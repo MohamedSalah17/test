@@ -9,6 +9,6 @@ class WelcomeController extends Controller
 {
     //
     public function index(){
-        return view('dashboard.welcome');
+        return view('dashboard.index');
     }
 }

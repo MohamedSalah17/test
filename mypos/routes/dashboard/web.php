@@ -8,7 +8,8 @@ Route::group(
     ],
     function() {
         Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(function(){
-            Route::get('/index', 'DashboardController@index')->name('index');
+
+            Route::get('/index', 'WelcomeController@index')->name('index');
 
             //user routes
             Route::resource('users', 'UserController')->except(['show']);
