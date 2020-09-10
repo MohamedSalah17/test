@@ -18,14 +18,6 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        /* the lower case of search
-            if($request->search){
-            $users = User::where('first_name', 'like', '%' .$request->search . '%' )
-            ->orWhere('last_name', 'like', '%' .$request->search . '%')
-            ->get();
-        } else {
-            $users = User::whereRoleIS('admin')->get();
-        } */
 
         $users = User::whereRoleIS('admin')
                 ->when($request->search, function($query) use ($request){
