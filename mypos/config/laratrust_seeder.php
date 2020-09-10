@@ -9,6 +9,8 @@ return [
             'users' => 'c,r,u,d',
         ],
         'admin' => [],
+        'doctors' => [],
+        'students' => [],
 
     ],
 

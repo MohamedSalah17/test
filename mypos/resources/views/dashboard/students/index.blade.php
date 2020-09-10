@@ -40,10 +40,12 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>@lang('site.first_name')</th>
-                                        <th>@lang('site.last_name')</th>
+                                        <th>@lang('site.four_name')</th>
+                                        <th>@lang('site.code')</th>
                                         <th>@lang('site.email')</th>
-                                        <th>@lang('site.image')</th>
+                                        <th>@lang('site.phone')</th>
+                                        <th>@lang('site.address')</th>
+                                        {{--<th>@lang('site.image')</th>--}}
                                         <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
@@ -51,10 +53,12 @@
                                     @foreach ($students as $index=>$student)
                                     <tr>
                                         <td>{{ $index + 1}}</td>
-                                        <td>{{ $student->first_name}}</td>
-                                        <td>{{ $student->last_name}}</td>
+                                        <td>{{ $student->four_name}}</td>
+                                        <td>{{ $student->code}}</td>
                                         <td>{{ $student->email}}</td>
-                                        <td><img src="{{ $student->image_path }}" style="width: 80px;" class="img-thumbnail" alt=""></td>
+                                        <td>{{ is_array($student->phone) ? implode($student->phone, '-') : $student->phone }}</td>
+                                        <td>{{ $student->address}}</td>
+                                        {{--<td><img src="{{ $student->image_path }}" style="width: 80px;" class="img-thumbnail" alt=""></td>--}}
                                         <td>
                                             @if (auth()->user()->hasPermission('update_students'))
                                                 <a href=" {{ route('dashboard.students.edit', $student->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
@@ -75,7 +79,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $students->appends(request()->query())->links() }}
+                            {{-- $students->appends(request()->query())->links() --}}
                         @else
                             <h2>@lang('site.no_data_found')</h2>
                         @endif

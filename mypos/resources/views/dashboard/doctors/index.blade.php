@@ -40,10 +40,11 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>@lang('site.first_name')</th>
-                                        <th>@lang('site.last_name')</th>
+                                        <th>@lang('site.four_name')</th>
                                         <th>@lang('site.email')</th>
-                                        <th>@lang('site.image')</th>
+                                        <th>@lang('site.phone')</th>
+                                        <th>@lang('site.address')</th>
+                                        {{--<th>@lang('site.image')</th>--}}
                                         <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
@@ -51,10 +52,11 @@
                                     @foreach ($doctors as $index=>$doctor)
                                     <tr>
                                         <td>{{ $index + 1}}</td>
-                                        <td>{{ $doctor->first_name}}</td>
-                                        <td>{{ $doctor->last_name}}</td>
+                                        <td>{{ $doctor->four_name}}</td>
                                         <td>{{ $doctor->email}}</td>
-                                        <td><img src="{{ $doctor->image_path }}" style="width: 80px;" class="img-thumbnail" alt=""></td>
+                                        <td>{{ is_array($doctor->phone) ? implode($doctor->phone, '-') : $doctor->phone }}</td>
+                                        <td>{{ $doctor->address}}</td>
+                                        <!--td><img src="{{-- $doctor->image_path --}}" style="width: 80px;" class="img-thumbnail" alt=""></td-->
                                         <td>
                                             @if (auth()->user()->hasPermission('update_doctors'))
                                                 <a href=" {{ route('dashboard.doctors.edit', $doctor->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
@@ -75,7 +77,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $doctors->appends(request()->query())->links() }}
+                            {{-- $doctors->appends(request()->query())->links() --}}
                         @else
                             <h2>@lang('site.no_data_found')</h2>
                         @endif

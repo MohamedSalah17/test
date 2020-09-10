@@ -14,7 +14,7 @@ class DoctorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $doctors = Doctor::all();
         return view('dashboard.doctors.index', compact('doctors'));
@@ -38,7 +38,41 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'four_name' => 'required',
+            'email' => 'required|unique:users',
+
+            'password' => 'required|confirmed',
+            'permissions' => 'required|min:1',
+
+            'phone' => 'required|array|min:1',
+            'phone.0' => 'required',
+
+            'address' => 'required',
+            'image' => 'image',
+        ]);
+
+        $request_data = $request->except(['password', 'password_confirmation', 'permissions', 'image']);
+        $request_data['password'] = bcrypt($request->password);
+        $request_data['phone'] = array_filter($request->phone);
+
+        /*Image Validation
+        if($request->image){
+            Image::make($request->image)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+            })
+            ->save(public_path('uploads/user_images/' .$request->image->hashName()));
+
+            $request_data['image']  =   $request->image->hashName();
+        }//end of if
+        */
+
+         Doctor::create($request_data);
+
+
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('dashboard.doctors.index');
     }
 
     /**
