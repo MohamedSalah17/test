@@ -16,8 +16,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //$students = Student::all();
-        //return view('dashboard.students.index', compact('students'));
+        $students = Student::all();
+        return view('dashboard.students.index', compact('students'));
     }
 
     /**
@@ -60,7 +60,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('dashboard.students.edit', compact('student'));
     }
 
     /**

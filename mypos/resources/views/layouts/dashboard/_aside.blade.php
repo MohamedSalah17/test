@@ -27,10 +27,6 @@
             <li><a href="{{route('dashboard.subjects.index')}}"><i class="fa fa-users"></i><span>@lang('site.subjects')</span></a></li>
         @endif
 
-        <li><a href="{{route('dashboard.doctors.index')}}"><i class="fa fa-users"></i><span>@lang('site.doctors')</span></a></li>
-        <li><a href="{{route('dashboard.students.index')}}"><i class="fa fa-users"></i><span>@lang('site.students')</span></a></li>
-        <li><a href="{{route('dashboard.subjects.index')}}"><i class="fa fa-users"></i><span>@lang('site.subjects')</span></a></li>
-
         @if (auth()->user()->hasPermission('read_users'))
             <li><a href="{{route('dashboard.users.index')}}"><i class="fa fa-users"></i><span>@lang('site.users')</span></a></li>
         @endif

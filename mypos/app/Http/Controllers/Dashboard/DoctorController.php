@@ -16,8 +16,8 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        //$doctors = Doctor::all();
-        //return view('dashboard.doctors.index', compact('doctors'));
+        $doctors = Doctor::all();
+        return view('dashboard.doctors.index', compact('doctors'));
     }
 
     /**
@@ -27,7 +27,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.doctors.create');
     }
 
     /**
@@ -60,7 +60,7 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
-        //
+        return view('dashboard.doctors.edit', compact('doctor'));
     }
 
     /**

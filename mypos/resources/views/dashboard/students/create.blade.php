@@ -33,14 +33,24 @@
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.std_code')</label>
-                                <input type="text" name="std_code" class="form-control" value="{{old('std_code')}}">
+                                <label>@lang('site.code')</label>
+                                <input type="text" name="code" class="form-control" value="{{old('code')}}">
                             </div>
 
 
                             <div class="form-group">
                                 <label>@lang('site.email')</label>
                                 <input type="email" name="email" class="form-control" value="{{old('email')}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.password')</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.password_confirmation')</label>
+                                <input type="password" name="password_confirmation" class="form-control">
                             </div>
 
                             @for ($i = 0; $i < 2; $i++)
@@ -64,22 +74,14 @@
                             <img src="{{ asset('uploads/user_images/default.png')}}" style="width: 100px" class="img-thumbnail image-preview" alt="">
                             </div>
 
-                            <div class="form-group">
-                                <label>@lang('site.password')</label>
-                                <input type="password" name="password" class="form-control">
-                            </div>
 
-                            <div class="form-group">
-                                <label>@lang('site.password_confirmation')</label>
-                                <input type="password" name="password_confirmation" class="form-control">
-                            </div>
 
                             <div class="form-group">
                                 <label>@lang('site.permissions')</label>
                                 <!-- Custom Tabs -->
                                 <div class="nav-tabs-custom">
                                     @php
-                                        $models = ['students', 'categories', 'products', 'clients', 'orders'];
+                                        $models = ['doctors','students', 'subjects'];
                                         $maps   = ['create', 'read', 'update', 'delete'];
                                     @endphp
                                     <ul class="nav nav-tabs">

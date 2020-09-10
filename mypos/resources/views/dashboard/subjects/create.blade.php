@@ -28,13 +28,13 @@
                             {{ method_field('post') }}
 
                             <div class="form-group">
-                                <label>@lang('site.sbj_name')</label>
-                                <input type="text" name="sbj_name" class="form-control" value="{{old('sbj_name')}}">
+                                <label>@lang('site.name')</label>
+                                <input type="text" name="name" class="form-control" value="{{old('name')}}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.sbj_code')</label>
-                                <input type="text" name="sbj_code" class="form-control" value="{{old('sbj_code')}}">
+                                <label>@lang('site.code')</label>
+                                <input type="text" name="code" class="form-control" value="{{old('code')}}">
                             </div>
 
                             <div class="form-group">

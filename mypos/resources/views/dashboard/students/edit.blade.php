@@ -23,23 +23,46 @@
 
                     <div class="box-body">
                         @include('partials._errors')
-                        <form action="{{route('dashboard.students.update', $user->id)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('dashboard.students.update', $student->id)}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('put') }}
 
                             <div class="form-group">
-                                <label>@lang('site.first_name')</label>
-                                <input type="text" name="first_name" class="form-control" value="{{ $user->first_name }}">
+                                <label>@lang('site.four_name')</label>
+                                <input type="text" name="four_name" class="form-control" value="{{$student->four_name}}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.last_name')</label>
-                                <input type="text" name="last_name" class="form-control" value="{{ $user->last_name }}">
+                                <label>@lang('site.code')</label>
+                                <input type="text" name="code" class="form-control" value="{{$student->code}}">
                             </div>
+
 
                             <div class="form-group">
                                 <label>@lang('site.email')</label>
-                                <input type="email" name="email" class="form-control" value="{{ $user->email }}">
+                                <input type="email" name="email" class="form-control" value="{{$student->email}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.password')</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.password_confirmation')</label>
+                                <input type="password" name="password_confirmation" class="form-control">
+                            </div>
+
+                            @for ($i = 0; $i < 2; $i++)
+                            <div class="form-group">
+                                <label>@lang('site.phone')</label>
+                                <input type="text" name="phone[]" class="form-control" value="{{$student->phone}}">
+                            </div>
+                            @endfor
+
+                            <div class="form-group">
+                                <label>@lang('site.address')</label>
+                                <textarea name="address" class="form-control">{{$student->address}}</textarea>
                             </div>
 
                             <div class="form-group">
@@ -48,9 +71,8 @@
                             </div>
 
                             <div class="form-group">
-                                <img src="{{ $user->image_path}}" style="width: 100px" class="img-thumbnail image-preview" alt="">
+                            <img src="{{ asset('uploads/user_images/default.png')}}" style="width: 100px" class="img-thumbnail image-preview" alt="">
                             </div>
-
 
                             <div class="form-group">
                                 <label>@lang('site.permissions')</label>

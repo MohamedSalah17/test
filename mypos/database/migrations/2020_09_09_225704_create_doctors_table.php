@@ -15,6 +15,12 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('four_name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('phone');
+            $table->text('address');
+            $table->string('image')->default('default.png');
             $table->timestamps();
         });
     }
