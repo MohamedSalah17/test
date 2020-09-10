@@ -75,16 +75,6 @@ class DoctorController extends Controller
         return redirect()->route('dashboard.doctors.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Doctor  $doctor
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Doctor $doctor)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -94,7 +84,7 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
-        return view('dashboard.doctors.edit', compact('doctor'));
+        return view('dashboard.doctors.edit',compact('doctor'));
     }
 
     /**

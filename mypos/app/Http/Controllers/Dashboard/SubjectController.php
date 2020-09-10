@@ -37,19 +37,21 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'code' => 'required',
+            'sbj_doc' => 'required',
+        ]);
+
+        $request_data = $request->all();
+
+        Subject::create($request_data);
+
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('dashboard.subjects.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subject $subject)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

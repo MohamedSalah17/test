@@ -40,10 +40,9 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>@lang('site.first_name')</th>
-                                        <th>@lang('site.last_name')</th>
-                                        <th>@lang('site.email')</th>
-                                        <th>@lang('site.image')</th>
+                                        <th>@lang('site.name')</th>
+                                        <th>@lang('site.code')</th>
+                                        <th>@lang('site.sbj_doc')</th>
                                         <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
@@ -74,7 +73,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $subjects->appends(request()->query())->links() }}
+                            {{-- $subjects->appends(request()->query())->links() --}}
                         @else
                             <h2>@lang('site.no_data_found')</h2>
                         @endif

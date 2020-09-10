@@ -29,24 +29,18 @@
 
 
                             <div class="form-group">
-                                <label>@lang('site.sbj_name')</label>
-                                <input type="text" name="sbj_name" class="form-control" value="{{ $subject->sbj_name }}">
+                                <label>@lang('site.name')</label>
+                                <input type="text" name="name" class="form-control" value="{{ $subject->name }}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.sbj_code')</label>
-                                <input type="text" name="sbj_code" class="form-control" value="{{ $subject->sbj_code }}">
+                                <label>@lang('site.code')</label>
+                                <input type="text" name="code" class="form-control" value="{{ $subject->code }}">
                             </div>
 
                             <div class="form-group">
                                 <label>@lang('site.sbj_doc')</label>
                                 <input type="text" name="sbj_doc" class="form-control" value="{{ $subject->sbj_doc }}">
-                            </div>
-
-
-                            <div class="form-group">
-                                <label>@lang('site.subj_stds')</label>
-                                <input type="file" name="subj_stds" class="form-control" value="{{ $subject->subj_stds }}">
                             </div>
 
 

@@ -32,31 +32,17 @@
                                 <input type="text" name="four_name" class="form-control" value="{{$doctor->four_name}}">
                             </div>
 
-                            <div class="form-group">
-                                <label>@lang('site.std_code')</label>
-                                <input type="text" name="std_code" class="form-control" value="{{$doctor->std_code}}">
-                            </div>
-
 
                             <div class="form-group">
                                 <label>@lang('site.email')</label>
                                 <input type="email" name="email" class="form-control" value="{{$doctor->email}}">
                             </div>
 
-                            <div class="form-group">
-                                <label>@lang('site.password')</label>
-                                <input type="password" name="password" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>@lang('site.password_confirmation')</label>
-                                <input type="password" name="password_confirmation" class="form-control">
-                            </div>
 
                             @for ($i = 0; $i < 2; $i++)
                             <div class="form-group">
                                 <label>@lang('site.phone')</label>
-                                <input type="text" name="phone[]" class="form-control" value="{{$doctor->phone}}">
+                                <input type="text" name="phone[]" class="form-control" value="{{$doctor->phone[$i] ?? ''}}">
                             </div>
                             @endfor
 
@@ -79,7 +65,7 @@
                                 <!-- Custom Tabs -->
                                 <div class="nav-tabs-custom">
                                     @php
-                                        $models = ['doctors', 'categories', 'products', 'clients', 'orders'];
+                                        $models = ['doctors', 'students', 'subjects'];
                                         $maps   = ['create', 'read', 'update', 'delete'];
                                     @endphp
                                     <ul class="nav nav-tabs">
@@ -91,7 +77,7 @@
                                         @foreach ($models as $index=>$model)
                                             <div class="tab-pane {{ $index == 0? 'active' : ''}}" id="{{$model}}">
                                                 @foreach ($maps as $map)
-                                                    <label><input type="checkbox" name="permissions[]" {{ $user->hasPermission($map .'_'. $model) ? 'checked' : '' }} value="{{$map .'_'. $model}}"> @lang('site.' .$map) </label>
+                                                    <label><input type="checkbox" name="permissions[]" {{ $doctor->hasPermission($map .'_'. $model) ? 'checked' : '' }} value="{{$map .'_'. $model}}"> @lang('site.' .$map) </label>
                                                 @endforeach
                                             </div>
                                             <!-- /.tab-pane -->
