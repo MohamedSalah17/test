@@ -80,6 +80,7 @@
                             @endforeach
                         </tbody>
                     </table><!-- end of table -->
+                    {{ $users->appends(request()->query())->links() }}
                     @else
                     <h2>@lang('site.no_data_found')</h2>
                     @endif

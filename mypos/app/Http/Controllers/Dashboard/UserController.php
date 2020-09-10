@@ -19,11 +19,15 @@ class UserController extends Controller
     public function index(Request $request)
     {
 
-        $users = User::whereRoleIS('admin')
-                ->when($request->search, function($query) use ($request){
-                    return $query->where('first_name', 'like', '%' . $request->search . '%' )
-                    ->orWhere('last_name', 'like', '%' . $request->search . '%');
-                })->get();
+        $users = User::whereRoleIs('admin')->where(function($q) use ($request){
+
+            return $q->when($request->search, function($query) use ($request){
+
+                return $query->where('first_name', 'like', '%'. $request->search .'%')
+                    ->orWhere('last_name', 'like', '%'. $request->search .'%');
+
+            });
+        })->latest()->paginate(4);
 
         return view('dashboard.users.index', compact('users'));
 
@@ -86,6 +90,8 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return redirect()->route('dashboard.users.index');
     }
 }

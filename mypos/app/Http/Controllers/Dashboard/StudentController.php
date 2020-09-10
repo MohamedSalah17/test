@@ -14,9 +14,12 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all();
+        $students = Student::when($request->search, function ($q) use ($request){
+            return $q->where('four_name', 'like', '%'. $request->search . '%')
+                    ->orWhere('code', 'like', '%'. $request->search . '%');
+        })->latest()->paginate(4);
         return view('dashboard.students.index', compact('students'));
     }
 

@@ -13,9 +13,13 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $subjects = Subject::all();
+        $subjects = Subject::when($request->search, function ($q) use ($request){
+            return $q->where('name', 'like', '%'. $request->search . '%')
+                    ->orWhere('code', 'like', '%'. $request->search . '%');
+        })->latest()->paginate(4);
+
         return view('dashboard.subjects.index', compact('subjects'));
     }
 

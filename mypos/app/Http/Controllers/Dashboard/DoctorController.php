@@ -16,7 +16,10 @@ class DoctorController extends Controller
      */
     public function index(Request $request)
     {
-        $doctors = Doctor::all();
+        $doctors = Doctor::when($request->search, function ($q) use ($request){
+            return $q->where('four_name', 'like', '%'. $request->search . '%');
+        })->latest()->paginate(4);
+
         return view('dashboard.doctors.index', compact('doctors'));
     }
 
