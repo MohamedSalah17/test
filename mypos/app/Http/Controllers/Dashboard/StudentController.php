@@ -98,7 +98,24 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $request->validate([
+            'four_name' => 'required',
+            'code' => 'required',
+            'email' => 'required|unique:students',
+            'image' => 'image',
+            'permissions' => 'required|min:1',
+            'phone' => 'required|array|min:1',
+            'phone.0' => 'required',
+            'address' => 'required',
+        ]);
+
+        $request_data = $request->except(['permissions', 'image']);
+        $request_data['phone'] = array_filter($request->phone);
+
+        $student->update($request_data);
+
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('dashboard.students.index');
     }
 
     /**
@@ -109,6 +126,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return redirect()->route('dashboard.students.index');
     }
 }

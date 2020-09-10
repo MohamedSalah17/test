@@ -96,7 +96,23 @@ class DoctorController extends Controller
      */
     public function update(Request $request, Doctor $doctor)
     {
-        //
+        $request->validate([
+            'four_name' => 'required',
+            'email' => 'required|unique:students',
+            'image' => 'image',
+            'permissions' => 'required|min:1',
+            'phone' => 'required|array|min:1',
+            'phone.0' => 'required',
+            'address' => 'required',
+        ]);
+
+        $request_data = $request->except(['permissions', 'image']);
+        $request_data['phone'] = array_filter($request->phone);
+
+        $doctor->update($request_data);
+
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('dashboard.doctors.index');
     }
 
     /**
@@ -107,6 +123,8 @@ class DoctorController extends Controller
      */
     public function destroy(Doctor $doctor)
     {
-        //
+        $doctor->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return redirect()->route('dashboard.doctors.index');
     }
 }

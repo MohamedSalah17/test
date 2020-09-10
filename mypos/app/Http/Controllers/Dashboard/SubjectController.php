@@ -73,7 +73,18 @@ class SubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'code' => 'required',
+            'sbj_doc' => 'required',
+        ]);
+
+        $request_data = $request->all();
+
+        $subject->update($request_data);
+
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('dashboard.subjects.index');
     }
 
     /**
@@ -84,6 +95,8 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        $subject->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return redirect()->route('dashboard.subjects.index');
     }
 }
