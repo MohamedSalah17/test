@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Doctor;
 use App\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,12 +24,17 @@ class SubjectController extends Controller
      */
     public function index(Request $request)
     {
+        $doctors = Doctor::all();
         $subjects = Subject::when($request->search, function ($q) use ($request){
             return $q->where('name', 'like', '%'. $request->search . '%')
                     ->orWhere('code', 'like', '%'. $request->search . '%');
+
+        })->when($request->doc_id, function ($q) use ($request){
+          return $q->where('doc_id', 'like', '%'. $request->doc_id . '%');
+
         })->latest()->paginate(4);
 
-        return view('dashboard.subjects.index', compact('subjects'));
+        return view('dashboard.subjects.index', compact('subjects','doctors'));
     }
 
     /**
@@ -38,7 +44,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('dashboard.subjects.create');
+        $doctors = Doctor::all();
+        return view('dashboard.subjects.create', compact('doctors'));
     }
 
     /**
@@ -52,7 +59,7 @@ class SubjectController extends Controller
         $request->validate([
             'name' => 'required|unique:subjects',
             'code' => 'required|unique:subjects',
-            'sbj_doc' => 'required',
+            'doc_id' => 'required',
         ]);
 
         $request_data = $request->all();

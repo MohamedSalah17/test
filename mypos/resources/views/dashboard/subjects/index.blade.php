@@ -21,6 +21,16 @@
                                 <div class="col-md-4">
                                     <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search}}">
                                 </div>
+
+                                <div class="col-md-4">
+                                    <select name="doc_id" class="form-control">
+                                        <option value="">@lang('site.doctors')</option>
+                                        @foreach ($doctors as $doctor)
+                                            <option value="{{$doctor->id}}" {{request()->doc_id == $doctor->id ? 'selected' : ''}}>{{$doctor->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
 
@@ -52,7 +62,7 @@
                                         <td>{{ $index + 1}}</td>
                                         <td>{{ $subject->name}}</td>
                                         <td>{{ $subject->code}}</td>
-                                        <td>{{ $subject->sbj_doc}}</td>
+                                        <td>{{ $subject->doctor['name']}}</td>
                                         <td>
                                             @if (auth()->user()->hasPermission('update_subjects'))
                                                 <a href=" {{ route('dashboard.subjects.edit', $subject->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>

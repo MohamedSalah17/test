@@ -14,19 +14,21 @@ class Doctor extends Model
 
     protected $guarded = [];
 
-    protected $casts = [
-        'phone' => 'array'
-    ];
-
 
     protected $fillable = [
         'name', 'email', 'password','phone', 'address'
     ];
 
-    protected $appends = ['image_path'];
+    protected $casts = [
+        'phone' => 'array'
+    ];
 
 
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function subjects(){
+        return $this->hasMany(Subject::class, 'doc_id');
+    }
 }

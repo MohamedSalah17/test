@@ -15,10 +15,12 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('doc_id');
             $table->string('name');
             $table->string('code');
-            $table->string('sbj_doc');
             $table->timestamps();
+
+            $table->foreign('doc_id')->references('id')->on('doctors')->onDelete('cascade');
         });
     }
 

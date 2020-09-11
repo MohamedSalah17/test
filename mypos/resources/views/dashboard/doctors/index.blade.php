@@ -42,6 +42,7 @@
                                         <th>#</th>
                                         <th>@lang('site.name')</th>
                                         <th>@lang('site.email')</th>
+                                        <th>@lang('site.subjects')</th>
                                         <th>@lang('site.phone')</th>
                                         <th>@lang('site.address')</th>
                                         {{--<th>@lang('site.image')</th>--}}
@@ -54,6 +55,7 @@
                                         <td>{{ $index + 1}}</td>
                                         <td>{{ $doctor->name}}</td>
                                         <td>{{ $doctor->email}}</td>
+                                        <td>{{ $doctor->subjects->count()}} <a href="{{route('dashboard.subjects.index', ['doc_id' => $doctor->id])}}" class="btn btn-info btn-sm">@lang('site.go')</a> </td>
                                         <td>{{ is_array($doctor->phone) ? implode($doctor->phone, '-') : $doctor->phone }}</td>
                                         <td>{{ $doctor->address}}</td>
                                         <!--td><img src="{{-- $doctor->image_path --}}" style="width: 80px;" class="img-thumbnail" alt=""></td-->
