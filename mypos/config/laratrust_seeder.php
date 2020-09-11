@@ -8,9 +8,24 @@ return [
             'subjects' => 'c,r,u,d',
             'users' => 'c,r,u,d',
         ],
-        'admin' => [],
-        'doctors' => [],
-        'students' => [],
+        'admin' => [
+            'doctors' => 'c,r,u,d',
+            'students' => 'c,r,u,d',
+            'subjects' => 'c,r,u,d',
+            'users' => 'c,r,u,d',
+        ],
+        'doctor' => [
+            'doctors' => 'c,r,u,d',
+            'students' => 'c,r,u,d',
+            'subjects' => 'c,r,u,d',
+            'users' => 'c,r,u,d',
+        ],
+        'student' => [
+            'doctors' => 'c,r,u,d',
+            'students' => 'c,r,u,d',
+            'subjects' => 'c,r,u,d',
+            'users' => 'c,r,u,d',
+        ],
 
     ],
 

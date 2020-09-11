@@ -30,14 +30,14 @@
                         {{csrf_field()}}
                         {{ method_field('put') }}
                         <div class="form-group">
-                            <label>@lang('site.first_name')</label>
-                            <input type="text" name="first_name" class="form-control" value="{{ $user->first_name }} ">
+                            <label>@lang('site.name')</label>
+                            <input type="text" name="name" class="form-control" value="{{ $user->name }} ">
                         </div>
 
-                        <div class="form-group">
+                        {{--<div class="form-group">
                             <label>@lang('site.last_name')</label>
                             <input type="text" name="last_name" class="form-control" value="{{ $user->last_name }} ">
-                        </div>
+                        </div>--}}
 
                         <div class="form-group">
                             <label>@lang('site.email')</label>

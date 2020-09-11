@@ -56,14 +56,6 @@
                                 <textarea name="address" class="form-control">{{$student->address}}</textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label>@lang('site.image')</label>
-                                <input type="file" name="image" class="form-control image">
-                            </div>
-
-                            <div class="form-group">
-                            <img src="{{ asset('uploads/user_images/default.png')}}" style="width: 100px" class="img-thumbnail image-preview" alt="">
-                            </div>
 
                             <div class="form-group">
                                 <label>@lang('site.permissions')</label>

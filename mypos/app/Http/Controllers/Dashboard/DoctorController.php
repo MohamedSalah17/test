@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Doctor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Validation\Rule;
 
 class DoctorController extends Controller
@@ -20,7 +21,7 @@ class DoctorController extends Controller
     public function index(Request $request)
     {
         $doctors = Doctor::when($request->search, function ($q) use ($request){
-            return $q->where('four_name', 'like', '%'. $request->search . '%');
+            return $q->where('name', 'like', '%'. $request->search . '%');
         })->latest()->paginate(4);
 
         return view('dashboard.doctors.index', compact('doctors'));
@@ -45,7 +46,7 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'four_name' => 'required',
+            'name' => 'required',
             'email' => 'required|unique:doctors',
 
             'password' => 'required|confirmed',
@@ -55,10 +56,9 @@ class DoctorController extends Controller
             'phone.0' => 'required',
 
             'address' => 'required',
-            'image' => 'image',
         ]);
 
-        $request_data = $request->except(['password', 'password_confirmation', 'permissions', 'image']);
+        $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
         $request_data['password'] = bcrypt($request->password);
         $request_data['phone'] = array_filter($request->phone);
 
@@ -76,6 +76,21 @@ class DoctorController extends Controller
 
          Doctor::create($request_data);
 
+        //add doctor to user table
+         $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
+
+            'password' => 'required|confirmed',
+            'permissions' => 'required|min:1',
+
+        ]);
+        $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
+        $request_data['password'] = bcrypt($request->password);
+
+        $user = User::create($request_data);
+        $user->attachRole('user');
+        $user->syncPermissions($request->permissions);
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('dashboard.doctors.index');
@@ -103,16 +118,15 @@ class DoctorController extends Controller
     public function update(Request $request, Doctor $doctor)
     {
         $request->validate([
-            'four_name' => 'required',
+            'name' => 'required',
             'email' => ['required', Rule::unique('doctors')->ignore($doctor->id)],
-            'image' => 'image',
             'permissions' => 'required|min:1',
             'phone' => 'required|array|min:1',
             'phone.0' => 'required',
             'address' => 'required',
         ]);
 
-        $request_data = $request->except(['permissions', 'image']);
+        $request_data = $request->except(['permissions']);
         $request_data['phone'] = array_filter($request->phone);
 
         $doctor->update($request_data);

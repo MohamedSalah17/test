@@ -24,7 +24,7 @@ class UserController extends Controller
 
             return $q->when($request->search, function($query) use ($request){
 
-                return $query->where('first_name', 'like', '%'. $request->search .'%')
+                return $query->where('name', 'like', '%'. $request->search .'%')
                     ->orWhere('last_name', 'like', '%'. $request->search .'%');
 
             });
@@ -44,8 +44,8 @@ class UserController extends Controller
     public function store(Request $request, User $user)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'name' => 'required',
+            //'last_name' => 'required',
             'email' => ['required', Rule::unique('users')->ignore($user->id)],
             'password' => 'required|confirmed',
         ]);
@@ -54,7 +54,7 @@ class UserController extends Controller
         $request_data['password'] = bcrypt($request->password);
 
         $user = User::create($request_data);
-        $user->attachRole('admin');
+        $user->attachRole('user');
         $user->syncPermissions($request->permissions);
 
         session()->flash('success', __('site.added_successfully'));
@@ -73,8 +73,8 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'name' => 'required',
+            //'last_name' => 'required',
             'email' => 'required',
         ]);
 

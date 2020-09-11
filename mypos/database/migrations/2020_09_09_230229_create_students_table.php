@@ -21,7 +21,7 @@ class CreateStudentsTable extends Migration
             $table->string('password');
             $table->string('phone');
             $table->text('address');
-            $table->string('image')->default('default.png');
+            //$table->string('image')->default('default.png');
             $table->timestamps();
         });
     }

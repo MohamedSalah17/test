@@ -28,8 +28,8 @@
                             {{ method_field('post') }}
 
                             <div class="form-group">
-                                <label>@lang('site.four_name')</label>
-                                <input type="text" name="four_name" class="form-control" value="{{old('four_name')}}">
+                                <label>@lang('site.name')</label>
+                                <input type="text" name="name" class="form-control" value="{{old('name')}}">
                             </div>
 
 
@@ -58,15 +58,6 @@
                             <div class="form-group">
                                 <label>@lang('site.address')</label>
                                 <textarea name="address" class="form-control">{{old('address')}}</textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label>@lang('site.image')</label>
-                                <input type="file" name="image" class="form-control image">
-                            </div>
-
-                            <div class="form-group">
-                            <img src="{{ asset('uploads/user_images/default.png')}}" style="width: 100px" class="img-thumbnail image-preview" alt="">
                             </div>
 
 

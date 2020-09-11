@@ -228,7 +228,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="{{ asset('dashboard/img/avatar5.png') }}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{ auth()->user()->first_name }} {{auth()->user()->last_name}}</span>
+              <span class="hidden-xs">{{ auth()->user()->name }} {{--auth()->user()->last_name--}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -236,7 +236,7 @@ desired effect
                 <img src="{{ asset('dashboard/img/avatar5.png') }} " class="img-circle" alt="User Image">
 
                 <p>
-                  {{ auth()->user()->first_name }} {{auth()->user()->last_name}} - Web Developer
+                  {{ auth()->user()->name }} {{--auth()->user()->last_name--}} - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>

@@ -52,7 +52,6 @@ class StudentController extends Controller
             'four_name' => 'required',
             'code' => 'required||unique:students',
             'email' => 'required|unique:students',
-            'image' => 'image',
 
             'password' => 'required|confirmed',
             'permissions' => 'required|min:1',
@@ -63,7 +62,7 @@ class StudentController extends Controller
             'address' => 'required',
         ]);
 
-        $request_data = $request->except(['password', 'password_confirmation', 'permissions', 'image']);
+        $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
         $request_data['password'] = bcrypt($request->password);
         $request_data['phone'] = array_filter($request->phone);
 
@@ -112,14 +111,13 @@ class StudentController extends Controller
             'four_name' => 'required',
             'code' => ['required', Rule::unique('students')->ignore($student->id)],
             'email' => ['required', Rule::unique('students')->ignore($student->id)],
-            'image' => 'image',
             'permissions' => 'required|min:1',
             'phone' => 'required|array|min:1',
             'phone.0' => 'required',
             'address' => 'required',
         ]);
 
-        $request_data = $request->except(['permissions', 'image']);
+        $request_data = $request->except(['permissions']);
         $request_data['phone'] = array_filter($request->phone);
 
         $student->update($request_data);

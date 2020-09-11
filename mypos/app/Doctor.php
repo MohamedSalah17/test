@@ -20,7 +20,7 @@ class Doctor extends Model
 
 
     protected $fillable = [
-        'four_name', 'email', 'password', 'image','phone', 'address'
+        'name', 'email', 'password','phone', 'address'
     ];
 
     protected $appends = ['image_path'];
