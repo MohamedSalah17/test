@@ -19,7 +19,7 @@ class Student extends Model
 
 
     protected $fillable = [
-        'four_name', 'email', 'password','phone', 'address','code'
+        'name', 'email', 'password','phone', 'address','code'
     ];
 
     protected $appends = ['image_path'];

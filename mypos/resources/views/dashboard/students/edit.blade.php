@@ -28,8 +28,8 @@
                             {{ method_field('put') }}
 
                             <div class="form-group">
-                                <label>@lang('site.four_name')</label>
-                                <input type="text" name="four_name" class="form-control" value="{{$student->four_name}}">
+                                <label>@lang('site.name')</label>
+                                <input type="text" name="name" class="form-control" value="{{$student->name}}">
                             </div>
 
                             <div class="form-group">

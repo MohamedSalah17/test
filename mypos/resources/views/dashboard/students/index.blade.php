@@ -40,7 +40,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>@lang('site.four_name')</th>
+                                        <th>@lang('site.name')</th>
                                         <th>@lang('site.code')</th>
                                         <th>@lang('site.email')</th>
                                         <th>@lang('site.phone')</th>
@@ -53,7 +53,7 @@
                                     @foreach ($students as $index=>$student)
                                     <tr>
                                         <td>{{ $index + 1}}</td>
-                                        <td>{{ $student->four_name}}</td>
+                                        <td>{{ $student->name}}</td>
                                         <td>{{ $student->code}}</td>
                                         <td>{{ $student->email}}</td>
                                         <td>{{ is_array($student->phone) ? implode($student->phone, '-') : $student->phone }}</td>

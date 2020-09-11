@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
@@ -24,7 +25,7 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $students = Student::when($request->search, function ($q) use ($request){
-            return $q->where('four_name', 'like', '%'. $request->search . '%')
+            return $q->where('name', 'like', '%'. $request->search . '%')
                     ->orWhere('code', 'like', '%'. $request->search . '%');
         })->latest()->paginate(4);
         return view('dashboard.students.index', compact('students'));
@@ -49,7 +50,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'four_name' => 'required',
+            'name' => 'required',
             'code' => 'required||unique:students',
             'email' => 'required|unique:students',
 
@@ -80,6 +81,22 @@ class StudentController extends Controller
 
         Student::create($request_data);
 
+        //add doctor to user table
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
+
+            'password' => 'required|confirmed',
+            'permissions' => 'required|min:1',
+
+        ]);
+        $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
+        $request_data['password'] = bcrypt($request->password);
+
+        $user = User::create($request_data);
+        $user->attachRole('user');
+        $user->syncPermissions($request->permissions);
+
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('dashboard.students.index');
@@ -108,7 +125,7 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $request->validate([
-            'four_name' => 'required',
+            'name' => 'required',
             'code' => ['required', Rule::unique('students')->ignore($student->id)],
             'email' => ['required', Rule::unique('students')->ignore($student->id)],
             'permissions' => 'required|min:1',
