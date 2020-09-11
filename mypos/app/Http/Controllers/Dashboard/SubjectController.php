@@ -5,9 +5,17 @@ namespace App\Http\Controllers\Dashboard;
 use App\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class SubjectController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['permission:read_subjects'])->only('index');
+        $this->middleware(['permission:create_subjects'])->only('create');
+        $this->middleware(['permission:update_subjects'])->only('edit');
+        $this->middleware(['permission:delete_subjects'])->only('destroy');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -42,8 +50,8 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'code' => 'required',
+            'name' => 'required|unique:subjects',
+            'code' => 'required|unique:subjects',
             'sbj_doc' => 'required',
         ]);
 
@@ -78,8 +86,8 @@ class SubjectController extends Controller
     public function update(Request $request, Subject $subject)
     {
         $request->validate([
-            'name' => 'required',
-            'code' => 'required',
+            'name' => ['required', Rule::unique('subjects')->ignore($subject->id)],
+            'code' => ['required', Rule::unique('subjects')->ignore($subject->id)],
             'sbj_doc' => 'required',
         ]);
 

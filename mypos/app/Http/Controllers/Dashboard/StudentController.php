@@ -5,10 +5,17 @@ namespace App\Http\Controllers\Dashboard;
 use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['permission:read_students'])->only('index');
+        $this->middleware(['permission:create_students'])->only('create');
+        $this->middleware(['permission:update_students'])->only('edit');
+        $this->middleware(['permission:delete_students'])->only('destroy');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -43,8 +50,8 @@ class StudentController extends Controller
     {
         $request->validate([
             'four_name' => 'required',
-            'code' => 'required',
-            'email' => 'required|unique:users',
+            'code' => 'required||unique:students',
+            'email' => 'required|unique:students',
             'image' => 'image',
 
             'password' => 'required|confirmed',
@@ -103,8 +110,8 @@ class StudentController extends Controller
     {
         $request->validate([
             'four_name' => 'required',
-            'code' => 'required',
-            'email' => 'required|unique:students',
+            'code' => ['required', Rule::unique('students')->ignore($student->id)],
+            'email' => ['required', Rule::unique('students')->ignore($student->id)],
             'image' => 'image',
             'permissions' => 'required|min:1',
             'phone' => 'required|array|min:1',

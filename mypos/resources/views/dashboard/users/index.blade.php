@@ -17,7 +17,7 @@
         <section class="content">
         <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title" style="margin-bottom:10px">@lang('site.users')</h3>
+                    <h3 class="box-title" style="margin-bottom:10px">@lang('site.users') <small>{{$users->total()}}</small></h3>
 
                     <form action=" {{ route('dashboard.users.index')}} " method="get">
                         <div class="row" style="display:flex">
@@ -70,7 +70,7 @@
                                             <form action="{{route('dashboard.users.destroy', $user->id)}} " method="post" style="display: inline-block">
                                                 {{csrf_field()}}
                                                 {{method_field('delete')}}
-                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+                                                <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                             </form>
                                         @else
                                             <button class="btn btn-danger disabled"><i class="fa fa-trash"></i> @lang('site.delete')</button>

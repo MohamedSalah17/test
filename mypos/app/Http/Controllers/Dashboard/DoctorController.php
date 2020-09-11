@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Dashboard;
 use App\Doctor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Validation\Rule;
 
 class DoctorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+        $this->middleware(['permission:read_doctors'])->only('index');
+        $this->middleware(['permission:create_doctors'])->only('create');
+        $this->middleware(['permission:update_doctors'])->only('edit');
+        $this->middleware(['permission:delete_doctors'])->only('destroy');
+
+    }
+
     public function index(Request $request)
     {
         $doctors = Doctor::when($request->search, function ($q) use ($request){
@@ -43,7 +46,7 @@ class DoctorController extends Controller
     {
         $request->validate([
             'four_name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|unique:doctors',
 
             'password' => 'required|confirmed',
             'permissions' => 'required|min:1',
@@ -101,7 +104,7 @@ class DoctorController extends Controller
     {
         $request->validate([
             'four_name' => 'required',
-            'email' => 'required|unique:students',
+            'email' => ['required', Rule::unique('doctors')->ignore($doctor->id)],
             'image' => 'image',
             'permissions' => 'required|min:1',
             'phone' => 'required|array|min:1',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -40,12 +41,12 @@ class UserController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required',
+            'email' => ['required', Rule::unique('users')->ignore($user->id)],
             'password' => 'required|confirmed',
         ]);
 
