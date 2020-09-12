@@ -15,4 +15,8 @@ class Subject extends Model
     public function doctor(){
         return $this->belongsTo(Doctor::class, 'doc_id');
     }
+
+    public function ordersRegist(){
+        return $this->belongsToMany(OrderRegist::class,'subject_id','order_id');
+    }
 }

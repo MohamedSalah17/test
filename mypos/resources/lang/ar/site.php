@@ -93,5 +93,7 @@ return [
     "four_name"     => 'الإسم رباعي',
     "code"          =>  'الكود',
     "sbj_doc"       =>  'دكتور المادة',
+    "orderRegits"       =>  'طلب تسجيل',
+    "add_orderRegist"       =>  'إضافة طلب تسجيل',
 
 ];

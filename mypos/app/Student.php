@@ -28,4 +28,8 @@ class Student extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function ordersRegits(){
+        return $this->hasMany(OrderRegist::class,'student_id','order_id');
+    }
 }

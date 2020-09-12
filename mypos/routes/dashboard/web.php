@@ -12,6 +12,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
             //student routes
             Route::resource('students', 'StudentController')->except(['show']);
+            Route::resource('students.ordersRegist', 'Student\OrderRegistController')->except(['show']);
 
             //user routes
             Route::resource('subjects', 'SubjectController')->except(['show']);

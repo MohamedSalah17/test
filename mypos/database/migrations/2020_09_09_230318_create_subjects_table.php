@@ -18,6 +18,7 @@ class CreateSubjectsTable extends Migration
             $table->unsignedBigInteger('doc_id');
             $table->string('name');
             $table->string('code');
+            $table->integer('sbj_num')->default(1);
             $table->timestamps();
 
             $table->foreign('doc_id')->references('id')->on('doctors')->onDelete('cascade');
