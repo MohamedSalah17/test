@@ -39,6 +39,9 @@
                                     @else
                                         <a href="#" class="btn btn-success disabled"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                     @endif
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#model-exim">
+                                        Import/Export
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -94,5 +97,56 @@
             </section>
 
     </div>
+
+    {{--model dailog--}}
+
+    <!-- Button trigger modal -->
+      <!-- Modal -->
+  <div class="modal fade" id="model-exim" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form action="{{ route('dashboard.subjects.import') }}" method="post" data-toggle="validator" enctype="multipart/form-data">
+            {{ csrf_field() }}
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Import/Export</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="export" class="col-md-3 control-label">Export</label>
+                    <div class="col-md-6">
+                        <a href="{{ route('dashboard.subjects.export') }}" class="btn btn-success">Export</a>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="file" class="col-md-3 control-label">Import</label>
+                    <div class="col-md-6">
+                        <input type="file" name="file" id="file" class="form-control" autofocus required>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success">Import</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+
+       </form>
+
+      </div><!--end of content-->
+    </div>
+  </div>
 
 @endsection

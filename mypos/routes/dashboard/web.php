@@ -16,6 +16,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
             //user routes
             Route::resource('subjects', 'SubjectController')->except(['show']);
+            Route::get('subjects/export', 'SubjectController@export')->name('subjects.export');
+            Route::get('importExportView', 'SubjectController@importExportView');
+            Route::post('subjects/import', 'SubjectController@import')->name('subjects.import');
 
             //user routes
             Route::resource('users', 'UserController')->except(['show']);

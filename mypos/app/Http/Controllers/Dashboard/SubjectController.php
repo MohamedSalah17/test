@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Doctor;
+use App\Exports\SubjectsExport;
 use App\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\SubjectsImport;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class SubjectController extends Controller
 {
@@ -16,6 +20,22 @@ class SubjectController extends Controller
         $this->middleware(['permission:update_subjects'])->only('edit');
         $this->middleware(['permission:delete_subjects'])->only('destroy');
 
+    }
+    public function importExportView()
+    {
+       return view('dashboard.subjects.index');
+    }
+
+    public function export()
+    {
+        return Excel::download(new SubjectsExport, 'subjects.xlsx');
+    }
+
+    public function import()
+    {
+        Excel::import(new SubjectsImport,request()->file('file'));
+
+        return back();
     }
     /**
      * Display a listing of the resource.
