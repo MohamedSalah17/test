@@ -365,13 +365,6 @@ desired effect
 
 
 </script>
-<script src="{{asset('dashboard/js/pdfobject.js')}}"></script>
-<script src="{{asset('dashboard/js/pdfobject.min.js')}}"></script>
-<script>
-    var viewer = $('#viewpdf');
-    PDFObject.embed("http://127.0.0.1:8000/dashboard/files/myposProject.pdf",viewer);
-</script>
-
 
 </body>
 </html>
