@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Exports\StudentsExport;
 use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\StudentsImport;
 use App\User;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -16,6 +19,23 @@ class StudentController extends Controller
         $this->middleware(['permission:update_students'])->only('edit');
         $this->middleware(['permission:delete_students'])->only('destroy');
 
+    }
+
+    public function importExportView()
+    {
+       return view('dashboard.students.index');
+    }
+
+    public function export()
+    {
+        return Excel::download(new StudentsExport, 'students.xlsx');
+    }
+
+    public function import()
+    {
+        Excel::import(new StudentsImport,request()->file('file'));
+
+        return back();
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +47,7 @@ class StudentController extends Controller
         $students = Student::when($request->search, function ($q) use ($request){
             return $q->where('name', 'like', '%'. $request->search . '%')
                     ->orWhere('code', 'like', '%'. $request->search . '%');
-        })->latest()->paginate(4);
+        })->latest()->paginate(6);
         return view('dashboard.students.index', compact('students'));
     }
 

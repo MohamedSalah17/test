@@ -54,7 +54,7 @@ class SubjectController extends Controller
         })->when($request->doc_id, function ($q) use ($request){
           return $q->where('doc_id', 'like', '%'. $request->doc_id . '%');
 
-        })->latest()->paginate(4);
+        })->latest()->paginate(6);
 
         return view('dashboard.subjects.index', compact('subjects','doctors'));
     }

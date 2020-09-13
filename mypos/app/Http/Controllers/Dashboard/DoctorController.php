@@ -22,7 +22,7 @@ class DoctorController extends Controller
     {
         $doctors = Doctor::when($request->search, function ($q) use ($request){
             return $q->where('name', 'like', '%'. $request->search . '%');
-        })->latest()->paginate(4);
+        })->latest()->paginate(6);
 
         return view('dashboard.doctors.index', compact('doctors'));
     }

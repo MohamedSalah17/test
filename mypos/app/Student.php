@@ -22,7 +22,6 @@ class Student extends Model
         'name', 'email', 'password','phone', 'address','code'
     ];
 
-    protected $appends = ['image_path'];
 
 
     protected $hidden = [
