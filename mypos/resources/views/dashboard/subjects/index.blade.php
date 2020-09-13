@@ -42,6 +42,7 @@
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#model-exim">
                                         Import/Export
                                     </button>
+
                                 </div>
                             </div>
                         </form>
@@ -56,6 +57,7 @@
                                         <th>@lang('site.name')</th>
                                         <th>@lang('site.code')</th>
                                         <th>@lang('site.sbj_doc')</th>
+                                        <th> </th>
                                         <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
@@ -66,6 +68,10 @@
                                         <td>{{ $subject->name}}</td>
                                         <td>{{ $subject->code}}</td>
                                         <td>{{ $subject->doctor['name']}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
+                                            {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>--}}
+                                        </td>
                                         <td>
                                             @if (auth()->user()->hasPermission('update_subjects'))
                                                 <a href=" {{ route('dashboard.subjects.edit', $subject->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
@@ -81,6 +87,7 @@
                                             @else
                                                 <button class="btn btn-danger disabled"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                             @endif
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -148,4 +155,26 @@
     </div>
   </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="sbjTable" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title text-center">@lang('site.sbj_table')</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pdfobject-container">
+                    <div id="viewpdf"></div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 @endsection
+

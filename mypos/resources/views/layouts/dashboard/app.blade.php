@@ -70,6 +70,17 @@
                 }
             }
 
+            .pdfobject-container {
+                width: 800px;
+                margin: 30px auto;
+            }
+            #viewpdf{
+                width: 100%;
+                height: 400px;
+                border: 1px solid rgb(0, 0, .2);
+            }
+
+
         </style>
 
         <script src="{{ asset('dashboard/js/jquery.min.js')}}"></script>
@@ -353,6 +364,12 @@ desired effect
     });//end of ready
 
 
+</script>
+<script src="{{asset('dashboard/js/pdfobject.js')}}"></script>
+<script src="{{asset('dashboard/js/pdfobject.min.js')}}"></script>
+<script>
+    var viewer = $('#viewpdf');
+    PDFObject.embed("http://127.0.0.1:8000/dashboard/files/myposProject.pdf",viewer);
 </script>
 
 

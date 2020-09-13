@@ -95,5 +95,9 @@ return [
     "sbj_doc"       =>  'دكتور المادة',
     "orderRegits"       =>  'طلب تسجيل',
     "add_orderRegist"       =>  'إضافة طلب تسجيل',
+    "show_subj_table"       =>  'عرض جدول المادة',
+    "sbj_table"       =>  'جدول المادة',
+
+
 
 ];
