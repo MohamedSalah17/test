@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Doctor;
-use App\Exports\SubjectsExport;
-use App\Subject;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Imports\SubjectsImport;
 use Illuminate\Validation\Rule;
+
+use App\Exports\SubjectsExport;
+use App\Imports\SubjectsImport;
+use App\Subject;
 use Maatwebsite\Excel\Facades\Excel;
 
 
