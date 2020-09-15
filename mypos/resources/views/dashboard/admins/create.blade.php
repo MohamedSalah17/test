@@ -5,10 +5,10 @@
     <div class="content-wrapper">
         <section class="content container-fluid">
             <section class="content-header">
-                <h1>@lang('site.users')</h1>
+                <h1>@lang('site.admins')</h1>
                 <ol class="breadcrumb">
                     <li><a href=" {{route('dashboard.index')}}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-                    <li> <a href=" {{route('dashboard.users.index')}}">@lang('site.users')</a></li>
+                    <li> <a href=" {{route('dashboard.admins.index')}}">@lang('site.admins')</a></li>
                     <li class="active">@lang('site.add')</li>
 
                 </ol>
@@ -23,7 +23,7 @@
 
                     <div class="box-body">
                         @include('partials._errors')
-                        <form action="{{route('dashboard.users.store')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('dashboard.admins.store')}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('post') }}
 
@@ -59,7 +59,7 @@
                                 <!-- Custom Tabs -->
                                 <div class="nav-tabs-custom">
                                     @php
-                                        $models = ['users', 'doctors', 'students', 'subjects'];
+                                        $models = ['admins', 'doctors', 'students', 'subjects'];
                                         $maps   = ['create', 'read', 'update', 'delete'];
                                     @endphp
                                     <ul class="nav nav-tabs">

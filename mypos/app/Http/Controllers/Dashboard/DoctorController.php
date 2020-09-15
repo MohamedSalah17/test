@@ -74,7 +74,9 @@ class DoctorController extends Controller
         }//end of if
         */
 
-         Doctor::create($request_data);
+        $doctor = Doctor::create($request_data);
+        $doctor->attachRole('doctor');
+        $doctor->syncPermissions($request->permissions);
 
         //add doctor to user table
          $request->validate([

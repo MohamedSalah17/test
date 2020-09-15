@@ -97,6 +97,8 @@ return [
     "add_orderRegist"       =>  'إضافة طلب تسجيل',
     "show_subj_table"       =>  'عرض جدول المادة',
     "sbj_table"       =>  'جدول المادة',
+    "admin"         => 'المشرف',
+    "admins"        => 'المشرفين'
 
 
 

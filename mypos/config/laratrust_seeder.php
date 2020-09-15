@@ -7,6 +7,7 @@ return [
             'students' => 'c,r,u,d',
             'subjects' => 'c,r,u,d',
             'orders' => 'c,r,u,d',
+            'admins' => 'c,r,u,d',
             'users' => 'c,r,u,d',
         ],
         'admin' => [
@@ -14,6 +15,7 @@ return [
             'students' => 'c,r,u,d',
             'subjects' => 'c,r,u,d',
             'orders' => 'c,r,u,d',
+            'admins' => 'c,r,u,d',
             'users' => 'c,r,u,d',
         ],
         'doctor' => [
@@ -21,6 +23,7 @@ return [
             'students' => 'c,r,u,d',
             'subjects' => 'c,r,u,d',
             'orders' => 'c,r,u,d',
+            'admins' => 'c,r,u,d',
             'users' => 'c,r,u,d',
         ],
         'student' => [
@@ -28,6 +31,7 @@ return [
             'students' => 'c,r,u,d',
             'subjects' => 'c,r,u,d',
             'orders' => 'c,r,u,d',
+            'admins' => 'c,r,u,d',
             'users' => 'c,r,u,d',
         ],
 

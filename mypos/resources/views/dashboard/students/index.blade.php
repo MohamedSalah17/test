@@ -26,8 +26,6 @@
 
                                     @if (auth()->user()->hasPermission('create_students'))
                                         <a href=" {{route('dashboard.students.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
-                                    @else
-                                        <a href="#" class="btn btn-success disabled"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                     @endif
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#model-exim">
                                         Import/Export
@@ -67,8 +65,6 @@
                                         <td>
                                             @if (auth()->user()->hasPermission('update_students'))
                                                 <a href=" {{ route('dashboard.students.edit', $student->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
-                                            @else
-                                                <a href="#" class="btn btn-info btn-sm disabled"><i class="fa fa-edit"></i> @lang('site.edit')</a>
                                             @endif
                                             @if (auth()->user()->hasPermission('delete_students'))
                                                 <form action="{{route('dashboard.students.destroy', $student->id)}}" method="POST" style="display: inline-block">
@@ -76,8 +72,6 @@
                                                     {{ method_field('delete')}}
                                                     <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                                 </form>
-                                            @else
-                                                <button class="btn btn-danger disabled"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                             @endif
                                         </td>
                                     </tr>

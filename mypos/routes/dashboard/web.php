@@ -20,7 +20,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
             Route::post('students/import', 'StudentController@import')->name('students.import');
 
             //user routes
-            Route::resource('subjects', 'SubjectController');
+            Route::resource('subjects', 'SubjectController')->except(['show']);
             Route::get('subjects/export', 'SubjectController@export')->name('subjects.export');
             Route::get('importExportView', 'SubjectController@importExportView');
             Route::post('subjects/import', 'SubjectController@import')->name('subjects.import');
@@ -30,8 +30,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
                 return response()->file(storage_path($file->path));
             })->name('subjects.show-pdf');*/
 
+            //admin routes
+            Route::resource('admins', 'AdminController')->except(['show']);
+
+
             //user routes
             Route::resource('users', 'UserController')->except(['show']);
+
 
 
 

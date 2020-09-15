@@ -27,8 +27,12 @@
             <li><a href="{{route('dashboard.subjects.index')}}"><i class="fa fa-users"></i><span>@lang('site.subjects')</span></a></li>
         @endif
 
-        @if (auth()->user()->hasPermission('read_users'))
+        {{--@if (auth()->user()->hasPermission('read_users'))
             <li><a href="{{route('dashboard.users.index')}}"><i class="fa fa-users"></i><span>@lang('site.users')</span></a></li>
+        @endif--}}
+
+        @if (auth()->user()->hasPermission('read_admins'))
+            <li><a href="{{route('dashboard.admins.index')}}"><i class="fa fa-users"></i><span>@lang('site.admins')</span></a></li>
         @endif
 
 

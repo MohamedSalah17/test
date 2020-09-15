@@ -99,7 +99,9 @@ class StudentController extends Controller
         }//end of if
         */
 
-        Student::create($request_data);
+        $student = Student::create($request_data);
+        $student->attachRole('student');
+        $student->syncPermissions($request->permissions);
 
         //add doctor to user table
         $request->validate([
