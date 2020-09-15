@@ -16,6 +16,10 @@ class Subject extends Model
         return $this->belongsTo(Doctor::class, 'doc_id');
     }
 
+    public function lessons(){
+        return $this->hasMany(Lesson::class, 'sbj_id');
+    }
+
     public function ordersRegist(){
         return $this->belongsToMany(OrderRegist::class,'subject_id','order_id');
     }

@@ -4,10 +4,10 @@
 
     <div class="content-wrapper">
             <section class="content-header">
-                <h1>@lang('site.lessons')</h1>
+                <h1>@lang('site.assignments')</h1>
                 <ol class="breadcrumb">
                 <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-                    <li class="active"> @lang('site.lessons')</li>
+                    <li class="active"> @lang('site.assignments')</li>
                 </ol>
             </section>
             <section class="content">
@@ -15,8 +15,8 @@
                 <div class="box box-primary">
 
                     <div class="box-header with-border">
-                        <h3 class="box-title" style="margin-bottom: 15px">@lang('site.lessons') <small>{{$lessons->total()}}</small></h3>
-                        <form action="{{ route('dashboard.lessons.index')}}" method="GET">
+                        <h3 class="box-title" style="margin-bottom: 15px">@lang('site.assignments') <small>{{$assignments->total()}}</small></h3>
+                        <form action="{{ route('dashboard.assignments.index')}}" method="GET">
                             <div class="row">
                                 <div class="col-md-4">
                                     <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search}}">
@@ -24,9 +24,9 @@
 
                                 <div class="col-md-4">
                                     <select name="doc_id" class="form-control">
-                                        <option value="">@lang('site.subjects')</option>
-                                        @foreach ($subjects as $subject)
-                                            <option value="{{$subject->id}}" {{request()->doc_id == $subject->id ? 'selected' : ''}}>{{$subject->name}}</option>
+                                        <option value="">@lang('site.lessons')</option>
+                                        @foreach ($lessons as $lesson)
+                                            <option value="{{$lesson->id}}" {{request()->doc_id == $lesson->id ? 'selected' : ''}}>{{$lesson->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -34,8 +34,8 @@
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
 
-                                    @if (auth()->user()->hasPermission('create_lessons'))
-                                        <a href=" {{route('dashboard.lessons.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                                    @if (auth()->user()->hasPermission('create_assignments'))
+                                        <a href=" {{route('dashboard.assignments.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                     @endif
 
 
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="box-body">
-                        @if ($lessons->count() > 0)
+                        @if ($assignments->count() > 0)
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -58,22 +58,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($lessons as $index=>$lesson)
+                                    @foreach ($assignments as $index=>$assignment)
                                     <tr>
                                         <td>{{ $index + 1}}</td>
-                                        <td>{{ $lesson->name}}</td>
-                                        <td>{{ $lesson->code}}</td>
-                                        <td>{{ $lesson->subject['name']}}</td>
+                                        <td>{{ $assignment->name}}</td>
+                                        <td>{{ $assignment->code}}</td>
+                                        <td>{{ $assignment->lesson['name']}}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
                                             {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>--}}
                                         </td>
                                         <td>
-                                            @if (auth()->user()->hasPermission('update_lessons'))
-                                                <a href=" {{ route('dashboard.lessons.edit', $lesson->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                                            @if (auth()->user()->hasPermission('update_assignments'))
+                                                <a href=" {{ route('dashboard.assignments.edit', $assignment->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
                                             @endif
-                                            @if (auth()->user()->hasPermission('delete_lessons'))
-                                                <form action="{{route('dashboard.lessons.destroy', $lesson->id)}}" method="POST" style="display: inline-block">
+                                            @if (auth()->user()->hasPermission('delete_assignments'))
+                                                <form action="{{route('dashboard.assignments.destroy', $assignment->id)}}" method="POST" style="display: inline-block">
                                                     {{ csrf_field() }}
                                                     {{ method_field('delete')}}
                                                     <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
@@ -85,7 +85,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{$lessons->appends(request()->query())->links()}}
+                            {{$assignments->appends(request()->query())->links()}}
                         @else
                             <h2>@lang('site.no_data_found')</h2>
                         @endif

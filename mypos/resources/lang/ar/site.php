@@ -98,7 +98,10 @@ return [
     "show_subj_table"       =>  'عرض جدول المادة',
     "sbj_table"       =>  'جدول المادة',
     "admin"         => 'المشرف',
-    "admins"        => 'المشرفين'
+    "admins"        => 'المشرفين',
+    "lessons"        => 'الدروس',
+    "less_sbj"        => 'مادة الدرس',
+
 
 
 

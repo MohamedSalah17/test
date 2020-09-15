@@ -27,6 +27,14 @@
             <li><a href="{{route('dashboard.subjects.index')}}"><i class="fa fa-users"></i><span>@lang('site.subjects')</span></a></li>
         @endif
 
+        @if (auth()->user()->hasPermission('read_lessons'))
+            <li><a href="{{route('dashboard.lessons.index')}}"><i class="fa fa-users"></i><span>@lang('site.lessons')</span></a></li>
+        @endif
+
+        @if (auth()->user()->hasPermission('read_assignments'))
+            <li><a href="{{route('dashboard.assignments.index')}}"><i class="fa fa-users"></i><span>@lang('site.assignments')</span></a></li>
+        @endif
+
         {{--@if (auth()->user()->hasPermission('read_users'))
             <li><a href="{{route('dashboard.users.index')}}"><i class="fa fa-users"></i><span>@lang('site.users')</span></a></li>
         @endif--}}

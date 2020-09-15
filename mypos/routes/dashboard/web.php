@@ -25,6 +25,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
             Route::get('importExportView', 'SubjectController@importExportView');
             Route::post('subjects/import', 'SubjectController@import')->name('subjects.import');
 
+            //lesson routes
+            Route::resource('lessons', 'LessonController')->except(['show']);
+
+            //lesson routes
+            Route::resource('assignments', 'AssignmentController')->except(['show']);
+
             /*Route::get('subjects/show-pdf/{id}', function($id) {
                 $file = Subject::find($id);
                 return response()->file(storage_path($file->path));

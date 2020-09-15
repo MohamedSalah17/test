@@ -102,7 +102,8 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        return view('dashboard.subjects.edit', compact('subject'));
+        $doctors = Doctor::all();
+        return view('dashboard.subjects.edit', compact('subject','doctors'));
     }
 
     /**

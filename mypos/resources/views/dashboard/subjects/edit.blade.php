@@ -39,8 +39,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.sbj_doc')</label>
-                                <input type="text" name="sbj_doc" class="form-control" value="{{ $subject->sbj_doc }}">
+                                <label>@lang('site.doctors')</label>
+                                <select name="doc_id" class="form-control">
+                                    <option value="">@lang('site.all_doctors')</option>
+                                    @foreach ($doctors as $doctor)
+                                        <option value="{{$doctor->id}}" {{$subject->doc_id == $doctor->id ? 'selected' : ''}}>{{$doctor->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
 

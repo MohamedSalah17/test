@@ -37,9 +37,9 @@
                                     @if (auth()->user()->hasPermission('create_subjects'))
                                         <a href=" {{route('dashboard.subjects.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                     @endif
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#model-exim">
+                                    {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#model-exim">
                                         Import/Export
-                                    </button>
+                                    </button>--}}
 
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                                         <th>@lang('site.name')</th>
                                         <th>@lang('site.code')</th>
                                         <th>@lang('site.sbj_doc')</th>
-                                        <th> </th>
+                                        <th>@lang('site.lessons') </th>
                                         <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
@@ -66,10 +66,11 @@
                                         <td>{{ $subject->name}}</td>
                                         <td>{{ $subject->code}}</td>
                                         <td>{{ $subject->doctor['name']}}</td>
-                                        <td>
+                                        <td>{{ $subject->lessons->count()}} <a href="{{route('dashboard.lessons.index', ['sbj_id' => $subject->id])}}" class="btn btn-info btn-sm">@lang('site.go')</a> </td>
+                                        {{--<td>
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
                                             {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>--}}
-                                        </td>
+                                        </td>--}}
                                         <td>
                                             @if (auth()->user()->hasPermission('update_subjects'))
                                                 <a href=" {{ route('dashboard.subjects.edit', $subject->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
