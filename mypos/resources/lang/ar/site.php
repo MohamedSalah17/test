@@ -106,7 +106,7 @@ return [
     "show_lesson_assignments"        => 'عرض مهمات الدرس',
     "youtube_link"        => 'فيديو يوتيوب',
     "pdf_file"        => 'ملف pdf',
-    "powerpoint_file"        => 'ملف بوربوينت',
+    "pptx_file"        => 'ملف بوربوينت',
     "download"        => 'تحميل',
     "ass_less"        => 'درس المهمه',
     "lesson_name"        => 'اسم الدرس',
@@ -115,19 +115,12 @@ return [
     "quest_file"        => 'ملف الأسئلة',
     "upload_anss"        => 'رفع الإجابة',
     "upload"        => 'رفع',
+    "regist"        => 'التسجيل',
+    "date"        => 'التاريخ',
     "pdf_anss"        => 'ملف الإجابة',
     "pdf_quest"        => 'ملف الاسئلة',
     "doc_id"        => 'كود الدكتور',
-
-
-
-
-
-
-
-
-
-
+    "student_regist_subjects"        => 'تسجيل الطلاب الي المواد',
 
 
 

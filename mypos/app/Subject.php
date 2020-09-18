@@ -20,7 +20,12 @@ class Subject extends Model
         return $this->hasMany(Lesson::class, 'sbj_id');
     }
 
-    public function ordersRegist(){
-        return $this->belongsToMany(OrderRegist::class,'subject_id','order_id');
+    public function students(){
+        return $this->belongsToMany(Student::class,'student_id', 'subject_id')
+                                    ->using(StudentSubject::class);
     }
+
+    /*public function ordersRegist(){
+        return $this->belongsToMany(OrderRegist::class,'subject_id','order_id');
+    }*/
 }

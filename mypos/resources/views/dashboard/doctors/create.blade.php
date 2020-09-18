@@ -67,7 +67,7 @@
                                 <!-- Custom Tabs -->
                                 <div class="nav-tabs-custom">
                                     @php
-                                        $models = ['admins', 'doctors', 'students', 'subjects','lessons', 'assignments'];
+                                        $models = ['admins', 'doctors', 'students', 'subjects','lessons', 'assignments','regist'];
                                         $maps   = ['create', 'read', 'update', 'delete'];
                                     @endphp
                                     <ul class="nav nav-tabs">

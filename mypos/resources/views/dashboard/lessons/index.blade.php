@@ -56,7 +56,7 @@
                                         <th>@lang('site.sbj_name')</th>
                                         <th>@lang('site.youtube_link')</th>
                                         <th>@lang('site.pdf_file')</th>
-                                        <th>@lang('site.powerpoint_file')</th>
+                                        <th>@lang('site.pptx_file')</th>
                                         <th>@lang('site.assignments') </th>
                                         <th>@lang('site.action')</th>
                                     </tr>
@@ -113,7 +113,7 @@
 
     {{--model dailog--}}
 
-
+    {{--
     <!-- Modal -->
     <div class="modal fade" id="sbjTable" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -133,7 +133,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>--}}
 
 @endsection
 

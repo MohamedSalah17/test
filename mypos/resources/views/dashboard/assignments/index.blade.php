@@ -77,10 +77,11 @@
                                         </td>--}}
                                         <td>
                                             @if (auth()->user()->hasPermission('delete_assignments'))
+                                                <a href="{{route('dashboard.assignments.edit',$assignment->id)}}" class="btn btn-warning btn-sm"><i class="fa fa-upload"></i> @lang('site.upload_anss')</a>
                                                 <a href="/files/{{$assignment->pdf_anss}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
                                             @else
-                                            <a href="{{route('dashboard.assignments.edit',$assignment->id)}}" class="btn btn-warning btn-sm"><i class="fa fa-upload"></i> @lang('site.upload_anss')</a>
-                                            <a href="/files/{{$assignment->pdf_anss}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
+                                                <a href="{{route('dashboard.assignments.edit',$assignment->id)}}" class="btn btn-warning btn-sm"><i class="fa fa-upload"></i> @lang('site.upload_anss')</a>
+                                                <a href="/files/{{$assignment->pdf_anss}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
                                             @endif
                                         </td>
                                         <td>

@@ -67,7 +67,7 @@ class AssignmentController extends Controller
         if($request->hasFile('pdf_quest')){
             $pdf_quest = $request->file('pdf_quest');
             $filename=time().'.'.$pdf_quest->getClientOriginalExtension();
-            $destinationPath = public_path('uploads');
+            $destinationPath = public_path('uploads/questions');
 
             $pdf_quest->move($destinationPath,$filename);
             //dd($pdf_quest);

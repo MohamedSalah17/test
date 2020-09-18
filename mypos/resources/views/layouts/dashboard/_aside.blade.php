@@ -35,6 +35,10 @@
             <li><a href="{{route('dashboard.assignments.index')}}"><i class="fa fa-users"></i><span>@lang('site.assignments')</span></a></li>
         @endif
 
+        @if (auth()->user()->hasPermission('read_regist'))
+            <li><a href="{{route('dashboard.student_subjects.index')}}"><i class="fa fa-users"></i><span>@lang('site.student_regist_subjects')</span></a></li>
+        @endif
+
         {{--@if (auth()->user()->hasPermission('read_users'))
             <li><a href="{{route('dashboard.users.index')}}"><i class="fa fa-users"></i><span>@lang('site.users')</span></a></li>
         @endif--}}
