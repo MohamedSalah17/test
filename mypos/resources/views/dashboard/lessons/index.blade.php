@@ -23,17 +23,19 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <select name="doc_id" class="form-control">
+                                    <select name="sbj_id" class="form-control">
                                         <option value="">@lang('site.subjects')</option>
                                         @foreach ($subjects as $subject)
-                                            <option value="{{$subject->id}}" {{request()->doc_id == $subject->id ? 'selected' : ''}}>{{$subject->name}}</option>
+                                            <option value="{{$subject->id}}" {{request()->sbj_id == $subject->id ? 'selected' : ''}}>{{$subject->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
+                                    @foreach ($lessons as $lesson)
 
+                                    @endforeach
                                     @if (auth()->user()->hasPermission('create_lessons'))
                                         <a href=" {{route('dashboard.lessons.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                     @endif
@@ -51,9 +53,11 @@
                                     <tr>
                                         <th>#</th>
                                         <th>@lang('site.name')</th>
-                                        <th>@lang('site.code')</th>
-                                        <th>@lang('site.sbj_doc')</th>
-                                        <th> </th>
+                                        <th>@lang('site.sbj_name')</th>
+                                        <th>@lang('site.youtube_link')</th>
+                                        <th>@lang('site.pdf_file')</th>
+                                        <th>@lang('site.powerpoint_file')</th>
+                                        <th>@lang('site.assignments') </th>
                                         <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
@@ -62,12 +66,22 @@
                                     <tr>
                                         <td>{{ $index + 1}}</td>
                                         <td>{{ $lesson->name}}</td>
-                                        <td>{{ $lesson->code}}</td>
                                         <td>{{ $lesson->subject['name']}}</td>
+                                        <td><a class="btn btn-warning btn-sm" href="{{$lesson->youtube_link}}" target="_blank">go</a></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
-                                            {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>--}}
+                                                <a href="/files/{{$lesson->pdf_file}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
+                                                <a href="/file/download/{{$lesson->pdf_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+
                                         </td>
+                                        <td>
+                                            <a href=" /files/{{$lesson->pptx_file}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
+                                            <a href="/file/download/{{$lesson->pptx_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                        </td>
+                                        <td>{{ $lesson->assignments->count()}} <a href="{{route('dashboard.assignments.index', ['sbj_id' => $lesson->sbj_id, 'lesson_id' => $lesson->id ])}}" class="btn btn-success btn-sm">@lang('site.show_lesson_assignments')</a> </td>
+                                        {{--<td>
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
+                                            {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
+                                        </td>--}}
                                         <td>
                                             @if (auth()->user()->hasPermission('update_lessons'))
                                                 <a href=" {{ route('dashboard.lessons.edit', $lesson->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>

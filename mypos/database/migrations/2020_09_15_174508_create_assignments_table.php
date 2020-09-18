@@ -16,13 +16,18 @@ class CreateAssignmentsTable extends Migration
         Schema::create('assignments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('lesson_id');
-            $table->integer('sbj_id');
-            $table->integer('doc_id');
+            $table->integer('sbj_id')->nullable();
+            $table->integer('doc_id')->nullable();
             $table->string('name');
-            $table->date('max_date');
-            $table->string('file')->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('pdf_quest');
+            $table->string('pdf_anss')->nullable();
 
             $table->timestamps();
+
+            $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
+
         });
     }
 

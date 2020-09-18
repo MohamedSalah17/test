@@ -54,7 +54,31 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'             => 'required',
+            'start_date'       => 'required',
+            'end_date'         => 'required',
+            'lesson_id'        => 'required',
+            'pdf_quest'        => 'required',
+
+        ]);
+        $request_data = $request->except('pdf_quest');
+
+        if($request->hasFile('pdf_quest')){
+            $pdf_quest = $request->file('pdf_quest');
+            $filename=time().'.'.$pdf_quest->getClientOriginalExtension();
+            $destinationPath = public_path('uploads');
+
+            $pdf_quest->move($destinationPath,$filename);
+            //dd($pdf_quest);
+            $request_data['pdf_quest'] = $pdf_quest;
+        }
+
+        Assignment::create($request_data);
+
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('dashboard.assignments.index');
+
     }
 
     /**
@@ -76,7 +100,7 @@ class AssignmentController extends Controller
      */
     public function edit(Assignment $assignment)
     {
-        //
+        return view('dashboard.assignments.edit', compact('assignment'));
     }
 
     /**
@@ -88,7 +112,27 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
-        //
+        $request->validate([
+            'pdf_anss'  => 'required'
+        ]);
+        $request_data = $request->except('pdf_anss');
+
+        if($request->hasFile('pdf_anss')){
+            $pdf_anss = $request->file('pdf_anss');
+            $filename=time().'.'.$pdf_anss->getClientOriginalExtension();
+            $destinationPath = public_path('uploads/anssers');
+
+            $pdf_anss->move($destinationPath,$filename);
+            //dd($pdf_quest);
+            $request_data['pdf_anss'] = $pdf_anss;
+        }
+
+        $assignment->update($request_data);
+
+
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('dashboard.assignments.index');
+
     }
 
     /**
@@ -99,6 +143,8 @@ class AssignmentController extends Controller
      */
     public function destroy(Assignment $assignment)
     {
-        //
+        $assignment->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return redirect()->route('dashboard.assignments.index');
     }
 }

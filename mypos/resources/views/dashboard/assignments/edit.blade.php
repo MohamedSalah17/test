@@ -18,7 +18,7 @@
                 <div class="box box-primary">
 
                     <div class="box-header">
-                        <h3 class="box-title">@lang('site.edit')</h3>
+                        <h3 class="box-title">@lang('site.upload_anss')</h3>
                     </div>
 
                     <div class="box-body">
@@ -29,29 +29,19 @@
 
 
                             <div class="form-group">
-                                <label>@lang('site.name')</label>
-                                <input type="text" name="name" class="form-control" value="{{ $assignment->name }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label>@lang('site.code')</label>
-                                <input type="text" name="code" class="form-control" value="{{ $assignment->code }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label>@lang('site.lessons')</label>
-                                <select name="sbj_id" class="form-control">
-                                    <option value="">@lang('site.all_lessons')</option>
-                                    @foreach ($lessons as $lesson)
-                                        <option value="{{$lesson->id}}" {{$assignment->sbj_id == $lesson->id ? 'selected' : ''}}>{{$lesson->name}}</option>
-                                    @endforeach
-                                </select>
+                                <label>@lang('site.pdf_anss')</label>
+                                <input type="file" name="pdf_anss" class="form-control" value="{{old('pdf_anss')}}">
+                                <!--input type="submit" value="upload"-->
                             </div>
 
 
 
+
+
+
+
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> @lang('site.edit')</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> @lang('site.upload')</button>
                             </div>
                         </form>
                     </div><!--end of box-body-->

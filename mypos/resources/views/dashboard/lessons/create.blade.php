@@ -23,6 +23,7 @@
 
                     <div class="box-body">
                         @include('partials._errors')
+
                         <form action="{{route('dashboard.lessons.store')}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('post') }}
@@ -33,9 +34,33 @@
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.code')</label>
-                                <input type="text" name="code" class="form-control" value="{{old('code')}}">
+                                <label>@lang('site.date')</label>
+                                <input type="date" name="date" class="form-control" value="{{old('date')}}">
                             </div>
+
+                                <div class="form-group">
+                                    <label>@lang('site.pdf_file')</label>
+                                    <input type="file" name="pdf_file" class="form-control" value="{{old('pdf_file')}}">
+                                    <!--input type="submit" value="upload"-->
+                                </div>
+
+                                <div class="form-group">
+                                    <label>@lang('site.pptx_file')</label>
+                                    <input type="file" name="pptx_file" class="form-control" value="{{old('pptx_file')}}">
+                                    <!--input type="submit" value="upload"-->
+                                </div>
+
+                                <div class="form-group">
+                                    <label>@lang('site.youtube_link')</label>
+                                    <input type="text" name="youtube_link" class="form-control" value="{{old('youtube_link')}}">
+                                </div>
+
+                                {{--<div class="form-group">
+                                    <label>@lang('site.doc_id')</label>
+                                    <input type="text" name="doc_id"  class="form-control" value="{{$request->doc_id}}" readonly>
+                                </div>--}}
+
+
 
                             <div class="form-group">
                                 <label>@lang('site.less_sbj')</label>

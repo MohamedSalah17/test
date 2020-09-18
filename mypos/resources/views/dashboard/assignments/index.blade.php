@@ -26,7 +26,7 @@
                                     <select name="doc_id" class="form-control">
                                         <option value="">@lang('site.lessons')</option>
                                         @foreach ($lessons as $lesson)
-                                            <option value="{{$lesson->id}}" {{request()->doc_id == $lesson->id ? 'selected' : ''}}>{{$lesson->name}}</option>
+                                            <option value="{{$lesson->id}}" {{request()->lesson_id == $lesson->id ? 'selected' : ''}}>{{$lesson->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -51,8 +51,10 @@
                                     <tr>
                                         <th>#</th>
                                         <th>@lang('site.name')</th>
-                                        <th>@lang('site.code')</th>
-                                        <th>@lang('site.sbj_doc')</th>
+                                        <th>@lang('site.lesson_name')</th>
+                                        <th>@lang('site.quest_file')</th>
+                                        <th>@lang('site.start_date')</th>
+                                        <th>@lang('site.end_date')</th>
                                         <th> </th>
                                         <th>@lang('site.action')</th>
                                     </tr>
@@ -62,16 +64,29 @@
                                     <tr>
                                         <td>{{ $index + 1}}</td>
                                         <td>{{ $assignment->name}}</td>
-                                        <td>{{ $assignment->code}}</td>
                                         <td>{{ $assignment->lesson['name']}}</td>
                                         <td>
+                                            <a href="/files/{{$assignment->pdf_quest}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
+                                            <a href="/file/download/{{$assignment->pdf_quest}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                        </td>
+                                        <td>{{ $assignment->start_date}}</td>
+                                        <td>{{ $assignment->end_date}}</td>
+                                        {{--<td>
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
-                                            {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>--}}
+                                            {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
+                                        </td>--}}
+                                        <td>
+                                            @if (auth()->user()->hasPermission('delete_assignments'))
+                                                <a href="/files/{{$assignment->pdf_anss}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
+                                            @else
+                                            <a href="{{route('dashboard.assignments.edit',$assignment->id)}}" class="btn btn-warning btn-sm"><i class="fa fa-upload"></i> @lang('site.upload_anss')</a>
+                                            <a href="/files/{{$assignment->pdf_anss}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
+                                            @endif
                                         </td>
                                         <td>
-                                            @if (auth()->user()->hasPermission('update_assignments'))
+                                            {{--@if (auth()->user()->hasPermission('update_assignments'))
                                                 <a href=" {{ route('dashboard.assignments.edit', $assignment->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
-                                            @endif
+                                            @endif--}}
                                             @if (auth()->user()->hasPermission('delete_assignments'))
                                                 <form action="{{route('dashboard.assignments.destroy', $assignment->id)}}" method="POST" style="display: inline-block">
                                                     {{ csrf_field() }}

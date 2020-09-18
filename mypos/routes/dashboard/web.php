@@ -1,7 +1,6 @@
 
 <?php
 
-use App\Subject;
 
 Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]],
     function() {
@@ -27,6 +26,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
             //lesson routes
             Route::resource('lessons', 'LessonController')->except(['show']);
+            Route::get('lessons/files/create', 'LessonController@fileCreate');
+            //Route::post('lessons/files', 'LessonController@fileStore');
+
+            Route::get('lessons/files/{pdf_file}', 'LessonController@show_pdf');
+            Route::get('lessons/files/{powerpoint_file}', 'LessonController@show_pptx');
+
+            Route::get('lessons/file/download/{pdf_file}', 'LessonController@download_pdf');
+            Route::get('lessons/file/download/{powerpoint_file}', 'LessonController@download_pptx');
+
 
             //lesson routes
             Route::resource('assignments', 'AssignmentController')->except(['show']);

@@ -10,7 +10,7 @@ return [
     "last_name"     =>      'الاسم الاخير',
     "email"         =>      'البريد الالكتروني',
     "image"         =>      'صورة',
-    "action"        =>      'اكشن',
+    "action"        =>      'العمليات',
 
     "add"           =>      'أضف',
     "create"         =>      'اضافة',
@@ -101,6 +101,35 @@ return [
     "admins"        => 'المشرفين',
     "lessons"        => 'الدروس',
     "less_sbj"        => 'مادة الدرس',
+    "assignments"        => 'المهمات',
+    "sbj_name"        => 'اسم المادة',
+    "show_lesson_assignments"        => 'عرض مهمات الدرس',
+    "youtube_link"        => 'فيديو يوتيوب',
+    "pdf_file"        => 'ملف pdf',
+    "powerpoint_file"        => 'ملف بوربوينت',
+    "download"        => 'تحميل',
+    "ass_less"        => 'درس المهمه',
+    "lesson_name"        => 'اسم الدرس',
+    "start_date"        => 'تاريخ البداية',
+    "end_date"        => 'تاريخ الإنتهاء',
+    "quest_file"        => 'ملف الأسئلة',
+    "upload_anss"        => 'رفع الإجابة',
+    "upload"        => 'رفع',
+    "pdf_anss"        => 'ملف الإجابة',
+    "pdf_quest"        => 'ملف الاسئلة',
+    "doc_id"        => 'كود الدكتور',
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

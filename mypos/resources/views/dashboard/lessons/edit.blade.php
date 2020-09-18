@@ -30,20 +30,39 @@
 
                             <div class="form-group">
                                 <label>@lang('site.name')</label>
-                                <input type="text" name="name" class="form-control" value="{{ $lesson->name }}">
+                                <input type="text" name="name" class="form-control" value="{{$lesson->name}}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.code')</label>
-                                <input type="text" name="code" class="form-control" value="{{ $lesson->code }}">
+                                <label>@lang('site.date')</label>
+                                <input type="date" name="date" class="form-control" value="{{$lesson->date}}">
                             </div>
 
+                                <div class="form-group">
+                                    <label>@lang('site.pdf_file')</label>
+                                    <input type="file" name="pdf_file" class="form-control" value="{{$lesson->pdf_file}}">
+                                    <!--input type="submit" value="upload"-->
+                                </div>
+
+                                <div class="form-group">
+                                    <label>@lang('site.pptx_file')</label>
+                                    <input type="file" name="pptx_file" class="form-control" value="{{$lesson->pptx_file}}">
+                                    <!--input type="submit" value="upload"-->
+                                </div>
+
+                                <div class="form-group">
+                                    <label>@lang('site.youtube_link')</label>
+                                    <input type="text" name="youtube_link" class="form-control" value="{{$lesson->youtube_link}}">
+                                </div>
+
+
+
                             <div class="form-group">
-                                <label>@lang('site.subjects')</label>
+                                <label>@lang('site.less_sbj')</label>
                                 <select name="sbj_id" class="form-control">
-                                    <option value="">@lang('site.all_subjects')</option>
+                                    <option value="">@lang('site.subjects')</option>
                                     @foreach ($subjects as $subject)
-                                        <option value="{{$subject->id}}" {{$lesson->sbj_id == $subject->id ? 'selected' : ''}}>{{$subject->name}}</option>
+                                        <option value="{{$subject->id}}" {{old('sbj_id') == $subject->id ? 'selected' : ''}}>{{$subject->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

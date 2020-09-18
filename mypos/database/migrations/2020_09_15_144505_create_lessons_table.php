@@ -16,12 +16,12 @@ class CreateLessonsTable extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('sbj_id');
-            $table->integer('doc_id');
+            $table->integer('doc_id')->nullable();
             $table->string('name');
             $table->date('date');
-            $table->string('youtube_link');
-            $table->string('pdf');
-            $table->string('powerpoint');
+            $table->string('pdf_file');
+            $table->string('pptx_file');
+            $table->string('youtube_link')->nullable();
             $table->timestamps();
 
             $table->foreign('sbj_id')->references('id')->on('subjects')->onDelete('cascade');
