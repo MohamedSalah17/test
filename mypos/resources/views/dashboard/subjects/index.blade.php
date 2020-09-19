@@ -82,6 +82,9 @@
                                                     <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                                 </form>
                                             @endif
+                                            @if (auth()->user()->hasPermission('create_regist'))
+                                            <a href="{{route('dashboard.student_subjects.create')}}" class="btn btn-warning btn-sm">@lang('site.add_std_to_sbj')</a>
+                                            @endif
 
                                         </td>
                                     </tr>

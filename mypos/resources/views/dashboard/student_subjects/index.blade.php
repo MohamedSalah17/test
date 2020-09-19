@@ -35,7 +35,7 @@
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
 
                                     @if (auth()->user()->hasPermission('create_regist'))
-                                        <a href=" {{route('dashboard.subjects.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                                        <a href=" {{route('dashboard.student_subjects.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                     @endif
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#model-exim">
                                         Import/Export
@@ -61,16 +61,16 @@
                                     @foreach ($stdSubjects as $index=>$stdSubject)
                                     <tr>
                                         <td>{{ $index + 1}}</td>
-                                        <td>{{ $stdSubject->subjects['name']}}</td>
                                         <td>{{ $stdSubject->students['name']}}</td>
+                                        <td>{{ $stdSubject->subjects['name']}}</td>
                                         {{--<td>
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
                                             {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
                                         </td>--}}
                                         <td>
-                                            @if (auth()->user()->hasPermission('update_regist'))
+                                            {{--@if (auth()->user()->hasPermission('update_regist'))
                                                 <a href=" {{ route('dashboard.student_subjects.edit', $stdSubject->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
-                                            @endif
+                                            @endif--}}
                                             @if (auth()->user()->hasPermission('delete_regist'))
                                                 <form action="{{route('dashboard.student_subjects.destroy', $stdSubject->id)}}" method="POST" style="display: inline-block">
                                                     {{ csrf_field() }}

@@ -44,7 +44,7 @@
                                         <th>@lang('site.name')</th>
                                         <th>@lang('site.code')</th>
                                         <th>@lang('site.email')</th>
-                                        <th>@lang('site.add_orderRegist')</th>
+                                        {{--<th>@lang('site.add_orderRegist')</th>--}}
                                         <th>@lang('site.phone')</th>
                                         <th>@lang('site.address')</th>
                                         {{--<th>@lang('site.image')</th>--}}
@@ -58,8 +58,7 @@
                                         <td>{{ $student->name}}</td>
                                         <td>{{ $student->code}}</td>
                                         <td>{{ $student->email}}</td>
-                                        <td><a href="{{route('dashboard.students.ordersRegist.create', $student->id)}}" class="btn btn-primary">@lang('site.add_orderRegist')</a></td>
-                                        <td>{{ is_array($student->phone) ? implode($student->phone, '-') : $student->phone }}</td>
+                                        {{--<td><a href="{{route('dashboard.student_subjects.create')}}" class="btn btn-primary">@lang('site.add_orderRegist')</a></td>--}}                                        <td>{{ is_array($student->phone) ? implode($student->phone, '-') : $student->phone }}</td>
                                         <td>{{ $student->address}}</td>
                                         {{--<td><img src="{{ $student->image_path }}" style="width: 80px;" class="img-thumbnail" alt=""></td>--}}
                                         <td>

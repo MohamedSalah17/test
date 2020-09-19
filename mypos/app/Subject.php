@@ -20,9 +20,13 @@ class Subject extends Model
         return $this->hasMany(Lesson::class, 'sbj_id');
     }
 
-    public function students(){
+    /*public function students(){
         return $this->belongsToMany(Student::class,'student_id', 'subject_id')
-                                    ->using(StudentSubject::class);
+                                    ->using(StudentSubject::class,'student_id', 'subject_id');
+    }*/
+
+    public function stdSbjs(){
+        return $this->hasMany(StudentSubject::class,'subject_id');
     }
 
     /*public function ordersRegist(){

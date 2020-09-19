@@ -28,9 +28,13 @@ class Student extends Model
         'password', 'remember_token',
     ];
 
-    public function subjects(){
+    /*public function subjects(){
         return $this->belongsToMany(Subject::class,'student_id', 'subject_id')
-                                    ->using(StudentSubject::class);
+                                    ->using(StudentSubject::class,'student_id', 'subject_id');
+    }*/
+
+    public function stdSbjs(){
+        return $this->hasMany(StudentSubject::class,'student_id');
     }
 
     /*public function ordersRegits(){
