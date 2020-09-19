@@ -123,6 +123,9 @@ return [
     "student_regist_subjects"        => 'تسجيل الطلاب الي المواد',
     "std_name"        => 'اسم الطالب',
     "add_std_to_sbj"        => 'اضافة طالب الي المادة',
+    "student_assignments"        => 'مهمات الطلاب',
+    "stdassign"        => 'حل المهمات',
+
 
 
 

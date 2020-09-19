@@ -37,6 +37,10 @@ class Student extends Model
         return $this->hasMany(StudentSubject::class,'student_id');
     }
 
+    public function stdAssign(){
+        return $this->hasMany(StudentAssignment::class,'student_id');
+    }
+
     /*public function ordersRegits(){
         return $this->hasMany(OrderRegist::class,'student_id','order_id');
     }*/

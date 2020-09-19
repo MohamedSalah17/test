@@ -35,11 +35,6 @@
                             </div>
 
 
-
-
-
-
-
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> @lang('site.upload')</button>
                             </div>

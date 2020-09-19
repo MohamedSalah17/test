@@ -14,4 +14,8 @@ class Assignment extends Model
     public function lesson(){
         return $this->belongsTo(Lesson::class, 'lesson_id');
     }
+
+    public function stdAssign(){
+        return $this->hasMany(StudentAssignment::class,'assign_id');
+    }
 }

@@ -1,0 +1,104 @@
+@extends('layouts.dashboard.app')
+
+@section('content')
+
+    <div class="content-wrapper">
+            <section class="content-header">
+                <h1>@lang('site.student_assignments')</h1>
+                <ol class="breadcrumb">
+                <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
+                    <li class="active"> @lang('site.student_assignments')</li>
+                </ol>
+            </section>
+            <section class="content">
+
+                <div class="box box-primary">
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title" style="margin-bottom: 15px">@lang('site.student_assignments') {{--<small>{{$subjects->total()}}</small>--}}</h3>
+                        <form action="{{ route('dashboard.student_assignments.index')}}" method="GET">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search}}">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <select name="std_id" class="form-control">
+                                        <option value="">@lang('site.students')</option>
+                                        @foreach ($students as $student)
+                                            <option value="{{$student->id}}" {{request()->std_id == $student->id ? 'selected' : ''}}>{{$student->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
+
+                                    {{--@if (auth()->user()->hasPermission('create_stdassign'))
+                                        <a href=" {{route('dashboard.student_assignments.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                                    @endif--}}
+
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="box-body">
+                        @if ($stdAssignments->count() > 0)
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>@lang('site.std_name')</th>
+                                        <th>@lang('site.sbj_name')</th>
+                                        <th>@lang('site.action')</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($stdAssignments as $index=>$stdAssignment)
+                                    <tr>
+                                        <td>{{ $index + 1}}</td>
+                                        <td>{{ $stdAssignment->students['name']}}</td>
+                                        <td>{{ $stdAssignment->assignments['name']}}</td>
+                                        <td>
+                                            <a href="/files/{{$stdAssignment->pdf_anss}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
+                                            <a href="/file/download/{{$stdAssignment->pdf_anss}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                        </td>
+                                        {{--<td>
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
+                                            {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
+                                        </td>--}}
+                                        <td>
+                                            {{--@if (auth()->user()->hasPermission('update_stdassign'))
+                                                <a href=" {{ route('dashboard.student_assignments.edit', $stdSubject->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                                            @endif--}}
+                                            @if (auth()->user()->hasPermission('delete_stdassign'))
+                                                <form action="{{route('dashboard.student_assignments.destroy', $stdAssignment->id)}}" method="POST" style="display: inline-block">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('delete')}}
+                                                    <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+                                                </form>
+                                            @endif
+
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{$stdAssignments->appends(request()->query())->links()}}
+                        @else
+                            <h2>@lang('site.no_data_found')</h2>
+                        @endif
+                    </div>
+
+                </div>
+
+            </section>
+
+    </div>
+
+
+
+@endsection
+

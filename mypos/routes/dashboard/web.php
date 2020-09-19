@@ -39,6 +39,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
             //lesson routes
             Route::resource('assignments', 'AssignmentController')->except(['show']);
 
+            //student_assignment routes
+            Route::resource('student_assignments', 'StudentAssignmentController')->except(['show']);
+
             //student with subject routes
             Route::resource('student_subjects', 'StudentSubjectController')->except(['show']);
             Route::get('student_subjects/export', 'StudentSubjectController@export')->name('student_subjects.export');

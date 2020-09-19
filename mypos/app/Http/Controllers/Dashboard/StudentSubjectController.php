@@ -47,9 +47,7 @@ class StudentSubjectController extends Controller
     {
         $subjects = Subject::all();
         $students = Student::all();
-        foreach ($students as $index => $student) {
-            # code...
-        }
+
         $stdSubjects = StudentSubject::when($request->search, function ($q) use ($request){
             return $q->where('id', 'like', '%'. $request->search . '%');
 
