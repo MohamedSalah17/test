@@ -128,6 +128,7 @@ return [
     "show_students_anss"        => 'عرض اجابات الطلاب',
     "uploaded_successfully"        => 'تم الرفع بنجاح',
     "assign_name"        => 'إسم المهمة',
+    "after_date"        => 'بعد المدة',
 
 
 

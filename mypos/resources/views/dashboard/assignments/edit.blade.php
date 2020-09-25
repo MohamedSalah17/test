@@ -29,14 +29,44 @@
 
 
                             <div class="form-group">
-                                <label>@lang('site.pdf_anss')</label>
-                                <input type="file" name="pdf_anss" class="form-control" value="{{old('pdf_anss')}}">
+                                <label>@lang('site.name')</label>
+                                <input type="text" name="name" class="form-control" value="{{$assignment->name}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.pdf_quest')</label>
+                                <input type="file" name="pdf_quest" class="form-control" value="{{$assignment->pdf_quest}}">
                                 <!--input type="submit" value="upload"-->
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.start_date')</label>
+                                <input type="date" name="start_date" class="form-control" value="{{$assignment->start_date}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.end_date')</label>
+                                <input type="date" name="end_date" class="form-control" value="{{$assignment->end_date}}">
+                            </div>
+
+                            {{--<div class="form-group">
+                                <label>@lang('site.ass_less')</label>
+                                <input type="text" name="lesson_id"  class="form-control" value="{{$request->lesson_id}}" readonly>
+                            </div>--}}
+
+                            <div class="form-group">
+                                <label>@lang('site.ass_less')</label>
+                                <select name="lesson_id" class="form-control">
+                                    <option value="">@lang('site.lessons')</option>
+                                    @foreach ($lessons as $lesson)
+                                        <option value="{{$lesson->id}}" {{old('lesson_id') == $lesson->id ? 'selected' : ''}}>{{$lesson->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> @lang('site.upload')</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> @lang('site.edit')</button>
                             </div>
                         </form>
                     </div><!--end of box-body-->

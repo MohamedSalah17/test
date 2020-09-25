@@ -221,21 +221,20 @@ class LessonController extends Controller
 
             $pdf_file = $request->file('pdf_file');
             $pdf_filename=time().'.'.$pdf_file->getClientOriginalExtension();
-            $destinationPath = public_path('uploads');
 
+            $request_data['pdf_file'] = $pdf_filename;
+
+            $destinationPath = public_path('uploads/lessons');
             $pdf_file->move($destinationPath,$pdf_filename);
-            //dd($pdf_file);
-            $request_data['pdf_file'] = $pdf_file;
 
             $pptx_file = $request->file('pptx_file');
             $pptx_filename=time().'.'.$pptx_file->getClientOriginalExtension();
-            $destinationPath = public_path('uploads');
+            $request_data['pptx_file'] = $pptx_filename;
 
+            $destinationPath = public_path('uploads/lessons');
             $pptx_file->move($destinationPath,$pptx_filename);
-            //$data->powerpoint_file = $pptx_file;
-            $request_data['pptx_file'] = $pptx_file;
 
-            $request_data = $request->all();
+            //$request_data = $request->all();
             //$data->save();
         }
 

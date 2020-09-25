@@ -92,9 +92,9 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{--@if (auth()->user()->hasPermission('update_assignments'))
+                                            @if (auth()->user()->hasPermission('update_assignments'))
                                                 <a href=" {{ route('dashboard.assignments.edit', $assignment->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
-                                            @endif--}}
+                                            @endif
                                             @if (auth()->user()->hasPermission('delete_assignments'))
                                                 <form action="{{route('dashboard.assignments.destroy', $assignment->id)}}" method="POST" style="display: inline-block">
                                                     {{ csrf_field() }}

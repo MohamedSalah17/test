@@ -111,7 +111,8 @@ class AssignmentController extends Controller
      */
     public function edit(Assignment $assignment)
     {
-        return view('dashboard.assignments.edit', compact('assignment'));
+        $lessons = Lesson::all();
+        return view('dashboard.assignments.edit', compact('assignment', 'lessons'));
     }
 
     /**
@@ -124,19 +125,26 @@ class AssignmentController extends Controller
     public function update(Request $request, Assignment $assignment)
     {
         $request->validate([
-            'pdf_anss'  => 'required'
+            'name'             => 'required',
+            'start_date'       => 'required',
+            'end_date'         => 'required',
+            'lesson_id'        => 'required',
+            'pdf_quest'        => 'required',
+
         ]);
-        $request_data = $request->except('pdf_anss');
+        $request_data = $request->except('pdf_quest');
 
-        if($request->hasFile('pdf_anss')){
-            $pdf_anss = $request->file('pdf_anss');
-            $filename=time().'.'.$pdf_anss->getClientOriginalExtension();
-            $destinationPath = public_path('uploads/anssers');
+        if($request->hasFile('pdf_quest')){
+            $pdf_quest = $request->file('pdf_quest');
+            $filename=time().'.'.$pdf_quest->getClientOriginalExtension();
+            $destinationPath = public_path('uploads/questions');
 
-            $pdf_anss->move($destinationPath,$filename);
+            $request_data['pdf_quest'] = $filename;
+
+            $pdf_quest->move($destinationPath,$filename);
             //dd($pdf_quest);
-            $request_data['pdf_anss'] = $pdf_anss;
         }
+
 
         $assignment->update($request_data);
 

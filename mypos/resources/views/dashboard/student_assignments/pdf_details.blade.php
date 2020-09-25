@@ -23,10 +23,13 @@
 
                     <div class="box-body">
 
-                        <p style="text-align: center">
+                        {{--<p style="text-align: center">
                             <iframe src="{{url('uploads/anssers/'.$data->pdf_anss)}}"
                                     style="width: 700px; height:500px"></iframe>
-                        </p>
+                        </p>--}}
+
+                        <embed src="https://docs.google.com/viewerng/viewer?url={{url('uploads/anssers/'.$data->pdf_anss)}}&embedded=true" width="100%" height="500px" type="application/pdf">
+
                     </div>
                 </div>
 

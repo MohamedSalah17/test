@@ -53,6 +53,7 @@
                                         <th>@lang('site.std_name')</th>
                                         <th>@lang('site.assign_name')</th>
                                         <th>@lang('site.pdf_anss')</th>
+                                        <th>@lang('site.date')</th>
                                         <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
@@ -70,6 +71,11 @@
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
                                             {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
                                         </td>--}}
+                                        @if ($stdAssignment->assignments['end_date'] > $stdAssignment->created_at)
+                                            <td style="color: green">{{ $stdAssignment->created_at}}</td>
+                                        @else
+                                            <td style="color: red">{{ $stdAssignment->created_at}} @lang('site.after_date')</td>
+                                        @endif
                                         <td>
                                             {{--@if (auth()->user()->hasPermission('update_stdassign'))
                                                 <a href=" {{ route('dashboard.student_assignments.edit', $stdSubject->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>

@@ -97,29 +97,31 @@ class AdminController extends Controller
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
-            'permissions' => 'required|min:1',
         ]);
 
         $request_data= $request->except(['permissions']);
         $admin->update($request_data);
 
-        $admin->syncPermissions($request->permissions);
-
         //update the admin in user table
+        $uid = DB::select("SELECT id FROM users  WHERE email = ?", [$admin->email]);
+
         $request->validate([
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
-            'permissions' => 'required|min:1',
         ]);
 
-        $uid = DB::select("SELECT id FROM users  WHERE email = ?", [$admin->email]);
-        $user->id = $uid;
+        //dd($uid);
+        //$user->id = $uid;
+        $users = User::all();
 
-        $request_data= $request->except(['permissions']);
-        $user->update($request_data);
+        foreach ($users as $myuser) {
+            if($myuser->id == $uid){
+                $request_data= $request->except(['permissions']);
+                $user->update($request_data);
+            }
+        }
 
-        $user->syncPermissions($request->permissions);
 
         session()->flash('success', __('site.updated_successfully'));
 

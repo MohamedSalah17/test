@@ -127,6 +127,7 @@ return [
     "show_students_anss"        => 'Show Students Anssers',
     "uploaded_successfully"        => 'Uploaded Successfully',
     "assign_name"        => 'Assignment Name',
+    "after_date"        => 'After The Date',
 
 
     ////////////////////the new words////////////////////

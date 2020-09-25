@@ -123,7 +123,6 @@ class DoctorController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => ['required', Rule::unique('doctors')->ignore($doctor->id)],
-            'permissions' => 'required|min:1',
             'phone' => 'required|array|min:1',
             'phone.0' => 'required',
             'address' => 'required',
@@ -133,14 +132,12 @@ class DoctorController extends Controller
         $request_data['phone'] = array_filter($request->phone);
 
         $doctor->update($request_data);
-        $doctor->syncPermissions($request->permissions);
 
         //update doctor in user table
         $request->validate([
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
-            'permissions' => 'required|min:1',
         ]);
 
         $uid = DB::select("SELECT id FROM users  WHERE email = ?", [$doctor->email]);
@@ -151,7 +148,6 @@ class DoctorController extends Controller
         $request_data= $request->except(['permissions']);
         $user->update($request_data);
 
-        $user->syncPermissions($request->permissions);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('dashboard.doctors.index');

@@ -22,11 +22,24 @@
                     </div>
 
                     <div class="box-body">
-                        <embed src="{{url('uploads/lessons/'.$data->pdf_file)}}" width="100%" height="500px" type="application/pdf">
-                       {{-- <object data="{{url('uploads/lessons/'.$data->pdf_file)}}" type="application/pdf">
+                        {{--<embed src="{{url('uploads/lessons/'.$data->pdf_file)}}" width="100%" height="500px" type="application/pdf">
+                        <object data="{{url('uploads/lessons/'.$data->pdf_file)}}" type="application/pdf">
                             <iframe src="https://docs.google.com/viewer?url={{url('uploads/lessons/'.$data->pdf_file)}}&embedded=true" type="application/pdf"
                                     style="width: 700px; height:500px"></iframe>
-                        </object>--}}
+                        </object>
+                        <a href="{{url('/uploads/web/viewer.html?file='.$data->pdf_file)}}">view</a>
+                        <embed src="https://docs.google.com/viewer?url={{url('uploads/lessons/'.$data->pdf_file)}}&embedded=true" width="100%" height="500px" type="application/pdf">
+
+                        <embed src="https://mozilla.github.io/pdf.js/web/viewer.html?file={{url('uploads/lessons/'.$data->pdf_file)}}"
+                            width="100%" height="500px" type="application/pdf">
+
+                        <embed src="/web/viewer.html?file=%2F{{('/uploads/lessons/'.$data->pdf_file)}}" width="100%" height="500px" type="application/pdf">
+
+                        <embed src="{{url('/uploads/web/viewer.html?file='.$data->pdf_file)}}" width="100%" height="500px" type="application/pdf">
+                        --}}
+                        <embed src="https://docs.google.com/viewerng/viewer?url={{url('uploads/lessons/'.$data->pdf_file)}}&embedded=true" width="100%" height="500px" type="application/pdf">
+
+
                     </div>
                 </div>
 

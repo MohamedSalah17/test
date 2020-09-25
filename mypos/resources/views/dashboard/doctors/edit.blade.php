@@ -54,36 +54,6 @@
 
 
                             <div class="form-group">
-                                <label>@lang('site.permissions')</label>
-                                <!-- Custom Tabs -->
-                                <div class="nav-tabs-custom">
-                                    @php
-                                        $models = ['admins', 'doctors', 'students', 'subjects','lessons', 'assignments','regist','stdassign'];
-                                        $maps   = ['create', 'read', 'update', 'delete'];
-                                    @endphp
-                                    <ul class="nav nav-tabs">
-                                        @foreach ($models as $index=>$model)
-                                            <li class="{{ $index == 0? 'active' : ''}}"><a href="#{{$model}}" data-toggle="tab">@lang('site.' .$model)</a></li>
-                                        @endforeach
-                                    </ul>
-                                    <div class="tab-content">
-                                        @foreach ($models as $index=>$model)
-                                            <div class="tab-pane {{ $index == 0? 'active' : ''}}" id="{{$model}}">
-                                                @foreach ($maps as $map)
-                                                    <label><input type="checkbox" name="permissions[]" {{ $doctor->hasPermission($map .'_'. $model) ? 'checked' : '' }} value="{{$map .'_'. $model}}"> @lang('site.' .$map) </label>
-                                                @endforeach
-                                            </div>
-                                            <!-- /.tab-pane -->
-                                        @endforeach
-                                    </div>
-                                    <!-- /.tab-content -->
-                                </div>
-                            <!-- nav-tabs-custom -->
-                            </div><!--end of form group-->
-
-
-
-                            <div class="form-group">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> @lang('site.edit')</button>
                             </div>
                         </form>

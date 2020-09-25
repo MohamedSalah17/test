@@ -151,7 +151,6 @@ class StudentController extends Controller
             'name' => 'required',
             'code' => ['required', Rule::unique('students')->ignore($student->id)],
             'email' => ['required', Rule::unique('students')->ignore($student->id)],
-            'permissions' => 'required|min:1',
             'phone' => 'required|array|min:1',
             'phone.0' => 'required',
             'address' => 'required',
@@ -161,14 +160,12 @@ class StudentController extends Controller
         $request_data['phone'] = array_filter($request->phone);
 
         $student->update($request_data);
-        $student->syncPermissions($request->permissions);
 
         //update student in user table
         $request->validate([
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
-            'permissions' => 'required|min:1',
         ]);
 
         $uid = DB::select("SELECT id FROM users  WHERE email = ?", [$student->email]);
@@ -176,8 +173,6 @@ class StudentController extends Controller
 
         $request_data= $request->except(['permissions']);
         $user->update($request_data);
-
-        $user->syncPermissions($request->permissions);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('dashboard.students.index');
