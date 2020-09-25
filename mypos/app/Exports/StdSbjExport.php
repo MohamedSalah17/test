@@ -33,7 +33,9 @@ class StdSbjExport implements FromCollection, WithHeadings, WithEvents
         return [
             '#',
             'Student_ID',
-            'Subject_ID'
+            'Subject_ID',
+            'Created_at',
+            'Updated_at'
         ];
     }
 

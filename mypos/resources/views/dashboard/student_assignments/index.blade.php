@@ -23,7 +23,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <select name="std_id" class="form-control">
+                                    <select name="assign_id" class="form-control">
                                         <option value="">@lang('site.assignments')</option>
                                         @foreach ($assignments as $assignment)
                                             <option value="{{$assignment->id}}" {{request()->assign_id == $assignment->id ? 'selected' : ''}}>{{$assignment->name}}</option>
