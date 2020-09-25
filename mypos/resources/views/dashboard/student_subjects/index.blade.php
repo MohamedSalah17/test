@@ -123,6 +123,7 @@
                 </div>
             </div>
 
+            @if (auth()->user()->hasPermission('create_regist'))
             <div class="row">
                 <div class="form-group">
                     <label for="file" class="col-md-3 control-label">Import</label>
@@ -132,7 +133,7 @@
                     </div>
                 </div>
             </div>
-
+            @endif
 
         </div>
         <div class="modal-footer">

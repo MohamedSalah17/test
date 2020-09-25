@@ -6,6 +6,7 @@ use App\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 
@@ -50,6 +51,8 @@ class AdminController extends Controller
             //'last_name' => 'required',
             'email' => ['required', Rule::unique('admins')->ignore($admin->id)],
             'password' => 'required|confirmed',
+            'permissions' => 'required|min:1',
+
         ]);
 
         $request_data= $request->except(['password', 'password_confirmation', 'permissions']);
@@ -88,18 +91,35 @@ class AdminController extends Controller
     }
 
 
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, Admin $admin, User $user)
     {
         $request->validate([
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
+            'permissions' => 'required|min:1',
         ]);
 
         $request_data= $request->except(['permissions']);
         $admin->update($request_data);
 
         $admin->syncPermissions($request->permissions);
+
+        //update the admin in user table
+        $request->validate([
+            'name' => 'required',
+            //'last_name' => 'required',
+            'email' => 'required',
+            'permissions' => 'required|min:1',
+        ]);
+
+        $uid = DB::select("SELECT id FROM users  WHERE email = ?", [$admin->email]);
+        $user->id = $uid;
+
+        $request_data= $request->except(['permissions']);
+        $user->update($request_data);
+
+        $user->syncPermissions($request->permissions);
 
         session()->flash('success', __('site.updated_successfully'));
 

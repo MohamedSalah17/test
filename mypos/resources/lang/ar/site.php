@@ -85,24 +85,23 @@ return [
         'description'  =>  'الوصف باللغة الانجليزية',
     ],
 
-    ///////////the new words/////////////////
 
     "doctors"       =>  'أعضاء هيئة التدريس',
     "students"      =>  'الطلاب',
-    "subjects"      =>  'المواد الدراسية',
+    "subjects"      =>  'المقررات الدراسية',
     "four_name"     => 'الإسم رباعي',
     "code"          =>  'الكود',
-    "sbj_doc"       =>  'دكتور المادة',
+    "sbj_doc"       =>  'دكتور المقرر',
     "orderRegits"       =>  'طلب تسجيل',
     "add_orderRegist"       =>  'إضافة طلب تسجيل',
-    "show_subj_table"       =>  'عرض جدول المادة',
-    "sbj_table"       =>  'جدول المادة',
+    "show_subj_table"       =>  'عرض جدول المقرر',
+    "sbj_table"       =>  'جدول المقرر',
     "admin"         => 'المشرف',
     "admins"        => 'المشرفين',
     "lessons"        => 'الدروس',
     "less_sbj"        => 'مادة الدرس',
     "assignments"        => 'المهمات',
-    "sbj_name"        => 'اسم المادة',
+    "sbj_name"        => 'اسم المقرر',
     "show_lesson_assignments"        => 'عرض مهمات الدرس',
     "youtube_link"        => 'فيديو يوتيوب',
     "pdf_file"        => 'ملف pdf',
@@ -120,16 +119,15 @@ return [
     "pdf_anss"        => 'ملف الإجابة',
     "pdf_quest"        => 'ملف الاسئلة',
     "doc_id"        => 'كود الدكتور',
-    "student_regist_subjects"        => 'تسجيل الطلاب الي المواد',
+    "student_regist_subjects"        => 'تسجيل الطلاب الي المقررات',
     "std_name"        => 'اسم الطالب',
-    "add_std_to_sbj"        => 'اضافة طالب الي المادة',
+    "add_std_to_sbj"        => 'اضافة طالب الي المقرر',
     "student_assignments"        => 'مهمات الطلاب',
     "stdassign"        => 'حل المهمات',
-
-
-
-
-
+    "registed_students"        => 'الطلاب المسجلين',
+    "show_students_anss"        => 'عرض اجابات الطلاب',
+    "uploaded_successfully"        => 'تم الرفع بنجاح',
+    "assign_name"        => 'إسم المهمة',
 
 
 

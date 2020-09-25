@@ -24,9 +24,9 @@
 
                                 <div class="col-md-4">
                                     <select name="std_id" class="form-control">
-                                        <option value="">@lang('site.students')</option>
-                                        @foreach ($students as $student)
-                                            <option value="{{$student->id}}" {{request()->std_id == $student->id ? 'selected' : ''}}>{{$student->name}}</option>
+                                        <option value="">@lang('site.assignments')</option>
+                                        @foreach ($assignments as $assignment)
+                                            <option value="{{$assignment->id}}" {{request()->assign_id == $assignment->id ? 'selected' : ''}}>{{$assignment->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -51,7 +51,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>@lang('site.std_name')</th>
-                                        <th>@lang('site.sbj_name')</th>
+                                        <th>@lang('site.assign_name')</th>
+                                        <th>@lang('site.pdf_anss')</th>
                                         <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
@@ -62,8 +63,8 @@
                                         <td>{{ $stdAssignment->students['name']}}</td>
                                         <td>{{ $stdAssignment->assignments['name']}}</td>
                                         <td>
-                                            <a href="/files/{{$stdAssignment->pdf_anss}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
-                                            <a href="/file/download/{{$stdAssignment->pdf_anss}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                            <a href="student_assignments/pdffiles/{{$stdAssignment->id}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
+                                            <a href="student_assignments/pdffile/download/{{$stdAssignment->pdf_anss}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
                                         </td>
                                         {{--<td>
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>

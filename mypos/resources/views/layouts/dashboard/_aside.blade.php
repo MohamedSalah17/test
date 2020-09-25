@@ -24,15 +24,15 @@
         @endif
 
         @if (auth()->user()->hasPermission('read_subjects'))
-            <li><a href="{{route('dashboard.subjects.index')}}"><i class="fa fa-users"></i><span>@lang('site.subjects')</span></a></li>
+            <li><a href="{{route('dashboard.subjects.index')}}"><i class="fa fa-graduation-cap"></i><span>@lang('site.subjects')</span></a></li>
         @endif
 
         @if (auth()->user()->hasPermission('read_lessons'))
-            <li><a href="{{route('dashboard.lessons.index')}}"><i class="fa fa-users"></i><span>@lang('site.lessons')</span></a></li>
+            <li><a href="{{route('dashboard.lessons.index')}}"><i class="fa fa-newspaper-o"></i><span>@lang('site.lessons')</span></a></li>
         @endif
 
         @if (auth()->user()->hasPermission('read_assignments'))
-            <li><a href="{{route('dashboard.assignments.index')}}"><i class="fa fa-users"></i><span>@lang('site.assignments')</span></a></li>
+            <li><a href="{{route('dashboard.assignments.index')}}"><i class="fa fa-list-alt"></i><span>@lang('site.assignments')</span></a></li>
         @endif
 
         @if (auth()->user()->hasPermission('read_stdassign'))
@@ -40,7 +40,7 @@
         @endif
 
         @if (auth()->user()->hasPermission('read_regist'))
-            <li><a href="{{route('dashboard.student_subjects.index')}}"><i class="fa fa-users"></i><span>@lang('site.student_regist_subjects')</span></a></li>
+            <li><a href="{{route('dashboard.student_subjects.index')}}"><i class="fa fa-th-list"></i><span>@lang('site.student_regist_subjects')</span></a></li>
         @endif
 
         {{--@if (auth()->user()->hasPermission('read_users'))

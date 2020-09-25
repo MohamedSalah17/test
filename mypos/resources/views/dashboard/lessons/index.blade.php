@@ -69,13 +69,12 @@
                                         <td>{{ $lesson->subject['name']}}</td>
                                         <td><a class="btn btn-warning btn-sm" href="{{$lesson->youtube_link}}" target="_blank">go</a></td>
                                         <td>
-                                                <a href="/files/{{$lesson->pdf_file}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
-                                                <a href="/file/download/{{$lesson->pdf_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                                <a href="lessons/pdffiles/{{$lesson->id}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
+                                                <a href="lessons/pdffile/download/{{$lesson->pdf_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
 
                                         </td>
                                         <td>
-                                            <a href=" /files/{{$lesson->pptx_file}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
-                                            <a href="/file/download/{{$lesson->pptx_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                            <a href="lessons/pptxfile/download/{{$lesson->pptx_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
                                         </td>
                                         <td>{{ $lesson->assignments->count()}} <a href="{{route('dashboard.assignments.index', ['sbj_id' => $lesson->sbj_id, 'lesson_id' => $lesson->id ])}}" class="btn btn-success btn-sm">@lang('site.show_lesson_assignments')</a> </td>
                                         {{--<td>

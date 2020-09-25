@@ -23,8 +23,8 @@ class StudentAssignmentController extends Controller
         $stdAssignments = StudentAssignment::when($request->search, function ($q) use ($request){
             return $q->where('id', 'like', '%'. $request->search . '%');
 
-        })->when($request->std_id, function ($q) use ($request){
-          return $q->where('student_id', 'like', '%'. $request->std_id . '%');
+        })->when($request->assign_id, function ($q) use ($request){
+          return $q->where('assign_id', 'like', '%'. $request->assign_id . '%');
 
         })->latest()->paginate(6);
 
@@ -63,18 +63,28 @@ class StudentAssignmentController extends Controller
             $pdf_anss = $request->file('pdf_anss');
             $filename=time().'.'.$pdf_anss->getClientOriginalExtension();
             $destinationPath = public_path('uploads/anssers');
+            $request_data['pdf_anss'] = $filename;
 
             $pdf_anss->move($destinationPath,$filename);
             //dd($pdf_quest);
-            $request_data['pdf_anss'] = $pdf_anss;
         }
 
         StudentAssignment::create($request_data);
 
 
-        session()->flash('success', __('site.created_successfully'));
-        return redirect()->route('dashboard.student_assignments.index');
+        session()->flash('success', __('site.uploaded_successfully'));
+        return redirect()->route('dashboard.assignments.index');
 
+    }
+
+    public function show_pdf($id)
+    {
+        $data = StudentAssignment::find($id);
+        return view('dashboard.student_assignments.pdf_details', compact('data'));
+    }
+    //function to download pdf file
+    public function download_pdf($pdf_anss){
+        return response()->download('uploads/anssers/'.$pdf_anss);
     }
 
     /**

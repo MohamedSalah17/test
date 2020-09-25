@@ -98,6 +98,7 @@
         <form action="{{ route('dashboard.students.import') }}" method="post" data-toggle="validator" enctype="multipart/form-data">
             {{ csrf_field() }}
 
+
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Import/Export</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -116,6 +117,7 @@
                 </div>
             </div>
 
+            @if (auth()->user()->hasPermission('create_students'))
             <div class="row">
                 <div class="form-group">
                     <label for="file" class="col-md-3 control-label">Import</label>
@@ -125,6 +127,8 @@
                     </div>
                 </div>
             </div>
+            @endif
+
 
 
         </div>

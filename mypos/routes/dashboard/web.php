@@ -29,18 +29,22 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
             Route::get('lessons/files/create', 'LessonController@fileCreate');
             //Route::post('lessons/files', 'LessonController@fileStore');
 
-            Route::get('lessons/files/{pdf_file}', 'LessonController@show_pdf');
-            Route::get('lessons/files/{powerpoint_file}', 'LessonController@show_pptx');
+            Route::get('lessons/pdffiles/{id}', 'LessonController@show_pdf');
+            Route::get('lessons/pptxfiles/{id}', 'LessonController@show_pptx');
 
-            Route::get('lessons/file/download/{pdf_file}', 'LessonController@download_pdf');
-            Route::get('lessons/file/download/{powerpoint_file}', 'LessonController@download_pptx');
+            Route::get('lessons/pdffile/download/{pdf_file}', 'LessonController@download_pdf');
+            Route::get('lessons/pptxfile/download/{pptx_file}', 'LessonController@download_pptx');
 
 
             //lesson routes
             Route::resource('assignments', 'AssignmentController')->except(['show']);
+            Route::get('assignments/pdffiles/{id}', 'AssignmentController@show_pdf');
+            Route::get('assignments/pdffile/download/{pdf_file}', 'AssignmentController@download_pdf');
 
             //student_assignment routes
             Route::resource('student_assignments', 'StudentAssignmentController')->except(['show']);
+            Route::get('student_assignments/pdffiles/{id}', 'StudentAssignmentController@show_pdf');
+            Route::get('student_assignments/pdffile/download/{pdf_file}', 'StudentAssignmentController@download_pdf');
 
             //student with subject routes
             Route::resource('student_subjects', 'StudentSubjectController')->except(['show']);

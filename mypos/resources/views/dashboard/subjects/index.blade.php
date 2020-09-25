@@ -56,6 +56,7 @@
                                         <th>@lang('site.code')</th>
                                         <th>@lang('site.sbj_doc')</th>
                                         <th>@lang('site.lessons') </th>
+                                        <th>@lang('site.registed_students') </th>
                                         <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
@@ -67,6 +68,7 @@
                                         <td>{{ $subject->code}}</td>
                                         <td>{{ $subject->doctor['name']}}</td>
                                         <td>{{ $subject->lessons->count()}} <a href="{{route('dashboard.lessons.index', [ 'doc_id' => $subject->doc_id, 'sbj_id' => $subject->id ])}}" class="btn btn-info btn-sm">@lang('site.go')</a> </td>
+                                        <td>{{ $subject->stdSbjs->count()}} <a href="{{route('dashboard.student_subjects.index', ['sbj_id' => $subject->id ])}}" class="btn btn-info btn-sm">@lang('site.show')</a> </td>
                                         {{--<td>
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
                                             {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
@@ -130,6 +132,7 @@
                 </div>
             </div>
 
+            @if (auth()->user()->hasPermission('create_subjects'))
             <div class="row">
                 <div class="form-group">
                     <label for="file" class="col-md-3 control-label">Import</label>
@@ -139,7 +142,7 @@
                     </div>
                 </div>
             </div>
-
+            @endif
 
         </div>
         <div class="modal-footer">

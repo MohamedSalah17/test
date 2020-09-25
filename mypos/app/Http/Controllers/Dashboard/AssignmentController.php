@@ -69,9 +69,10 @@ class AssignmentController extends Controller
             $filename=time().'.'.$pdf_quest->getClientOriginalExtension();
             $destinationPath = public_path('uploads/questions');
 
+            $request_data['pdf_quest'] = $filename;
+
             $pdf_quest->move($destinationPath,$filename);
             //dd($pdf_quest);
-            $request_data['pdf_quest'] = $pdf_quest;
         }
 
         Assignment::create($request_data);
@@ -79,6 +80,16 @@ class AssignmentController extends Controller
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('dashboard.assignments.index');
 
+    }
+
+    public function show_pdf($id)
+    {
+        $data = Assignment::find($id);
+        return view('dashboard.assignments.pdf_details', compact('data'));
+    }
+    //function to download pdf file
+    public function download_pdf($pdf_quest){
+        return response()->download('uploads/questions/'.$pdf_quest);
     }
 
     /**

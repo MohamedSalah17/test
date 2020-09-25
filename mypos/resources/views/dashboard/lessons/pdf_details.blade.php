@@ -8,7 +8,7 @@
                 <h1>@lang('site.lessons')</h1>
                 <ol class="breadcrumb">
                     <li><a href=" {{route('dashboard.index')}}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-                    <li> <a href=" {{route('dashboard.lessons.pdf_details')}}">@lang('site.lessons')</a></li>
+                    {{--<li> <a href=" {{route('dashboard.lessons.pdf_details')}}">@lang('site.lessons')</a></li>--}}
                     <li class="active">@lang('site.details')</li>
 
                 </ol>
@@ -22,10 +22,11 @@
                     </div>
 
                     <div class="box-body">
-
-                        <p>
-                            <iframe src="{{url('storage/'.$data->pdf_file)}}" frameborder="0"></iframe>
-                        </p>
+                        <embed src="{{url('uploads/lessons/'.$data->pdf_file)}}" width="100%" height="500px" type="application/pdf">
+                       {{-- <object data="{{url('uploads/lessons/'.$data->pdf_file)}}" type="application/pdf">
+                            <iframe src="https://docs.google.com/viewer?url={{url('uploads/lessons/'.$data->pdf_file)}}&embedded=true" type="application/pdf"
+                                    style="width: 700px; height:500px"></iframe>
+                        </object>--}}
                     </div>
                 </div>
 

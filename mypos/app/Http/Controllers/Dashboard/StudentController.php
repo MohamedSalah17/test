@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Imports\StudentsImport;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -144,7 +145,7 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, Student $student, User $user)
     {
         $request->validate([
             'name' => 'required',
@@ -160,6 +161,23 @@ class StudentController extends Controller
         $request_data['phone'] = array_filter($request->phone);
 
         $student->update($request_data);
+        $student->syncPermissions($request->permissions);
+
+        //update student in user table
+        $request->validate([
+            'name' => 'required',
+            //'last_name' => 'required',
+            'email' => 'required',
+            'permissions' => 'required|min:1',
+        ]);
+
+        $uid = DB::select("SELECT id FROM users  WHERE email = ?", [$student->email]);
+        $user->id = $uid;
+
+        $request_data= $request->except(['permissions']);
+        $user->update($request_data);
+
+        $user->syncPermissions($request->permissions);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('dashboard.students.index');

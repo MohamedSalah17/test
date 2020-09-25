@@ -55,6 +55,7 @@
                                         <th>@lang('site.quest_file')</th>
                                         <th>@lang('site.start_date')</th>
                                         <th>@lang('site.end_date')</th>
+                                        <th>@lang('site.students')</th>
                                         <th> </th>
                                         <th>@lang('site.action')</th>
                                     </tr>
@@ -66,8 +67,8 @@
                                         <td>{{ $assignment->name}}</td>
                                         <td>{{ $assignment->lesson['name']}}</td>
                                         <td>
-                                            <a href="/files/{{$assignment->pdf_quest}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
-                                            <a href="/file/download/{{$assignment->pdf_quest}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                            <a href="assignments/pdffiles/{{$assignment->id}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
+                                            <a href="assignments/pdffile/download/{{$assignment->pdf_quest}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
                                         </td>
                                         <td>{{ $assignment->start_date}}</td>
                                         <td>{{ $assignment->end_date}}</td>
@@ -76,10 +77,14 @@
                                             {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
                                         </td>--}}
                                         <td>
+                                            @if (auth()->user()->hasPermission('read_stdassign'))
+                                            {{ $assignment->stdAssign->count()}} <a href="{{route('dashboard.student_assignments.index', ['assign_id' => $assignment->id ])}}" class="btn btn-info btn-sm">@lang('site.show_students_anss')</a>
+                                            @endif
+                                        </td>
+
+                                        <td>
                                             @if (auth()->user()->hasPermission('create_stdassign'))
-                                                <a href="{{route('dashboard.student_assignments.create')}}" class="btn btn-warning btn-sm"><i class="fa fa-upload"></i> @lang('site.upload_anss')</a>
-                                                <a href="/files/{{$assignment->pdf_anss}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
-                                            @else
+                                            <a href="{{route('dashboard.student_assignments.create')}}" class="btn btn-warning btn-sm"><i class="fa fa-upload"></i> @lang('site.upload_anss')</a>
                                                 {{--
                                                 <a href="{{route('dashboard.assignments.edit',$assignment->id)}}" class="btn btn-warning btn-sm"><i class="fa fa-upload"></i> @lang('site.upload_anss')</a>
                                                 <a href="/files/{{$assignment->pdf_anss}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>

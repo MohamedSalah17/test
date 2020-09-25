@@ -124,26 +124,37 @@ class LessonController extends Controller
 
             $pdf_file = $request->file('pdf_file');
             $pdf_filename=time().'.'.$pdf_file->getClientOriginalExtension();
-            $request_data['pdf_file'] = strrev($pdf_filename);
 
-            $destinationPath = public_path('uploads');
+            $request_data['pdf_file'] = $pdf_filename;
 
+            $destinationPath = public_path('uploads/lessons');
             $pdf_file->move($destinationPath,$pdf_filename);
+
+            /*if($pdf_file->move($destinationPath,$pdf_filename)){
+                $less = new Lesson();
+                $less->pdf_file = $pdf_filename;
+                $less->save();
+            };*/
             //dd($pdf_file);
 
             $pptx_file = $request->file('pptx_file');
             $pptx_filename=time().'.'.$pptx_file->getClientOriginalExtension();
-            $request_data['pptx_file'] = strrev($pptx_filename);
+            $request_data['pptx_file'] = $pptx_filename;
 
-            $destinationPath = public_path('uploads');
-
+            $destinationPath = public_path('uploads/lessons');
             $pptx_file->move($destinationPath,$pptx_filename);
+
+            /*if($pptx_file->move($destinationPath,$pptx_filename)){
+                $less = new Lesson();
+                $less->pptx_file = $pptx_filename;
+                $less->save();
+            };*/
+
             //$data->powerpoint_file = $pptx_file;
 
-            $request_data = $request->all();
+            //$request_data = $request->all();
             //$data->save();
         }
-
 
         Lesson::create($request_data);
         //$data->update(['pdf_file','powerpoint_file']);
@@ -159,25 +170,19 @@ class LessonController extends Controller
      * @return \Illuminate\Http\Response
      */
     //function to show pdf file
-    public function show_pdf($pdf_file)
+    public function show_pdf($id)
     {
-        $data = Lesson::find($pdf_file);
+        $data = Lesson::find($id);
         return view('dashboard.lessons.pdf_details', compact('data'));
     }
     //function to download pdf file
     public function download_pdf($pdf_file){
-        return response()->download('storage/'.$pdf_file);
+        return response()->download('uploads/lessons/'.$pdf_file);
     }
 
-    //function to show pptx file
-    public function show_pptx($pptx_file)
-    {
-        $data = Lesson::find($pptx_file);
-        return view('dashboard.lessons.pptx_details', compact('data'));
-    }
     //function to download pptx file
     public function download_pptx($pptx_file){
-        return response()->download('storage/'.$pptx_file);
+        return response()->download('uploads/lessons/'.$pptx_file);
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Doctor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class DoctorController extends Controller
@@ -117,7 +118,7 @@ class DoctorController extends Controller
      * @param  \App\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Doctor $doctor)
+    public function update(Request $request, Doctor $doctor, User $user)
     {
         $request->validate([
             'name' => 'required',
@@ -132,6 +133,25 @@ class DoctorController extends Controller
         $request_data['phone'] = array_filter($request->phone);
 
         $doctor->update($request_data);
+        $doctor->syncPermissions($request->permissions);
+
+        //update doctor in user table
+        $request->validate([
+            'name' => 'required',
+            //'last_name' => 'required',
+            'email' => 'required',
+            'permissions' => 'required|min:1',
+        ]);
+
+        $uid = DB::select("SELECT id FROM users  WHERE email = ?", [$doctor->email]);
+        //dd($uid);
+        $user->id = $uid;
+
+        //$user->id = $doctor->id;
+        $request_data= $request->except(['permissions']);
+        $user->update($request_data);
+
+        $user->syncPermissions($request->permissions);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('dashboard.doctors.index');
