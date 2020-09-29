@@ -55,7 +55,10 @@ class StudentAssignmentController extends Controller
         $request->validate([
             'student_id' => 'required',
             'assign_id' => 'required',
-            'pdf_anss'  => 'required'
+            'pdf_anss'  => 'required',
+            'lesson_id' => 'required',
+            'sbj_id' => 'required',
+            'doc_id'  => 'required'
         ]);
         $request_data = $request->except('pdf_anss');
 

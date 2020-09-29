@@ -76,7 +76,7 @@ class StudentController extends Controller
             'email' => 'required|unique:students',
 
             'password' => 'required|confirmed',
-            'permissions' => 'required|min:1',
+            //'permissions' => 'required|min:1',
 
             'phone' => 'required|array|min:1',
             'phone.0' => 'required',
@@ -102,23 +102,27 @@ class StudentController extends Controller
 
         $student = Student::create($request_data);
         $student->attachRole('student');
-        $student->syncPermissions($request->permissions);
+        //$student->syncPermissions($request->permissions);
 
         //add doctor to user table
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users',
+            'type'  =>  'student',
 
             'password' => 'required|confirmed',
-            'permissions' => 'required|min:1',
+            //'permissions' => 'required|min:1',
 
         ]);
         $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
         $request_data['password'] = bcrypt($request->password);
+        $request_data['type'] = 'student';
+        $request_data['fid']  = $student->id;
+
 
         $user = User::create($request_data);
-        $user->attachRole('user');
-        $user->syncPermissions($request->permissions);
+        $user->attachRole('student');
+        //$user->syncPermissions($request->permissions);
 
 
         session()->flash('success', __('site.added_successfully'));

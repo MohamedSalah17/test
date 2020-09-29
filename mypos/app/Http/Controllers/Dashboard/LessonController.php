@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Lesson;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\StudentSubject;
 use App\Subject;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Storage;
@@ -26,6 +27,7 @@ class LessonController extends Controller
      */
     public function index(Request $request)
     {
+        $stdSbs = StudentSubject::all();
         $subjects = Subject::all();
         $lessons = Lesson::when($request->search, function ($q) use ($request){
             return $q->where('name', 'like', '%'. $request->search . '%');
@@ -35,7 +37,7 @@ class LessonController extends Controller
 
         })->latest()->paginate(6);
 
-        return view('dashboard.lessons.index', compact('lessons','subjects'));
+        return view('dashboard.lessons.index', compact('lessons','subjects', 'stdSbs'));
     }
 
     /**
@@ -112,9 +114,10 @@ class LessonController extends Controller
         $request->validate([
             'name'          => 'required',
             'date'          => 'required',
-            'youtube_link'  => 'required',
+            'youtube_link'  => 'nullable',
             'sbj_id'        => 'required',
-            'pdf_file'      => 'required',
+            'doc_id'        => 'required',
+            'pdf_file'      => 'nullable',
             'pptx_file'     => 'required',
         ]);
 
@@ -122,6 +125,7 @@ class LessonController extends Controller
 
         if($request->hasFile('pptx_file')){
 
+            if($request->hasFile('pdf_file')){
             $pdf_file = $request->file('pdf_file');
             $pdf_filename=time().'.'.$pdf_file->getClientOriginalExtension();
 
@@ -129,7 +133,7 @@ class LessonController extends Controller
 
             $destinationPath = public_path('uploads/lessons');
             $pdf_file->move($destinationPath,$pdf_filename);
-
+            }
             /*if($pdf_file->move($destinationPath,$pdf_filename)){
                 $less = new Lesson();
                 $less->pdf_file = $pdf_filename;
@@ -209,10 +213,10 @@ class LessonController extends Controller
         $request->validate([
             'name'          => 'required',
             'date'          => 'required',
-            'youtube_link'  => 'required',
+            'youtube_link'  => 'nullable',
             'sbj_id'        => 'required',
-            'pdf_file'        => 'required',
-            'pptx_file' => 'required',
+            'pdf_file'      => 'nullable',
+            'pptx_file'     => 'required',
         ]);
 
         $request_data = $request->except(['pdf_file', 'pptx_file']);

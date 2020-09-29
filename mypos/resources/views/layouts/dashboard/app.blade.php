@@ -41,6 +41,9 @@
             .mr-2{
                 margin-right: 5px;
             }
+            .mt-2{
+                margin-top: 5px;
+            }
 
             .loader {
                 border: 5px solid #f3f3f3;

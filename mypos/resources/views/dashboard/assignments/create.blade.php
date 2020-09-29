@@ -28,23 +28,23 @@
                             {{ method_field('post') }}
 
                             <div class="form-group">
-                                <label>@lang('site.name')</label>
+                                <label>@lang('site.name')*</label>
                                 <input type="text" name="name" class="form-control" value="{{old('name')}}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.pdf_quest')</label>
+                                <label>@lang('site.pdf_quest')*</label>
                                 <input type="file" name="pdf_quest" class="form-control" value="{{old('pdf_quest')}}">
                                 <!--input type="submit" value="upload"-->
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.start_date')</label>
+                                <label>@lang('site.start_date')*</label>
                                 <input type="date" name="start_date" class="form-control" value="{{old('start_date')}}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.end_date')</label>
+                                <label>@lang('site.end_date')*</label>
                                 <input type="date" name="end_date" class="form-control" value="{{old('end_date')}}">
                             </div>
 
@@ -53,8 +53,9 @@
                                 <input type="text" name="lesson_id"  class="form-control" value="{{$request->lesson_id}}" readonly>
                             </div>--}}
 
+                            {{--
                             <div class="form-group">
-                                <label>@lang('site.ass_less')</label>
+                                <label>@lang('site.ass_less')*</label>
                                 <select name="lesson_id" class="form-control">
                                     <option value="">@lang('site.lessons')</option>
                                     @foreach ($lessons as $lesson)
@@ -62,6 +63,12 @@
                                     @endforeach
                                 </select>
                             </div>
+                            --}}
+
+                            <input type="hidden" name="lesson_id" value={{$_GET['lesson_id']}}>
+                            <input type="hidden" name="sbj_id" value={{$_GET['sbj_id']}}>
+                            <input type="hidden" name="doc_id" value={{auth()->user()->fid}}>
+
 
 
 

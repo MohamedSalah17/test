@@ -18,6 +18,9 @@ class CreateStudentAssignmentsTable extends Migration
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('assign_id');
             $table->string('pdf_anss');
+            $table->string('lesson_id');
+            $table->string('sbj_id');
+            $table->string('doc_id');
             $table->timestamps();
 
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');

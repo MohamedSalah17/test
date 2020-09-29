@@ -29,13 +29,19 @@
 
 
                             <div class="form-group">
-                                <label>@lang('site.name')</label>
+                                <label>@lang('site.name')*</label>
                                 <input type="text" name="name" class="form-control" value="{{$lesson->name}}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.date')</label>
+                                <label>@lang('site.date')*</label>
                                 <input type="date" name="date" class="form-control" value="{{$lesson->date}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.pptx_file')*</label>
+                                <input type="file" name="pptx_file" class="form-control" value="{{$lesson->pptx_file}}">
+                                <!--input type="submit" value="upload"-->
                             </div>
 
                                 <div class="form-group">
@@ -44,11 +50,7 @@
                                     <!--input type="submit" value="upload"-->
                                 </div>
 
-                                <div class="form-group">
-                                    <label>@lang('site.pptx_file')</label>
-                                    <input type="file" name="pptx_file" class="form-control" value="{{$lesson->pptx_file}}">
-                                    <!--input type="submit" value="upload"-->
-                                </div>
+
 
                                 <div class="form-group">
                                     <label>@lang('site.youtube_link')</label>
@@ -56,7 +58,7 @@
                                 </div>
 
 
-
+                            {{--
                             <div class="form-group">
                                 <label>@lang('site.less_sbj')</label>
                                 <select name="sbj_id" class="form-control">
@@ -66,6 +68,9 @@
                                     @endforeach
                                 </select>
                             </div>
+                            --}}
+
+                            <input type="hidden" name="sbj_id" value={{$lesson->sbj_id}}>
 
 
 

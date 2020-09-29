@@ -121,7 +121,7 @@ return [
     "doc_id"        => 'كود الدكتور',
     "student_regist_subjects"        => 'تسجيل الطلاب الي المقررات',
     "std_name"        => 'اسم الطالب',
-    "add_std_to_sbj"        => 'اضافة طالب الي المقرر',
+    "add_std_to_sbj"        => 'تسجيل المقرر الي طالب',
     "student_assignments"        => 'مهمات الطلاب',
     "stdassign"        => 'حل المهمات',
     "registed_students"        => 'الطلاب المسجلين',
@@ -129,6 +129,12 @@ return [
     "uploaded_successfully"        => 'تم الرفع بنجاح',
     "assign_name"        => 'إسم المهمة',
     "after_date"        => 'بعد المدة',
+    "add_lesson"        => 'إضافة درس',
+    "add_assignment"        => 'إضافة مهمة',
+    "assign_doc"        => 'تسجيل المقرر الي دكتور',
+    "assigned_successfully"        => 'تم التسجيل بنجاح',
+    "phone_one"        => 'التليفون الأول',
+    "phone_two"        => 'التليفون الثاني',
 
 
 

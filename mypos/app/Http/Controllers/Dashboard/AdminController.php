@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\StudentSubject;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -22,6 +23,7 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {
+
 
         $admins = Admin::whereRoleIs('admin')->where(function($q) use ($request){
 
@@ -51,7 +53,7 @@ class AdminController extends Controller
             //'last_name' => 'required',
             'email' => ['required', Rule::unique('admins')->ignore($admin->id)],
             'password' => 'required|confirmed',
-            'permissions' => 'required|min:1',
+            //'permissions' => 'required|min:1',
 
         ]);
 
@@ -60,23 +62,26 @@ class AdminController extends Controller
 
         $admin = Admin::create($request_data);
         $admin->attachRole('admin');
-        $admin->syncPermissions($request->permissions);
+        //$admin->syncPermissions($request->permissions);
 
         //add doctor to user table
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users',
-
+            'type'  =>  'admin',
             'password' => 'required|confirmed',
-            'permissions' => 'required|min:1',
+            //'permissions' => 'required|min:1',
 
         ]);
         $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
         $request_data['password'] = bcrypt($request->password);
+        $request_data['type'] = 'admin';
+        $request_data['fid']  = $admin->id;
+
 
         $user = User::create($request_data);
-        $user->attachRole('user');
-        $user->syncPermissions($request->permissions);
+        $user->attachRole('admin');
+        //$user->syncPermissions($request->permissions);
 
         session()->flash('success', __('site.added_successfully'));
 
@@ -101,7 +106,6 @@ class AdminController extends Controller
 
         $request_data= $request->except(['permissions']);
         $admin->update($request_data);
-
         //update the admin in user table
         $uid = DB::select("SELECT id FROM users  WHERE email = ?", [$admin->email]);
 

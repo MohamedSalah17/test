@@ -26,7 +26,9 @@
                                     <select name="assign_id" class="form-control">
                                         <option value="">@lang('site.assignments')</option>
                                         @foreach ($assignments as $assignment)
+                                        @if ($assignment->doc_id == auth()->user()->fid || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin') || auth()->user()->hasRole('student'))
                                             <option value="{{$assignment->id}}" {{request()->assign_id == $assignment->id ? 'selected' : ''}}>{{$assignment->name}}</option>
+                                        @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -59,12 +61,13 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($stdAssignments as $index=>$stdAssignment)
+                                    @if ($stdAssignment->doc_id == auth()->user()->fid && auth()->user()->hasRole('doctor') || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
                                     <tr>
                                         <td>{{ $index + 1}}</td>
                                         <td>{{ $stdAssignment->students['name']}}</td>
                                         <td>{{ $stdAssignment->assignments['name']}}</td>
                                         <td>
-                                            <a href="student_assignments/pdffiles/{{$stdAssignment->id}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
+                                            {{--<a href="student_assignments/pdffiles/{{$stdAssignment->id}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>--}}
                                             <a href="student_assignments/pdffile/download/{{$stdAssignment->pdf_anss}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
                                         </td>
                                         {{--<td>
@@ -90,6 +93,7 @@
 
                                         </td>
                                     </tr>
+                                    @endif
                                     @endforeach
                                 </tbody>
                             </table>

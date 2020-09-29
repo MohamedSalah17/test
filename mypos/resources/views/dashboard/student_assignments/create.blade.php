@@ -27,19 +27,21 @@
                             {{ csrf_field() }}
                             {{ method_field('post') }}
 
+                            {{--
                             <div class="form-group">
-                                <label>@lang('site.assignments')</label>
+                                <label>@lang('site.assignments')*</label>
                                 <select name="assign_id" class="form-control">
                                     <option value="">@lang('site.assignments')</option>
-                                    {{--$n = Assignment::orderBy('id','desc')->first()->id--}}
+                                    {{--$n = Assignment::orderBy('id','desc')->first()->id--}
                                     @foreach ($assignments as $assignment)
                                         <option value="{{$assignment->id}}" {{old('assign_id') == $assignment->id ? 'selected' : ''}}>{{$assignment->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
-
+                            --}}
+                            {{--
                             <div class="form-group">
-                                <label>@lang('site.students')</label>
+                                <label>@lang('site.students')*</label>
                                 <select name="student_id" class="form-control">
                                     <option value="">@lang('site.students')</option>
                                     @foreach ($students as $student)
@@ -47,9 +49,17 @@
                                     @endforeach
                                 </select>
                             </div>
+                            --}}
+
+                            <input type="hidden" name="assign_id" value={{$_GET['assign_id']}}>
+                            <input type="hidden" name="lesson_id" value={{$_GET['lesson_id']}}>
+                            <input type="hidden" name="sbj_id" value={{$_GET['sbj_id']}}>
+                            <input type="hidden" name="doc_id" value={{$_GET['doc_id']}}>
+
+                            <input type="hidden" name="student_id" value={{auth()->user()->fid}}>
 
                             <div class="form-group">
-                                <label>@lang('site.pdf_anss')</label>
+                                <label>@lang('site.pdf_anss')*</label>
                                 <input type="file" name="pdf_anss" class="form-control" value="{{old('pdf_anss')}}">
                                 <!--input type="submit" value="upload"-->
                             </div>

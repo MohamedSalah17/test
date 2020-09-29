@@ -28,24 +28,21 @@
                             {{ method_field('post') }}
 
                             <div class="form-group">
-                                <label>@lang('site.name')</label>
+                                <label>@lang('site.name')*</label>
                                 <input type="text" name="name" class="form-control" value="{{old('name')}}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.code')</label>
+                                <label>@lang('site.code')*</label>
                                 <input type="text" name="code" class="form-control" value="{{old('code')}}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.sbj_doc')</label>
-                                <select name="doc_id" class="form-control">
-                                    <option value="">@lang('site.doctors')</option>
-                                    @foreach ($doctors as $doctor)
-                                        <option value="{{$doctor->id}}" {{old('doc_id') == $doctor->id ? 'selected' : ''}}>{{$doctor->name}}</option>
-                                    @endforeach
-                                </select>
+                                <label>@lang('site.description')*</label>
+                                <input type="text" name="description" class="form-control" value="{{old('description')}}">
                             </div>
+
+
 
 
 

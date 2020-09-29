@@ -26,7 +26,9 @@
                                     <select name="sbj_id" class="form-control">
                                         <option value="">@lang('site.subjects')</option>
                                         @foreach ($subjects as $subject)
+                                        @if ($subject->doc_id == auth()->user()->fid && auth()->user()->hasRole('doctor')  || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
                                             <option value="{{$subject->id}}" {{request()->sbj_id == $subject->id ? 'selected' : ''}}>{{$subject->name}}</option>
+                                        @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -34,9 +36,9 @@
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
 
-                                    @if (auth()->user()->hasPermission('create_regist'))
+                                    {{--@if (auth()->user()->hasPermission('create_regist'))
                                         <a href=" {{route('dashboard.student_subjects.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
-                                    @endif
+                                    @endif--}}
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#model-exim">
                                         Import/Export
                                     </button>
@@ -59,28 +61,56 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($stdSubjects as $index=>$stdSubject)
-                                    <tr>
-                                        <td>{{ $index + 1}}</td>
-                                        <td>{{ $stdSubject->students['name']}}</td>
-                                        <td>{{ $stdSubject->subjects['name']}}</td>
-                                        {{--<td>
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
-                                            {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
-                                        </td>--}}
-                                        <td>
-                                            {{--@if (auth()->user()->hasPermission('update_regist'))
-                                                <a href=" {{ route('dashboard.student_subjects.edit', $stdSubject->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
-                                            @endif--}}
-                                            @if (auth()->user()->hasPermission('delete_regist'))
-                                                <form action="{{route('dashboard.student_subjects.destroy', $stdSubject->id)}}" method="POST" style="display: inline-block">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('delete')}}
-                                                    <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
-                                                </form>
-                                            @endif
+                                        @foreach ($subjects as $subject)
+                                            @if ($stdSubject->subject_id == $subject->id && auth()->user()->type == 'doctor' && $subject->doc_id == auth()->user()->fid)
+                                            <tr>
+                                                <td>{{ $index + 1}}</td>
+                                                <td>{{ $stdSubject->students['name']}}</td>
+                                                <td>{{ $stdSubject->subjects['name']}}</td>
+                                                {{--<td>
+                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
+                                                    {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
+                                                </td>--}}
+                                                <td>
+                                                    {{--@if (auth()->user()->hasPermission('update_regist'))
+                                                        <a href=" {{ route('dashboard.student_subjects.edit', $stdSubject->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                                                    @endif--}}
+                                                    @if (auth()->user()->hasPermission('delete_regist'))
+                                                        <form action="{{route('dashboard.student_subjects.destroy', $stdSubject->id)}}" method="POST" style="display: inline-block">
+                                                            {{ csrf_field() }}
+                                                            {{ method_field('delete')}}
+                                                            <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+                                                        </form>
+                                                    @endif
 
-                                        </td>
-                                    </tr>
+                                                </td>
+                                            </tr>
+                                            @endif
+                                        @endforeach
+                                        @if (auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
+                                        <tr>
+                                            <td>{{ $index + 1}}</td>
+                                            <td>{{ $stdSubject->students['name']}}</td>
+                                            <td>{{ $stdSubject->subjects['name']}}</td>
+                                            {{--<td>
+                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
+                                                {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
+                                            </td>--}}
+                                            <td>
+                                                {{--@if (auth()->user()->hasPermission('update_regist'))
+                                                    <a href=" {{ route('dashboard.student_subjects.edit', $stdSubject->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                                                @endif--}}
+                                                @if (auth()->user()->hasPermission('delete_regist'))
+                                                    <form action="{{route('dashboard.student_subjects.destroy', $stdSubject->id)}}" method="POST" style="display: inline-block">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('delete')}}
+                                                        <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+                                                    </form>
+                                                @endif
+
+                                            </td>
+                                        </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>

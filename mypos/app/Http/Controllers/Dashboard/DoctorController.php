@@ -51,7 +51,7 @@ class DoctorController extends Controller
             'email' => 'required|unique:doctors',
 
             'password' => 'required|confirmed',
-            'permissions' => 'required|min:1',
+            //'permissions' => 'required|min:1',
 
             'phone' => 'required|array|min:1',
             'phone.0' => 'required',
@@ -77,23 +77,35 @@ class DoctorController extends Controller
 
         $doctor = Doctor::create($request_data);
         $doctor->attachRole('doctor');
-        $doctor->syncPermissions($request->permissions);
+        /*$doctor->attachPermission('read_students','read_subjects'
+                ,'create_lessons','read_lessons', 'edit_lessons','delete_lessons',
+                'create_assignments','read_assignments', 'edit_assignments','delete_assignments',
+                'read_regist','read_stdassign');*/
+        //$doctor->syncPermissions($request->permissions);
 
         //add doctor to user table
          $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users',
+            'type'  =>  'doctor',
 
             'password' => 'required|confirmed',
-            'permissions' => 'required|min:1',
+            //'permissions' => 'required|min:1',
 
         ]);
         $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
         $request_data['password'] = bcrypt($request->password);
+        //dd($doctor->id);
+        $request_data['type'] = 'doctor';
+        $request_data['fid']  = $doctor->id;
 
         $user = User::create($request_data);
-        $user->attachRole('user');
-        $user->syncPermissions($request->permissions);
+        $user->attachRole('doctor');
+        /*$user->attachPermission('read_students','read_subjects'
+        ,'create_lessons','read_lessons', 'edit_lessons','delete_lessons',
+        'create_assignments','read_assignments', 'edit_assignments','delete_assignments',
+        'read_regist','read_stdassign');*/
+        //$user->syncPermissions($request->permissions);
 
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('dashboard.doctors.index');
@@ -124,7 +136,7 @@ class DoctorController extends Controller
             'name' => 'required',
             'email' => ['required', Rule::unique('doctors')->ignore($doctor->id)],
             'phone' => 'required|array|min:1',
-            'phone.0' => 'required',
+            'phone.0' => 'nullable',
             'address' => 'required',
         ]);
 

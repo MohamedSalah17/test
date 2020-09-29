@@ -10,7 +10,9 @@ use Illuminate\Validation\Rule;
 
 use App\Exports\SubjectsExport;
 use App\Imports\SubjectsImport;
+use App\StudentSubject;
 use App\Subject;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -46,17 +48,42 @@ class SubjectController extends Controller
      */
     public function index(Request $request)
     {
-        $doctors = Doctor::all();
-        $subjects = Subject::when($request->search, function ($q) use ($request){
-            return $q->where('name', 'like', '%'. $request->search . '%')
+        /*$test = DB::select("SELECT * FROM doctors");
+        dd($test);*/
+        //dd(auth()->user()->type);
+        if(auth()->user()->type == 'admin' || auth()->user()->type == 'super_admin'){
+            $doctors = DB::select("SELECT * FROM doctors");
+            //dd($doctors);
+            $subjects = Subject::when($request->search, function ($q) use ($request){
+                return $q->where('name', 'like', '%'. $request->search . '%')
                     ->orWhere('code', 'like', '%'. $request->search . '%');
 
-        })->when($request->doc_id, function ($q) use ($request){
-          return $q->where('doc_id', 'like', '%'. $request->doc_id . '%');
+            })->when($request->doc_id, function ($q) use ($request){
+            return $q->where('doc_id', 'like', '%'. $request->doc_id . '%');
 
-        })->latest()->paginate(6);
+            })->latest()->paginate(6);
+            return view('dashboard.subjects.index', compact('subjects','doctors'));
+        }
+        elseif(auth()->user()->type == 'doctor' || auth()->user()->type == 'student'){
 
-        return view('dashboard.subjects.index', compact('subjects','doctors'));
+            $stdSbs = StudentSubject::all();
+            $doctors = DB::select("SELECT * FROM doctors");
+            //dd($doctor_id);
+
+            $subjects = Subject::when($request->search, function ($q) use ($request){
+                return $q->where('name', 'like', '%'. $request->search . '%')
+                    ->orWhere('code', 'like', '%'. $request->search . '%');
+
+            })->latest()->paginate(6);
+            //$subjects = Subject::where('doc_id' ,'=',  $doctor_id );
+            //$subjects = $query->where('doc_id' ,'=',  $doctor_id);
+                        //dd($subjects);
+            return view('dashboard.subjects.index', compact('subjects','doctors','stdSbs'));
+
+        }else{
+            return redirect()->back();
+        }
+
     }
 
     /**
@@ -81,7 +108,7 @@ class SubjectController extends Controller
         $request->validate([
             'name' => 'required|unique:subjects',
             'code' => 'required|unique:subjects',
-            'doc_id' => 'required',
+            'description' => 'required',
         ]);
 
         $request_data = $request->all();
@@ -106,6 +133,12 @@ class SubjectController extends Controller
         return view('dashboard.subjects.edit', compact('subject','doctors'));
     }
 
+    public function editdoc(Subject $subject)
+    {
+        $doctors = Doctor::all();
+        return view('dashboard.subjects.editdoc', compact('subject','doctors'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -115,18 +148,52 @@ class SubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        $request->validate([
-            'name' => ['required', Rule::unique('subjects')->ignore($subject->id)],
-            'code' => ['required', Rule::unique('subjects')->ignore($subject->id)],
-            'sbj_doc' => 'required',
-        ]);
+        if($request['doc_id']){
+            $request->validate([
+                'doc_id' => 'required',
+            ]);
 
-        $request_data = $request->all();
+            $request_data = $request->all();
 
-        $subject->update($request_data);
+            $subject->update($request_data);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('dashboard.subjects.index');
+            session()->flash('success', __('site.assigned_successfully'));
+            return redirect()->route('dashboard.subjects.index');
+
+        }else{
+            $request->validate([
+                'name' => ['required', Rule::unique('subjects')->ignore($subject->id)],
+                'code' => ['required', Rule::unique('subjects')->ignore($subject->id)],
+                'description' => 'required',
+                //'sbj_doc' => 'required',
+            ]);
+
+            $request_data = $request->all();
+
+            $subject->update($request_data);
+
+            session()->flash('success', __('site.updated_successfully'));
+            return redirect()->route('dashboard.subjects.index');
+
+        }
+
+    }
+
+    public function updatedoc(Request $request, Subject $subject,$sbj_id)
+    {
+        if($subject->id == $sbj_id){
+            $request->validate([
+                'doc_id' => 'required',
+            ]);
+
+            $request_data = $request->all();
+
+            $subject->update($request_data);
+
+            session()->flash('success', __('site.assigned_successfully'));
+            return redirect()->route('dashboard.subjects.index');
+        }
+
     }
 
     /**

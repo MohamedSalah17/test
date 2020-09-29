@@ -6,6 +6,7 @@ use App\Assignment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Lesson;
+use App\StudentSubject;
 
 class AssignmentController extends Controller
 {
@@ -23,6 +24,8 @@ class AssignmentController extends Controller
      */
     public function index(Request $request)
     {
+        $stdSbs = StudentSubject::all();
+
         $lessons = Lesson::all();
         $assignments = Assignment::when($request->search, function ($q) use ($request){
             return $q->where('name', 'like', '%'. $request->search . '%');
@@ -32,7 +35,7 @@ class AssignmentController extends Controller
 
         })->latest()->paginate(6);
 
-        return view('dashboard.assignments.index', compact('assignments','lessons'));
+        return view('dashboard.assignments.index', compact('assignments','lessons','stdSbs'));
     }
 
     /**
@@ -59,6 +62,8 @@ class AssignmentController extends Controller
             'start_date'       => 'required',
             'end_date'         => 'required',
             'lesson_id'        => 'required',
+            'doc_id'        => 'required',
+            'sbj_id'        => 'required',
             'pdf_quest'        => 'required',
 
         ]);

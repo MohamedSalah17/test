@@ -27,8 +27,9 @@
                             {{ csrf_field() }}
                             {{ method_field('post') }}
 
+                            {{--
                             <div class="form-group">
-                                <label>@lang('site.subjects')</label>
+                                <label>@lang('site.subjects')*</label>
                                 <select name="subject_id" class="form-control">
                                     <option value="">@lang('site.subjects')</option>
                                     @foreach ($subjects as $subject)
@@ -36,9 +37,12 @@
                                     @endforeach
                                 </select>
                             </div>
+                            --}}
+
+                            <input type="hidden" name="subject_id" value={{$_GET['sbj_id']}}>
 
                             <div class="form-group">
-                                <label>@lang('site.students')</label>
+                                <label>@lang('site.students')*</label>
                                 <select name="student_id" class="form-control">
                                     <option value="">@lang('site.students')</option>
                                     @foreach ($students as $student)

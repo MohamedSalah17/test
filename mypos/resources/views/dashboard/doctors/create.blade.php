@@ -28,40 +28,44 @@
                             {{ method_field('post') }}
 
                             <div class="form-group">
-                                <label>@lang('site.name')</label>
+                                <label>@lang('site.name')*</label>
                                 <input type="text" name="name" class="form-control" value="{{old('name')}}">
                             </div>
 
 
                             <div class="form-group">
-                                <label>@lang('site.email')</label>
+                                <label>@lang('site.email')*</label>
                                 <input type="email" name="email" class="form-control" value="{{old('email')}}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.password')</label>
+                                <label>@lang('site.password')*</label>
                                 <input type="password" name="password" class="form-control">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.password_confirmation')</label>
+                                <label>@lang('site.password_confirmation')*</label>
                                 <input type="password" name="password_confirmation" class="form-control">
                             </div>
 
-                            @for ($i = 0; $i < 2; $i++)
                             <div class="form-group">
-                                <label>@lang('site.phone')</label>
+                                <label>@lang('site.phone_one') *</label>
                                 <input type="text" name="phone[]" class="form-control">
                             </div>
-                            @endfor
 
                             <div class="form-group">
-                                <label>@lang('site.address')</label>
+                                <label>@lang('site.phone_two') </label>
+                                <input type="text" name="phone[]" class="form-control">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>@lang('site.address')*</label>
                                 <textarea name="address" class="form-control">{{old('address')}}</textarea>
                             </div>
 
 
-
+                            {{--
                             <div class="form-group">
                                 <label>@lang('site.permissions')</label>
                                 <!-- Custom Tabs -->
@@ -89,7 +93,7 @@
                                 </div>
                             <!-- nav-tabs-custom -->
                             </div><!--end of form group-->
-
+                            --}}
 
 
                             <div class="form-group">

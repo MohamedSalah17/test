@@ -90,7 +90,7 @@ class StudentSubjectController extends Controller
         StudentSubject::create($request_data);
 
         session()->flash('success', __('site.added_successfully'));
-        return redirect()->route('dashboard.student_subjects.index');
+        return redirect()->route('dashboard.subjects.index');
     }
 
     /**

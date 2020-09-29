@@ -19,7 +19,7 @@ class CreateLessonsTable extends Migration
             $table->integer('doc_id')->nullable();
             $table->string('name');
             $table->date('date');
-            $table->string('pdf_file');
+            $table->string('pdf_file')->nullable();
             $table->string('pptx_file');
             $table->string('youtube_link')->nullable();
             $table->timestamps();
