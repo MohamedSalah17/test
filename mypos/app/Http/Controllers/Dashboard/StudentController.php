@@ -172,11 +172,14 @@ class StudentController extends Controller
             'email' => 'required',
         ]);
 
-        $uid = DB::select("SELECT id FROM users  WHERE email = ?", [$student->email]);
-        $user->id = $uid;
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->fid == $student->id){
+                $request_data= $request->except(['permissions']);
+                $user->update($request_data);
+            }
+        }
 
-        $request_data= $request->except(['permissions']);
-        $user->update($request_data);
 
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('dashboard.students.index');
@@ -190,6 +193,13 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->fid == $student->id){
+                $user->delete();
+            }
+        }
+
         $student->delete();
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('dashboard.students.index');

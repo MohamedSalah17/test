@@ -56,7 +56,7 @@
                                         <th>@lang('site.assign_name')</th>
                                         <th>@lang('site.pdf_anss')</th>
                                         <th>@lang('site.date')</th>
-                                        <th>@lang('site.action')</th>
+                                        {{--<th>@lang('site.action')</th>--}}
                                     </tr>
                                 </thead>
                                 <tbody>

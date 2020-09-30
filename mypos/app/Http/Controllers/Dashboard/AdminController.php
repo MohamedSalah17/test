@@ -107,7 +107,6 @@ class AdminController extends Controller
         $request_data= $request->except(['permissions']);
         $admin->update($request_data);
         //update the admin in user table
-        $uid = DB::select("SELECT id FROM users  WHERE email = ?", [$admin->email]);
 
         $request->validate([
             'name' => 'required',
@@ -118,9 +117,8 @@ class AdminController extends Controller
         //dd($uid);
         //$user->id = $uid;
         $users = User::all();
-
-        foreach ($users as $myuser) {
-            if($myuser->id == $uid){
+        foreach ($users as $user) {
+            if($user->fid == $admin->id){
                 $request_data= $request->except(['permissions']);
                 $user->update($request_data);
             }
@@ -135,6 +133,12 @@ class AdminController extends Controller
 
     public function destroy(Admin $admin)
     {
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->fid == $admin->id){
+                $user->delete();
+            }
+        }
         $admin->delete();
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('dashboard.admins.index');

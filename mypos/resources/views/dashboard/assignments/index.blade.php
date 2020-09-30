@@ -68,7 +68,9 @@
                                         <th>@lang('site.students')</th>
                                         @endif
                                         <th> </th>
+                                        @if(auth()->user()->hasRole('doctor')  || auth()->user()->hasRole('student') )
                                         <th>@lang('site.action')</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>

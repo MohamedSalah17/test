@@ -152,13 +152,16 @@ class DoctorController extends Controller
             'email' => 'required',
         ]);
 
-        $uid = DB::select("SELECT id FROM users  WHERE email = ?", [$doctor->email]);
-        //dd($uid);
-        $user->id = $uid;
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->fid == $doctor->id){
+                $request_data= $request->except(['permissions']);
+                $user->update($request_data);
+            }
+        }
 
         //$user->id = $doctor->id;
-        $request_data= $request->except(['permissions']);
-        $user->update($request_data);
+
 
 
         session()->flash('success', __('site.updated_successfully'));
@@ -173,6 +176,12 @@ class DoctorController extends Controller
      */
     public function destroy(Doctor $doctor)
     {
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->fid == $doctor->id){
+                $user->delete();
+            }
+        }
         $doctor->delete();
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('dashboard.doctors.index');

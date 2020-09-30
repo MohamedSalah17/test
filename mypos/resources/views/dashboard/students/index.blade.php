@@ -27,9 +27,11 @@
                                     @if (auth()->user()->hasPermission('create_students'))
                                         <a href=" {{route('dashboard.students.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                     @endif
+                                    @if(auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#model-exim">
                                         Import/Export
                                     </button>
+                                    @endif
                                 </div>
                             </div>
                         </form>

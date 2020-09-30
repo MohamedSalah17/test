@@ -67,7 +67,9 @@
                                         <th>@lang('site.pdf_file')</th>
                                         <th>@lang('site.pptx_file')</th>
                                         <th>@lang('site.assignments') </th>
+                                        @if(auth()->user()->hasRole('doctor'))
                                         <th>@lang('site.action')</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
