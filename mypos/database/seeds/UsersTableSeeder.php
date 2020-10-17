@@ -15,6 +15,8 @@ class UsersTableSeeder extends Seeder
             'name' => 'super admin',
             //'last_name' => 'admin',
             'email' => 'super_admin@app.com',
+            'username' => 'superadmin',
+            'phone' => '01157404397',
             'type' => 'super_admin',
             'password' => bcrypt('123456'),
         ]);

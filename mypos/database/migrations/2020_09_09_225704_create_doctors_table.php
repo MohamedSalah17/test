@@ -16,9 +16,10 @@ class CreateDoctorsTable extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('username')->unique();
             $table->string('email')->unique();
+            $table->string('phone')->unique();
             $table->string('password');
-            $table->string('phone');
             $table->text('address');
             //$table->string('image')->default('default.png');
             $table->timestamps();

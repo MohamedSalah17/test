@@ -54,14 +54,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.phone_one')*</label>
-                                <input type="text" name="phone[]" class="form-control">
+                                <label>@lang('site.phone')*</label>
+                                <input type="text" name="phone" class="form-control" value="{{old('phone')}}">
                             </div>
 
-                            <div class="form-group">
-                                <label>@lang('site.phone_two')</label>
-                                <input type="text" name="phone[]" class="form-control">
-                            </div>
+
 
 
                             <div class="form-group">

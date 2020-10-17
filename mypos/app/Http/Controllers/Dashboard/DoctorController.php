@@ -49,19 +49,18 @@ class DoctorController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:doctors',
+            'username' => 'required|unique:doctors',
+            'phone' => 'required|unique:doctors',
 
             'password' => 'required|confirmed',
             //'permissions' => 'required|min:1',
-
-            'phone' => 'required|array|min:1',
-            'phone.0' => 'required',
 
             'address' => 'required',
         ]);
 
         $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
         $request_data['password'] = bcrypt($request->password);
-        $request_data['phone'] = array_filter($request->phone);
+        //$request_data['phone'] = array_filter($request->phone);
 
         /*Image Validation
         if($request->image){
@@ -87,6 +86,8 @@ class DoctorController extends Controller
          $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users',
+            'username' => 'required|unique:users',
+            'phone' => 'required|unique:users',
             'type'  =>  'doctor',
 
             'password' => 'required|confirmed',
@@ -135,13 +136,13 @@ class DoctorController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => ['required', Rule::unique('doctors')->ignore($doctor->id)],
-            'phone' => 'required|array|min:1',
-            'phone.0' => 'nullable',
+            'username' => ['required', Rule::unique('doctors')->ignore($doctor->id)],
+            'phone' => ['required', Rule::unique('doctors')->ignore($doctor->id)],
             'address' => 'required',
         ]);
 
         $request_data = $request->except(['permissions']);
-        $request_data['phone'] = array_filter($request->phone);
+        //$request_data['phone'] = array_filter($request->phone);
 
         $doctor->update($request_data);
 
@@ -150,6 +151,8 @@ class DoctorController extends Controller
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
+            'username' => 'required',
+            'phone' => 'required',
         ]);
 
         $users = User::all();

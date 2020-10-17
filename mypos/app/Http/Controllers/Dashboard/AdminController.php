@@ -52,6 +52,8 @@ class AdminController extends Controller
             'name' => 'required',
             //'last_name' => 'required',
             'email' => ['required', Rule::unique('admins')->ignore($admin->id)],
+            'username' => ['required', Rule::unique('admins')->ignore($admin->id)],
+            'phone' => ['required', Rule::unique('admins')->ignore($admin->id)],
             'password' => 'required|confirmed',
             //'permissions' => 'required|min:1',
 
@@ -64,10 +66,12 @@ class AdminController extends Controller
         $admin->attachRole('admin');
         //$admin->syncPermissions($request->permissions);
 
-        //add doctor to user table
+        //add admin to user table
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users',
+            'username' => 'required|unique:users',
+            'phone' => 'required|unique:users',
             'type'  =>  'admin',
             'password' => 'required|confirmed',
             //'permissions' => 'required|min:1',
@@ -102,6 +106,8 @@ class AdminController extends Controller
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
+            'username' => 'required',
+            'phone' => 'required',
         ]);
 
         $request_data= $request->except(['permissions']);
@@ -112,6 +118,8 @@ class AdminController extends Controller
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
+            'username' => 'required',
+            'phone' => 'required',
         ]);
 
         //dd($uid);

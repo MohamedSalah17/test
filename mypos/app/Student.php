@@ -13,9 +13,9 @@ class Student extends Model
 
     protected $guarded = [];
 
-    protected $casts = [
+    /*protected $casts = [
         'phone' => 'array'
-    ];
+    ];*/
 
 
     protected $fillable = [

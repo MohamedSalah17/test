@@ -28,31 +28,29 @@
                             {{ method_field('put') }}
 
                             <div class="form-group">
-                                <label>@lang('site.name')</label>
+                                <label>@lang('site.name') *</label>
                                 <input type="text" name="name" class="form-control" value="{{$student->name}}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.code')</label>
+                                <label>@lang('site.code') *</label>
                                 <input type="text" name="code" class="form-control" value="{{$student->code}}">
                             </div>
 
 
                             <div class="form-group">
-                                <label>@lang('site.email')</label>
+                                <label>@lang('site.email') *</label>
                                 <input type="email" name="email" class="form-control" value="{{$student->email}}">
                             </div>
 
 
-                            @for ($i = 0; $i < 2; $i++)
                             <div class="form-group">
-                                <label>@lang('site.phone')</label>
-                                <input type="text" name="phone[]" class="form-control" value="{{$student->phone[$i] ?? ''}}">
+                                <label>@lang('site.phone')*</label>
+                                <input type="text" name="phone" class="form-control" value="{{$student->phone}}">
                             </div>
-                            @endfor
 
                             <div class="form-group">
-                                <label>@lang('site.address')</label>
+                                <label>@lang('site.address') *</label>
                                 <textarea name="address" class="form-control">{{$student->address}}</textarea>
                             </div>
 

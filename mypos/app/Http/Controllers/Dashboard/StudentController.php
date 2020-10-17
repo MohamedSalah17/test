@@ -74,19 +74,18 @@ class StudentController extends Controller
             'name' => 'required',
             'code' => 'required||unique:students',
             'email' => 'required|unique:students',
+            'username' => 'required|unique:students',
+            'phone' => 'required|unique:students',
 
             'password' => 'required|confirmed',
             //'permissions' => 'required|min:1',
-
-            'phone' => 'required|array|min:1',
-            'phone.0' => 'required',
 
             'address' => 'required',
         ]);
 
         $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
         $request_data['password'] = bcrypt($request->password);
-        $request_data['phone'] = array_filter($request->phone);
+        //$request_data['phone'] = array_filter($request->phone);
 
         /*Image Validation
         if($request->image){
@@ -108,6 +107,8 @@ class StudentController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users',
+            'username' => 'required|unique:users',
+            'phone' => 'required|unique:users',
             'type'  =>  'student',
 
             'password' => 'required|confirmed',
@@ -155,13 +156,13 @@ class StudentController extends Controller
             'name' => 'required',
             'code' => ['required', Rule::unique('students')->ignore($student->id)],
             'email' => ['required', Rule::unique('students')->ignore($student->id)],
-            'phone' => 'required|array|min:1',
-            'phone.0' => 'required',
+            'username' => ['required', Rule::unique('students')->ignore($student->id)],
+            'phone' => ['required', Rule::unique('students')->ignore($student->id)],
             'address' => 'required',
         ]);
 
         $request_data = $request->except(['permissions']);
-        $request_data['phone'] = array_filter($request->phone);
+        //$request_data['phone'] = array_filter($request->phone);
 
         $student->update($request_data);
 
@@ -170,6 +171,8 @@ class StudentController extends Controller
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
+            'username' => 'required',
+            'phone' => 'required',
         ]);
 
         $users = User::all();

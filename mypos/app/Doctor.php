@@ -19,9 +19,9 @@ class Doctor extends Model
         'name', 'email', 'password','phone', 'address'
     ];
 
-    protected $casts = [
+    /*protected $casts = [
         'phone' => 'array'
-    ];
+    ];*/
 
 
     protected $hidden = [

@@ -18,10 +18,41 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @if (app()->getLocale() == 'ar')
+          <link rel="stylesheet" href="{{ asset('dashboard/css/font-awesome-rtl.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('dashboard/css/AdminLTE-RTL.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('dashboard/css/fontcairo.css') }}">
+          <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap-rtl.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('dashboard/css/rtl.css') }}">
+
+          <style>
+            body, h1, h2, h3, h4, h5, h6{
+              font-family: 'Cairo', sans-serif !important;
+            }
+          </style>
+        @else
+          <link rel="stylesheet" href="{{ asset('dashboard/css/AdminLTE.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('dashboard/css/font-awesome.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('dashboard/css/fontbasic.css') }}">
+        @endif
+
+    <style>
+        .login-box-body, .register-box-body {
+            color: rgb(102, 102, 102);
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            border-top: 0px;
+        }
+    </style>
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<body style="
+            background-image: url({{ asset('dashboard/images/login/159102063738642.jpg') }});
+            background-size: cover!important;
+            background-repeat: no-repeat!important;
+            ">
+        {{--<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -70,7 +101,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav>--}}
 
         <main class="py-4">
             @yield('content')

@@ -8,7 +8,14 @@
             </div>
             <div class="pull-left info">
                 <p> {{ auth()->user()->name }} {{--auth()->user()->last_name--}}</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <p style="font-size: 13px"><i class="fa fa-circle text-success"></i>
+                    @if (auth()->user()->type == 'super_admin' || auth()->user()->type == 'admin')
+                        @lang('site.admin')
+                    @elseif (auth()->user()->type == 'student')
+                        @lang('site.student')
+                    @elseif (auth()->user()->type == 'doctor')
+                        @lang('site.doctor')
+                    @endif </p>
             </div>
         </div>
 

@@ -96,6 +96,7 @@ return [
     "show_subj_table"       =>  'Show Subject Table',
     "sbj_table"       =>  'Subject Table',
     "admin"         => 'Admin',
+    "super_admin"         => 'Admin',
     "admins"        => 'Admins',
     "lessons"        => 'Lessons',
     "less_sbj"        => 'Lesson Subject',
@@ -128,6 +129,11 @@ return [
     "uploaded_successfully"        => 'Uploaded Successfully',
     "assign_name"        => 'Assignment Name',
     "after_date"        => 'After The Date',
+    "add_assignment"        => 'Add assignment',
+    "add_lesson"        => 'Add Lesson',
+    "doctor"        => 'Doctor',
+    "student"        => 'Student',
+
 
 
     ////////////////////the new words////////////////////
