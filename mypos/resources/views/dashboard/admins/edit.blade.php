@@ -34,6 +34,16 @@
                             <input type="text" name="name" class="form-control" value="{{ $admin->name }} ">
                         </div>
 
+                        <div class="form-group">
+                            <label>@lang('site.username')*</label>
+                            <input type="text" name="username" class="form-control" value="{{$admin->username}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>@lang('site.phone')*</label>
+                            <input type="text" name="phone" class="form-control" value="{{$admin->phone}}">
+                        </div>
+
                         {{--<div class="form-group">
                             <label>@lang('site.last_name')</label>
                             <input type="text" name="last_name" class="form-control" value="{{ $admin->last_name }} ">

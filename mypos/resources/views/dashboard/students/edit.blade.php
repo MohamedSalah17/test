@@ -33,6 +33,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label>@lang('site.username')*</label>
+                                <input type="text" name="username" class="form-control" value="{{$student->username}}">
+                            </div>
+
+                            <div class="form-group">
                                 <label>@lang('site.code') *</label>
                                 <input type="text" name="code" class="form-control" value="{{$student->code}}">
                             </div>

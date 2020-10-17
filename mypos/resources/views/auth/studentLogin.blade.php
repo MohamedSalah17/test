@@ -19,13 +19,8 @@
                             <br>
                             <p class="login-box-msg" style="color: red">@lang('site.login-not2')</p>
                             <br>
-                            <center>
-                                <div class="btn-group" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default" onclick="$('.auth-container, .auth-card').slideUp(500);$('.doctor-container, .doctor-login-card').slideDown(500)" >@lang('site.doctor')</button>
-                                   <button type="button" class="btn btn-default" onclick="$('.auth-container, .auth-card').slideUp(500);$('.admin-container, .admin-login-card').slideDown(500)" >@lang('site.admin')</button>
-                               </div>
-                            </center>
-                            <br>
+                            <p class="login-box-msg">@lang('site.login-not3')</p>
+
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
 

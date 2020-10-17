@@ -133,8 +133,13 @@ return [
     "add_lesson"        => 'Add Lesson',
     "doctor"        => 'Doctor',
     "student"        => 'Student',
-
-
+    "username"        => 'User Name',
+    "profile"        => 'Profile',
+    "about-me"        => 'About Me',
+    "activity"        => 'Activity',
+    "login_proccess"        => 'Logins Proccess',
+    "settings"        => 'Settings',
+    "send"        => 'Send',
 
     ////////////////////the new words////////////////////
 

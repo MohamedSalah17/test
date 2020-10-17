@@ -35,6 +35,7 @@
           <link rel="stylesheet" href="{{ asset('dashboard/css/AdminLTE.min.css') }}">
           <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap.min.css') }}">
           <link rel="stylesheet" href="{{ asset('dashboard/css/font-awesome.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('dashboard/css/ionicons.min.css') }}">
           <link rel="stylesheet" href="{{ asset('dashboard/css/fontbasic.css') }}">
         @endif
 
@@ -107,5 +108,12 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="{{ asset('dashboard/js/adminlte.min.js')}}"></script>
+    <script src="{{ asset('dashboard/js/jquery.min.js')}}"></script>
+    <script src="{{ asset('dashboard/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('dashboard/plugins/icheck/icheck.min.js') }}"></script>
+    <script src="{{ asset('dashboard/plugins/ckeditor/ckeditor.js') }}"></script>
+
 </body>
 </html>

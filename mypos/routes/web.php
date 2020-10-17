@@ -24,3 +24,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+///Route::group(['prefix' => LaravelLocalization::setLocale()], );
+Route::get('/studentLogin', 'StudentLoginController@index')->name('studentLogin');
+
+
+

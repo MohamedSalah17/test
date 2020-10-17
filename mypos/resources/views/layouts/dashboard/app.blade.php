@@ -309,6 +309,8 @@ desired effect
 
       <!-- Bootstrap 3.3.7 -->
       <script src="{{ asset('dashboard/js/bootstrap.min.js')}}"></script>
+      <script src="{{ asset('dashboard/js/bootstrap.bundle.min.js')}}"></script>
+      <script src="{{ asset('dashboard/js/jquery.min.js')}}"></script>
        <!-- AdminLTE App -->
       <script src="{{ asset('dashboard/js/adminlte.min.js')}}"></script>
       <script src="{{ asset('dashboard/js/fastclick.js')}}"></script>
