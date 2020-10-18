@@ -19,7 +19,7 @@ class Student extends Model
 
 
     protected $fillable = [
-        'name', 'username','email', 'password','phone', 'address','code'
+        'name', 'username','email', 'password','phone', 'address','code','level_id','department_id'
     ];
 
 
@@ -39,6 +39,14 @@ class Student extends Model
 
     public function stdAssign(){
         return $this->hasMany(StudentAssignment::class,'student_id');
+    }
+
+    public function level(){
+        return $this->belongsTo(Level::class, 'level_id');
+    }
+
+    public function department(){
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
     /*public function ordersRegits(){

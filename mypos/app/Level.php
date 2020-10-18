@@ -14,4 +14,12 @@ class Level extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function students() {
+        return $this->hasMany("App\User", "level_id");
+    }
+
+    public function departments() {
+        return $this->hasMany("App\Department", "level_id");
+    }
 }

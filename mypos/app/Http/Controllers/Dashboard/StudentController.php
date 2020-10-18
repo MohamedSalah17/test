@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Department;
 use App\Exports\StudentsExport;
 use App\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Imports\StudentsImport;
+use App\Level;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -59,7 +61,10 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('dashboard.students.create');
+        $levels = Level::all();
+        $departments = Department::all();
+
+        return view('dashboard.students.create', compact('levels', 'departments'));
     }
 
     /**
@@ -72,6 +77,8 @@ class StudentController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'level_id' => 'required',
+            'department_id' => 'required',
             'code' => 'required||unique:students',
             'email' => 'required|unique:students',
             'username' => 'required|unique:students',

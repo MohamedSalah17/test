@@ -153,6 +153,8 @@ return [
     "login_proccess"        => 'سجل التسجيلات',
     "settings"        => 'الاعدادات',
     "send"        => 'إرسال',
+    "level"        => 'المستوى',
+    "department"        => 'الشعبة',
 
 
 

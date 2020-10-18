@@ -38,6 +38,27 @@
                             </div>
 
                             <div class="form-group">
+                                <label>@lang('site.level')*</label>
+                                <select name="level_id" class="form-control">
+                                    <option value="">@lang('site.level')</option>
+                                    @foreach ($levels as $level)
+                                        <option value="{{$level->id}}" {{old('level_id') == $level->id ? 'selected' : ''}}>{{$level->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.department')*</label>
+                                <select name="department_id" class="form-control">
+                                    <option value="">@lang('site.department')</option>
+                                    @foreach ($departments as $department)
+                                        <option value="{{$department->id}}" {{old('department_id') == $department->id ? 'selected' : ''}}>{{$department->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
                                 <label>@lang('site.code')*</label>
                                 <input type="text" name="code" class="form-control" value="{{old('code')}}">
                             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard/index';
+    protected $redirectTo = "/dashboard/index";
+
 
     /**
      * Create a new controller instance.
@@ -38,6 +40,15 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * logout custom
+     */
+    protected function logout() {
+        $redirectTo = Auth::user()->type == 'student'? route('studentLogin') : route('login');
+        Auth::logout();
+        return redirect($redirectTo);
     }
 
     protected function credentials(Request $request)

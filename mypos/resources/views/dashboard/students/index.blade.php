@@ -46,6 +46,8 @@
                                         <th>@lang('site.name')</th>
                                         <th>@lang('site.code')</th>
                                         <th>@lang('site.email')</th>
+                                        <th>@lang('site.level')</th>
+                                        <th>@lang('site.department')</th>
                                         {{--<th>@lang('site.add_orderRegist')</th>--}}
                                         <th>@lang('site.phone')</th>
                                         <th>@lang('site.address')</th>
@@ -60,6 +62,8 @@
                                         <td>{{ $student->name}}</td>
                                         <td>{{ $student->code}}</td>
                                         <td>{{ $student->email}}</td>
+                                        <td>{{ $student->level['name']}}</td>
+                                        <td>{{ $student->department['name']}}</td>
                                         {{--<td><a href="{{route('dashboard.student_subjects.create')}}" class="btn btn-primary">@lang('site.add_orderRegist')</a></td>--}}                                        <td>{{ is_array($student->phone) ? implode($student->phone, '-') : $student->phone }}</td>
                                         <td>{{ $student->address}}</td>
                                         {{--<td><img src="{{ $student->image_path }}" style="width: 80px;" class="img-thumbnail" alt=""></td>--}}

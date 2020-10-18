@@ -124,7 +124,7 @@
                                 <!-- timeline time label -->
                                 <li class="time-label">
                                       <span class="bg-red">
-                                        10 Feb. 2014
+                                        2020-08-09
                                       </span>
                                 </li>
                                 <!-- /.timeline-label -->
@@ -135,13 +135,11 @@
                                   <div class="timeline-item">
                                     <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
 
-                                    <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                                    <h3 class="timeline-header"><a href="#">Notification 1</a> </h3>
 
                                     <div class="timeline-body">
                                       Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                      weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                      jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                      quora plaxo ideeli hulu weebly balihoo...
+                                      weebly ning heekya handango imeem plugg dopplr jibjab, movity.
                                     </div>
 
                                   </div>
@@ -152,10 +150,15 @@
                                   <i class="fa fa-user bg-aqua"></i>
 
                                   <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+                                    <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
 
-                                    <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-                                    </h3>
+                                    <h3 class="timeline-header"><a href="#">Notification 2 </a> </h3>
+
+                                    <div class="timeline-body">
+                                      Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                                      weebly ning heekya handango imeem plugg dopplr jibjab, movity.
+                                    </div>
+
                                   </div>
                                 </li>
                                 <!-- END timeline item -->
@@ -164,9 +167,9 @@
                                   <i class="fa fa-comments bg-yellow"></i>
 
                                   <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+                                    <span class="time"><i class="fa fa-clock-o"></i> 08:05</span>
 
-                                    <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                                    <h3 class="timeline-header"><a href="#">Notification 3</a> </h3>
 
                                     <div class="timeline-body">
                                       Take me to your leader!
@@ -180,7 +183,7 @@
                                 <!-- timeline time label -->
                                 <li class="time-label">
                                       <span class="bg-green">
-                                        3 Jan. 2014
+                                        2020-07-5
                                       </span>
                                 </li>
                                 <!-- /.timeline-label -->
@@ -189,15 +192,14 @@
                                   <i class="fa fa-camera bg-purple"></i>
 
                                   <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
+                                    <span class="time"><i class="fa fa-clock-o"></i> 10:30</span>
 
-                                    <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                                    <h3 class="timeline-header"><a href="#">Notification 4</a> </h3>
 
                                     <div class="timeline-body">
-                                      <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                      <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                      <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                      <img src="http://placehold.it/150x100" alt="..." class="margin">
+                                        Take me to your leader!
+                                        Switzerland is small and neutral!
+                                        We are more like Germany, ambitious and misunderstood!
                                     </div>
                                   </div>
                                 </li>
@@ -260,17 +262,20 @@
                             @endif
                         </p>
 
-                        <ul class="list-group list-group-unbordered mb-3">
-                          <li class="list-group-item">
-                            <b>@lang('site.subjects')</b> <a class="float-right">  1</a>
-                          </li>
-                          <li class="list-group-item">
-                            <b>@lang('site.lessons')</b> <a class="float-right"> 4</a>
-                          </li>
-                          <li class="list-group-item">
-                            <b>@lang('site.assignments')</b> <a class="float-right"> 4</a>
-                          </li>
-                        </ul>
+                        @if (auth()->user()->type == 'student' || auth()->user()->type == 'doctor')
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                <b>@lang('site.subjects')</b> <a class="float-right">  1</a>
+                                </li>
+                                <li class="list-group-item">
+                                <b>@lang('site.lessons')</b> <a class="float-right"> 4</a>
+                                </li>
+                                <li class="list-group-item">
+                                <b>@lang('site.assignments')</b> <a class="float-right"> 4</a>
+                                </li>
+                            </ul>
+                        @endif
+
 
                       </div>
                       <!-- /.card-body -->
