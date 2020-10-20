@@ -59,7 +59,7 @@
                                 <select name="lesson_id" class="form-control">
                                     <option value="">@lang('site.lessons')</option>
                                     @foreach ($lessons as $lesson)
-                                        <option value="{{$lesson->id}}" {{old('lesson_id') == $lesson->id ? 'selected' : ''}}>{{$lesson->name}}</option>
+                                        <option value="{{$lesson->id}}" {{$assignment->lesson_id == $lesson->id ? 'selected' : ''}}>{{$lesson->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

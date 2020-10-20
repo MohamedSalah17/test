@@ -9,9 +9,15 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
   <!--bootstrap-->
-    <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('dashboard/datatable/bootstrap.min.css') }}">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> --}}
     <link rel="stylesheet" href="{{ asset('dashboard/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard/css/skin-blue.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashboard/datatable/dataTables.bootstrap.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('dashboard/datatable/dataTables.material.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('dashboard/datatable/bootstrap.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('dashboard/datatable/buttons.dataTables.min.css') }}"> --}}
 
   <!-- Theme style -->
 
@@ -308,9 +314,16 @@ desired effect
      user experience. -->
 
       <!-- Bootstrap 3.3.7 -->
-      <script src="{{ asset('dashboard/js/bootstrap.min.js')}}"></script>
-      <script src="{{ asset('dashboard/js/bootstrap.bundle.min.js')}}"></script>
       <script src="{{ asset('dashboard/js/jquery.min.js')}}"></script>
+      <script src="{{ asset('dashboard/js/bootstrap.min.js')}}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+      {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
+      <script src="{{ asset('dashboard/js/bootstrap.bundle.min.js')}}"></script>
+      <script src="{{ asset('dashboard/datatable/jquery.dataTables.min.js')}}"></script>
+            <script src="{{ asset('dashboard/datatable/dataTables.bootstrap4.min.js')}}"></script>
+      {{-- <script src="{{ asset('dashboard/datatable/jquery.dataTables.min_1.js')}}"></script> --}}
+
        <!-- AdminLTE App -->
       <script src="{{ asset('dashboard/js/adminlte.min.js')}}"></script>
       <script src="{{ asset('dashboard/js/fastclick.js')}}"></script>
@@ -333,8 +346,46 @@ desired effect
 
 
 <script>
+    function editTranslation(button) {
+        $(button).attr('disabled', 'disabled');
+        $(button).html('<i class="fa fa-spin fa-spinner" ></i>');
+
+        var translations = [];
+
+        $(".dictionary-item").each(function(){
+            var item = {};
+            item.id = $(this).attr('data-id');
+            item.word_en = $(this).find(".word_en").val();
+            item.word_ar = $(this).find(".word_ar").val();
+
+            translations.push(item);
+        });
+
+        var data = {
+            translations: JSON.stringify(translations),
+            _token: '{{ csrf_token() }}'
+        };
+
+        $.post('{{ url("/dashboard/translation/update?") }}', $.param(data), function(r){
+            if (r.status == 1) {
+                success(r.message);
+            } else {
+                error(r.message);
+            }
+            $(button).removeAttr("disabled");
+            $(button).html(' <i class="fa fa-check" ></i> {{ __('save') }}');
+        });
+    }
+
+
+
     $(document).ready(function () {
         $('.sidebar-menu').tree();
+
+        $('#table').DataTable({
+         "pageLength": 10,
+
+        });
 
         //icheck
         $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({

@@ -11,6 +11,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
             //doctor routes
             Route::resource('doctors', 'DoctorController')->except(['show']);
 
+            //department and level routes
+            Route::resource('departments', 'DepartmentController')->except(['show']);
+            Route::resource('levels', 'LevelController')->except(['show']);
+
+             // option routes
+            Route::get("option/", "SettingController@index")->name('option.index');
+            Route::get("option/update", "SettingController@update");
+            Route::post("option/update", "SettingController@update");
+            Route::post("translation/update", "SettingController@updateTranslation");
+
             //student routes
             Route::resource('students', 'StudentController')->except(['show']);
             Route::resource('students.ordersRegist', 'Student\OrderRegistController')->except(['show']);

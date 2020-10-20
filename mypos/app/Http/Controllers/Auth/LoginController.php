@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Dashboard;
+use App\LoginHistory;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -40,7 +43,47 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        //$this->login
+
+        //$this->sendLoginResponse()
     }
+
+    // function login(Request $request) {
+
+    //     $user = User::where("phone", $request->phone)
+    //         ->where("password", $request->password)
+    //         ->where('email', $request->email)
+    //         ->where('username', $request->username)
+    //         ->first();
+
+    //     Auth::login($user);
+
+    //     LoginHistory::create([
+    //         'ip' => request()->ip(),
+    //         'user_id' => Auth::user()->id,
+    //         'phone_details' => ''//LoginHistory::getInfo(new Request())
+    //     ]);
+
+    //     return redirect()->route('dashboard.index');
+    // }
+
+    protected function authenticated(Request $request, $user)
+    {
+        // $user->update([
+        //     'last_login_at' => Carbon::now()->toDateTimeString(),
+        //     'last_login_ip' => $request->getClientIp()
+        // ]);
+
+        LoginHistory::create([
+            'ip' => request()->ip(),
+            'user_id' => Auth::user()->id,
+            'phone_details' => LoginHistory::getInfo($request)
+        ]);
+    }
+
+
+
+
 
     /**
      * logout custom

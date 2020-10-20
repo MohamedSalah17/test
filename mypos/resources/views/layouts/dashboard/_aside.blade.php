@@ -30,6 +30,15 @@
             <li><a href="{{route('dashboard.students.index')}}"><i class="fa fa-users"></i><span>@lang('site.students')</span></a></li>
         @endif
 
+
+        @if (auth()->user()->hasPermission('read_levels'))
+            <li><a href="{{route('dashboard.levels.index')}}"><i class="fa fa-level-up"></i><span>@lang('site.levels')</span></a></li>
+        @endif
+
+        @if (auth()->user()->hasPermission('read_departments'))
+            <li><a href="{{route('dashboard.departments.index')}}"><i class="fa fa-bank"></i><span>@lang('site.departments')</span></a></li>
+        @endif
+
         @if (auth()->user()->hasPermission('read_subjects'))
             <li><a href="{{route('dashboard.subjects.index')}}"><i class="fa fa-graduation-cap"></i><span>@lang('site.subjects')</span></a></li>
         @endif
@@ -57,6 +66,9 @@
         @if (auth()->user()->hasPermission('read_admins'))
             <li><a href="{{route('dashboard.admins.index')}}"><i class="fa fa-users"></i><span>@lang('site.admins')</span></a></li>
         @endif
+
+        <li><a href="{{route('dashboard.option.index')}}"><i class="fa fa-cogs"></i><span>@lang('site.settings')</span></a></li>
+
 
 
            {{-- @if (auth()->user()->hasPermission('read_categories'))

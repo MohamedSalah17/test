@@ -23,6 +23,9 @@ return [
     "search"        =>      'بحث',
     "password"      =>      'كلمة المرور',
     "password_confirmation"      =>      'تأكيد كلمه المرور',
+    "old_password"      =>      ' كلمه المرور القديمة',
+    "new_password"      =>      ' كلمه المرور الجديدة',
+    "new_phone"      =>      'الهاتف الجديد',
 
     "logout"        =>      'تسجيل خروج',
 
@@ -155,6 +158,12 @@ return [
     "send"        => 'إرسال',
     "level"        => 'المستوى',
     "department"        => 'الشعبة',
+    "levels"        => 'المستويات',
+    "departments"        => 'أقسام المعهد-الشعب',
+    "notes"        => 'ملاحظات',
+    "change_password"        => 'تغيير كلمة السر',
+    "change_phone"        => 'تغيير الهاتف',
+    "settings"        => 'الإعدادات',
 
 
 

@@ -27,96 +27,34 @@
                         <div class="nav-tabs-custom">
                           <ul class="nav nav-tabs">
                             <li class="active"><a href="#activity" data-toggle="tab">@lang('site.activity')</a></li>
-                            <li><a href="#loginsprocc" data-toggle="tab">@lang('site.login_proccess')</a></li>
+                            <li><a href="#loginHistory" data-toggle="tab">@lang('site.login_proccess')</a></li>
                             <li><a href="#settings" data-toggle="tab">@lang('site.settings')</a></li>
+                            <li><a href="#password" data-toggle="tab">@lang('site.change_password')</a></li>
+                            <li><a href="#phone" data-toggle="tab">@lang('site.change_phone')</a></li>
                           </ul>
                           <div class="tab-content">
-                            <div class="tab-pane" id="loginsprocc">
-                              <!-- Post -->
-                              <div class="post">
-                                <div class="user-block">
-                                  <img class="img-circle img-bordered-sm" src="{{ asset('dashboard/img/user.png') }}" alt="user image">
-                                      <span class="username">
-                                        <a href="#">Jonathan Burke Jr.</a>
-                                      </span>
-                                  <span class="description">Shared publicly - 7:30 PM today</span>
-                                </div>
-                                <!-- /.user-block -->
-                                <p>
-                                  Lorem ipsum represents a long-held tradition for designers,
-                                  typographers and the like. Some people hate it and argue for
-                                  its demise, but others ignore the hate as they create awesome
-                                  tools to help create filler text for everyone from bacon lovers
-                                  to Charlie Sheen fans.
-                                </p>
 
-
+                            <div class="tab-pane" id="loginHistory">
+                                <!-- The timeline -->
+                                <table class="table table-border" id="table" >
+                                    <thead>
+                                        <tr>
+                                            <th>{{ __('datetime') }}</th>
+                                            <th>{{ __('ip') }}</th>
+                                            <th>{{ __('device info') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach(Auth::user()->loginHistories()->orderBy("id", 'ASC')->get() as $item)
+                                        <tr>
+                                            <td>{{ $item->created_at }}</td>
+                                            <td>{{ $item->ip }}</td>
+                                            <td>{!! $item->phone_details !!}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                               </div>
-                              <!-- /.post -->
-
-                              <!-- Post -->
-                              <div class="post clearfix">
-                                <div class="user-block">
-                                  <img class="img-circle img-bordered-sm" src="{{ asset('dashboard/img/user.png') }}" alt="User Image">
-                                      <span class="username">
-                                        <a href="#">Sarah Ross</a>
-                                      </span>
-                                  <span class="description">Sent you a message - 3 days ago</span>
-                                </div>
-                                <!-- /.user-block -->
-                                <p>
-                                  Lorem ipsum represents a long-held tradition for designers,
-                                  typographers and the like. Some people hate it and argue for
-                                  its demise, but others ignore the hate as they create awesome
-                                  tools to help create filler text for everyone from bacon lovers
-                                  to Charlie Sheen fans.
-                                </p>
-
-
-                              </div>
-                              <!-- /.post -->
-
-                              <!-- Post -->
-                              <div class="post">
-                                <div class="user-block">
-                                  <img class="img-circle img-bordered-sm" src="{{ asset('dashboard/img/user.png') }}" alt="User Image">
-                                      <span class="username">
-                                        <a href="#">Adam Jones</a>
-                                      </span>
-                                  <span class="description">Posted 5 photos - 5 days ago</span>
-                                </div>
-                                <!-- /.user-block -->
-                                <div class="row margin-bottom">
-                                  <div class="col-sm-6">
-                                    <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
-                                  </div>
-                                  <!-- /.col -->
-                                  <div class="col-sm-6">
-                                    <div class="row">
-                                      <div class="col-sm-6">
-                                        <img class="img-responsive" src="../../dist/img/photo2.png" alt="Photo">
-                                        <br>
-                                        <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
-                                      </div>
-                                      <!-- /.col -->
-                                      <div class="col-sm-6">
-                                        <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
-                                        <br>
-                                        <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
-                                      </div>
-                                      <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
-                                  </div>
-                                  <!-- /.col -->
-                                </div>
-                                <!-- /.row -->
-
-
-
-                              </div>
-                              <!-- /.post -->
-                            </div>
                             <!-- /.tab-pane -->
                             <div class="active tab-pane" id="activity">
                               <!-- The timeline -->
@@ -212,7 +150,7 @@
                             <!-- /.tab-pane -->
 
                             <div class="tab-pane" id="settings">
-                              <form class="form-horizontal">
+                              <form action="#" class="form-horizontal">
                                   <div class="box">
                                       <div class="box-body">
                                         <div class="form-group">
@@ -232,8 +170,71 @@
                               </form>
                             </div>
                             <!-- /.tab-pane -->
-                          </div>
+
+                            <div class="tab-pane" id="password">
+                                <form action="#" class="form-horizontal">
+                                    <div class="box">
+                                        <div class="box-body">
+                                          <div class="form-group">
+                                              <label>@lang('site.old_password') </label>
+                                              <input type="password" name="password" class="form-control" >
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label>@lang('site.new_password') </label>
+                                            <input type="password" name="password" class="form-control" >
+                                          </div>
+
+                                            <div class="form-group">
+                                                <label>@lang('site.password_confirmation') </label>
+                                                <input type="password" name="password" class="form-control" >
+                                            </div>
+
+                                          <div class="form-group">
+                                              <div>
+                                                <button type="submit" class="btn btn-primary btn-block">@lang('site.send')</button>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+
+                            <div class="tab-pane" id="phone">
+                                <form action="#" class="form-horizontal">
+                                    <div class="box">
+                                        <div class="box-body">
+                                          <div class="form-group">
+                                              <label>@lang('site.phone') </label>
+                                              <input type="text" name="phone" class="form-control" value="{{auth()->user()->phone}}">
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label>@lang('site.new_phone') </label>
+                                            <input type="text" name="phone" class="form-control">
+                                        </div>
+
+                                          <div class="form-group">
+                                              <div>
+                                                <button type="submit" class="btn btn-primary btn-block">@lang('site.send')</button>
+                                              </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                              <!-- /.tab-pane -->
+
+                              <!-- /.tab-pane -->
+
+                            </div>
                           <!-- /.tab-content -->
+
+
                         </div>
                         <!-- /.nav-tabs-custom -->
                       </div>
