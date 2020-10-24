@@ -36,13 +36,21 @@ $(document).ready(function () {
 
     var levelids = $('#hidlevels').data('id');
 
-    if(departlevels == levelids){
-        var html = `<option value="${departids}">${departnames}</option>`
+    for (let index = 0; index < 5; index++) {
+        if(departlevels == levelids){
+            //var html = `<option value="${departids}">${departnames}</option>`
+
+            //console.log(levelids);
+        }
     }
 
+
     $('#levelselect').on('change',function(){
-        $('#departselect').children().remove();
-        $('#departselect').append(html);
+        //$('#departselect').children().remove();
+        //$('#departselect').append(html);
+        if($('.departoption').data('level') == levelids){
+            $('.departoption').css('display', 'block');
+        }
     });
 
     //prevent disabled

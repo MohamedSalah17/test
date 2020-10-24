@@ -177,7 +177,7 @@ class StudentController extends Controller
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
-            'username' => 'required|unique:users',
+            //'username' => 'required|unique:users',
             'phone' => 'required',
             'active' => 'required',
 
@@ -185,7 +185,7 @@ class StudentController extends Controller
 
         $users = User::all();
         foreach ($users as $user) {
-            if($user->fid == $student->id){
+            if($user->fid == $student->id && $user->type == 'student'){
                 $request_data= $request->except(['permissions']);
                 $user->update($request_data);
             }

@@ -122,7 +122,7 @@ class AdminController extends Controller
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
-            'username' => ['required', Rule::unique('users')->ignore($user->id)],
+            //'username' => ['required', Rule::unique('users')->ignore($user->id)],
             'phone' => 'required',
             'active' => 'required',
         ]);
@@ -131,7 +131,7 @@ class AdminController extends Controller
         //$user->id = $uid;
         $users = User::all();
         foreach ($users as $user) {
-            if($user->fid == $admin->id){
+            if($user->fid == $admin->id && $user->type == 'admin'){
                 $request_data= $request->except(['permissions']);
                 $user->update($request_data);
             }

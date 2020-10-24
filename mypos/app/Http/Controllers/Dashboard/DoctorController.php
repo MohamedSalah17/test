@@ -169,21 +169,19 @@ class DoctorController extends Controller
         $doctor->update($request_data);
 
         //update doctor in user table
-        $users = User::all();
         $request->validate([
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
-            'username' => ['required',Rule::unique('users')->ignore($user->id)],
+            //'username' => ['required',Rule::unique('users')->ignore($user->id)],
             'phone' => 'required',
             'active' => 'required',
 
         ]);
 
-
-
+        $users = User::all();
         foreach ($users as $user) {
-            if($user->fid == $doctor->id){
+            if($user->fid == $doctor->id && $user->type == 'doctor'){
                 $request_data= $request->except(['permissions']);
                 $user->update($request_data);
             }

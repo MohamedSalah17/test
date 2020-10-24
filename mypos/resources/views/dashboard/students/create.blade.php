@@ -70,7 +70,7 @@
                                 <select name="department_id" class="form-control" id="departselect">
                                     <option value="">@lang('site.department')</option>
                                     @foreach ($departments as $department)
-                                        <option value="{{$department->id}}" {{old('department_id') == $department->id ? 'selected' : ''}}>
+                                        <option class="departoption" style="display: none" data-level="{{$department->level_id}}" value="{{$department->id}}" {{old('department_id') == $department->id ? 'selected' : ''}}>
                                             {{$department->name}}-{{$department->level['name']}}
                                         </option>
                                     @endforeach
