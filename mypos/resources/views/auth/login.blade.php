@@ -21,16 +21,19 @@
                             <br>
                             <center>
                                 <div class="btn-group" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default" onclick="$('.auth-container, .auth-card').slideUp(500);$('.doctor-container, .doctor-login-card').slideDown(500)" >@lang('site.doctor')</button>
-                                   <button type="button" class="btn btn-default" onclick="$('.auth-container, .auth-card').slideUp(500);$('.admin-container, .admin-login-card').slideDown(500)" >@lang('site.admin')</button>
+                                    <button type="button" class="btn btn-default doclogslid" onclick="$('.auth-container, .auth-card').slideUp(500);$('.doctor-container, .doctor-login-card').slideDown(500)" >@lang('site.doctor')</button>
+                                   <button type="button" class="btn btn-default adlogslid" onclick="$('.auth-container, .auth-card').slideUp(500);$('.admin-container, .admin-login-card').slideDown(500)" >@lang('site.admin')</button>
                                </div>
+                               <br>
+                               <p class="logtext" style="margin-top:10px "></p>
+
                             </center>
-                            <br>
+
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
 
                                     <div class="form-group has-feedback">
-                                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="@lang('site.phone')">
+                                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="@lang('site.phone-or-email-or-username')">
                                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">

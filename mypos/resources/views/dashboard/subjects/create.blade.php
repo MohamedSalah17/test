@@ -38,8 +38,18 @@
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.description')*</label>
+                                <label>@lang('site.hours')*</label>
+                                <input type="number" name="hours" class="form-control" value="{{old('hours')}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.description')</label>
                                 <input type="text" name="description" class="form-control" value="{{old('description')}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.notes')</label>
+                                <input type="text" name="notes" class="form-control" value="{{old('notes')}}">
                             </div>
 
 

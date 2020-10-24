@@ -27,6 +27,12 @@
                                     @if (auth()->user()->hasPermission('create_doctors'))
                                         <a href=" {{route('dashboard.doctors.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                     @endif
+
+                                    @if(auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#model-exim">
+                                        Import/Export
+                                    </button>
+                                    @endif
                                 </div>
                             </div>
                         </form>
@@ -42,7 +48,8 @@
                                         <th>@lang('site.email')</th>
                                         <th>@lang('site.subjects')</th>
                                         <th>@lang('site.phone')</th>
-                                        <th>@lang('site.address')</th>
+                                        <th>@lang('site.active')</th>
+                                        <th>@lang('site.account_confirm')</th>
                                         {{--<th>@lang('site.image')</th>--}}
                                         <th>@lang('site.action')</th>
                                     </tr>
@@ -55,7 +62,15 @@
                                         <td>{{ $doctor->email}}</td>
                                         <td>{{ $doctor->subjects->count()}} <a href="{{route('dashboard.subjects.index', ['doc_id' => $doctor->id])}}" class="btn btn-info btn-sm">@lang('site.go')</a> </td>
                                         <td>{{ is_array($doctor->phone) ? implode($doctor->phone, '-') : $doctor->phone }}</td>
-                                        <td>{{ $doctor->address}}</td>
+                                        <td>{{ $doctor->active}}</td>
+                                        <td>
+                                            @if ($doctor->account_confirm == 0)
+                                                @lang('site.no')
+                                            @else
+                                                @lang('site.yes')
+                                            @endif
+
+                                        </td>
                                         <!--td><img src="{{-- $doctor->image_path --}}" style="width: 80px;" class="img-thumbnail" alt=""></td-->
                                         <td>
                                             @if (auth()->user()->hasPermission('update_doctors'))
@@ -84,5 +99,59 @@
             </section>
 
     </div>
+
+        {{--model dailog--}}
+
+      <!-- Modal -->
+  <div class="modal fade" id="model-exim" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form action="{{ route('dashboard.doctors.import') }}" method="post" data-toggle="validator" enctype="multipart/form-data">
+            {{ csrf_field() }}
+
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Import/Export</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="export" class="col-md-3 control-label">Export</label>
+                    <div class="col-md-6">
+                        <a href="{{ route('dashboard.doctors.export') }}" class="btn btn-success">Export</a>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+            </div>
+
+            @if (auth()->user()->hasPermission('create_doctors'))
+            <div class="row">
+                <div class="form-group">
+                    <label for="file" class="col-md-3 control-label">Import</label>
+                    <div class="col-md-6">
+                        <input type="file" name="file" id="file" class="form-control" autofocus required>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success">Import</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+
+       </form>
+
+      </div><!--end of content-->
+    </div>
+  </div>
 
 @endsection

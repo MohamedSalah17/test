@@ -64,6 +64,17 @@
                                 <input type="password" name="password_confirmation" class="form-control" value="{{old('password_confirmation')}}">
                             </div>
 
+                            <div class="form-group">
+                                <label>@lang('site.active')*</label>
+                                <select name="active" class="form-control">
+                                    <option value="1" selected>@lang('site.is_active')</option>
+                                    <option value="0">@lang('site.not_active')</option>
+                                </select>
+                            </div>
+
+                            <input type="hidden" name="account_confirm" value="0">
+
+
                             {{--
                             <div class="form-group">
                                 <label>@lang('site.permissions')</label>

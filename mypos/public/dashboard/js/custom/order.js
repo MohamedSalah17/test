@@ -29,7 +29,21 @@ $(document).ready(function () {
           }());
     });
 
+    //fuction to change department based on levels
+    var departids = $('#hiddeparts').data('id');
+    var departnames = $('#hiddeparts').data('name');
+    var departlevels = $('#hiddeparts').data('level');
 
+    var levelids = $('#hidlevels').data('id');
+
+    if(departlevels == levelids){
+        var html = `<option value="${departids}">${departnames}</option>`
+    }
+
+    $('#levelselect').on('change',function(){
+        $('#departselect').children().remove();
+        $('#departselect').append(html);
+    });
 
     //prevent disabled
     $('body').on('click', '.disabled', function(e){
@@ -47,6 +61,7 @@ $(document).ready(function () {
 
 
     });
+
 
 
 
@@ -85,6 +100,12 @@ $(document).ready(function () {
         $('#print-area').printThis();
     });
 
+
+    //set the date is today
+    //$('.datePicker').val(new Date().toDateInputValue());
+
+    //document.getElementsByClassName('datePicker').value = new Date();
+    document.getElementsByClassName('datePicker').valueAsDate = new Date();
 
 
 });//end of document ready

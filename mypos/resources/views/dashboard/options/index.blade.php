@@ -35,10 +35,10 @@
                {{ __('you can translate each word in English or Arabic') }}
             </div>
             <table class="table table-bordered" >
-                <tr>
-                    <th>{{ __('key') }}</th>
-                    <th>{{ __('word in English') }}</th>
-                    <th>{{ __('word in Arabic') }}</th>
+                <tr style="text-align: center">
+                    <th style="text-align: center">{{ __('key') }}</th>
+                    <th style="text-align: center">{{ __('word in English') }}</th>
+                    <th style="text-align: center">{{ __('word in Arabic') }}</th>
                 </tr>
                 @foreach(App\Translation::all() as $item)
                 <tr class="dictionary-item" data-id="{{ $item->id }}" >
@@ -82,4 +82,45 @@
 </section>
 
 </div>
+@endsection
+
+
+@section('scripts')
+<script>
+
+    function editTranslation(button) {
+        $(button).attr('disabled', 'disabled');
+        $(button).html('<i class="fa fa-spin fa-spinner" ></i>');
+
+        var translations = [];
+
+        $(".dictionary-item").each(function(){
+            var item = {};
+            item.id = $(this).attr('data-id');
+            item.word_en = $(this).find(".word_en").val();
+            item.word_ar = $(this).find(".word_ar").val();
+
+            translations.push(item);
+        });
+
+        var data = {
+            translations: JSON.stringify(translations),
+            _token: '{{ csrf_token() }}'
+        };
+
+
+
+        $.post('{{ route("dashboard.translation.update.post") }}', $.param(data), function(r){
+            if (r.status == 1) {
+                alert(r.message);
+            } else {
+                alert(r.message);
+            }
+            $(button).removeAttr("disabled");
+            $(button).html(' <i class="fa fa-check" ></i> {{ __('save') }}');
+        });
+    }
+
+
+</script>
 @endsection

@@ -38,6 +38,26 @@
                             </div>
 
                             <div class="form-group">
+                                <label>@lang('site.level')*</label>
+                                <select name="level_id" class="form-control">
+                                    <option value="">@lang('site.level')</option>
+                                    @foreach ($levels as $level)
+                                        <option value="{{$level->id}}" {{$student->level_id == $level->id ? 'selected' : ''}}>{{$level->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.department')*</label>
+                                <select name="department_id" class="form-control">
+                                    <option value="">@lang('site.department')</option>
+                                    @foreach ($departments as $department)
+                                        <option value="{{$department->id}}" {{$student->department_id == $department->id ? 'selected' : ''}}>{{$department->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label>@lang('site.code') *</label>
                                 <input type="text" name="code" class="form-control" value="{{$student->code}}">
                             </div>
@@ -54,11 +74,24 @@
                                 <input type="text" name="phone" class="form-control" value="{{$student->phone}}">
                             </div>
 
+
                             <div class="form-group">
-                                <label>@lang('site.address') *</label>
-                                <textarea name="address" class="form-control">{{$student->address}}</textarea>
+                                <label>@lang('site.set_number')*</label>
+                                <input type="text" name="set_number" class="form-control" value="{{$student->set_number}}">
                             </div>
 
+                            <div class="form-group">
+                                <label>@lang('site.national_id')*</label>
+                                <input type="text" name="national_id" class="form-control" value="{{$student->national_id}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.active')*</label>
+                                <select name="active" class="form-control">
+                                    <option value="1" {{$student->active == 1? 'selected' : ''}} >@lang('site.is_active')</option>
+                                    <option value="0" {{$student->active == 0? 'selected' : ''}}>@lang('site.not_active')</option>
+                                </select>
+                            </div>
 
 
 

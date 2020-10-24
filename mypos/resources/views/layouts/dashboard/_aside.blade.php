@@ -67,9 +67,11 @@
             <li><a href="{{route('dashboard.admins.index')}}"><i class="fa fa-users"></i><span>@lang('site.admins')</span></a></li>
         @endif
 
+        @if (auth()->user()->hasRole('admin' ) || auth()->user()->hasRole('super_admin' ))
+
         <li><a href="{{route('dashboard.option.index')}}"><i class="fa fa-cogs"></i><span>@lang('site.settings')</span></a></li>
 
-
+        @endif
 
            {{-- @if (auth()->user()->hasPermission('read_categories'))
                 <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-th"></i><span>@lang('site.categories')</span></a></li>

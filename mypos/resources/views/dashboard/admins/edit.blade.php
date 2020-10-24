@@ -54,6 +54,13 @@
                             <input type="email" name="email" class="form-control" value="{{ $admin->email }} ">
                         </div>
 
+                        <div class="form-group">
+                            <label>@lang('site.active')*</label>
+                            <select name="active" class="form-control">
+                                <option value="1" {{$admin->active == 1? 'selected': '' }}>@lang('site.is_active')</option>
+                                <option value="0" {{$admin->active == 0? 'selected': '' }}>@lang('site.not_active')</option>
+                            </select>
+                        </div>
 
 
 

@@ -23,7 +23,12 @@ class CreateStudentsTable extends Migration
             $table->integer('department_id')->nullable();
             $table->string('code');
             $table->string('password');
-            $table->text('address');
+            $table->boolean('active', 0);
+            $table->boolean('account_confirm', 0);
+            $table->integer('set_number');
+            $table->string('national_id');
+            $table->boolean('graduated', 0);
+            $table->boolean('can_see_result', 0);
             //$table->string('image')->default('default.png');
             $table->timestamps();
         });

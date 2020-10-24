@@ -6,6 +6,7 @@ use App\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\StudentSubject;
+use App\Translation;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -20,6 +21,8 @@ class AdminController extends Controller
         $this->middleware(['permission:delete_admins'])->only('destroy');
 
     }
+
+
 
     public function index(Request $request)
     {
@@ -108,6 +111,7 @@ class AdminController extends Controller
             'email' => 'required',
             'username' => 'required',
             'phone' => 'required',
+            'active' => 'required',
         ]);
 
         $request_data= $request->except(['permissions']);
@@ -118,8 +122,9 @@ class AdminController extends Controller
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
-            'username' => 'required',
+            'username' => ['required', Rule::unique('users')->ignore($user->id)],
             'phone' => 'required',
+            'active' => 'required',
         ]);
 
         //dd($uid);

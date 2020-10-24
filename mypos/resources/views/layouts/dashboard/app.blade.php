@@ -4,7 +4,7 @@
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>FCAI-Online</title>
+  <title>@lang('site.hioac')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -59,6 +59,9 @@
                 height: 60px;
                 -webkit-animation: spin 1s linear infinite; /* Safari */
                 animation: spin 1s linear infinite;
+            }
+            select{
+                padding: 2px 12px !important;
             }
 
             /* Safari */
@@ -314,9 +317,9 @@ desired effect
      user experience. -->
 
       <!-- Bootstrap 3.3.7 -->
-      <script src="{{ asset('dashboard/js/jquery.min.js')}}"></script>
       <script src="{{ asset('dashboard/js/bootstrap.min.js')}}"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="{{ asset('dashboard/js/jquery.min.js')}}"></script>
+      {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> --}}
 
       {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
       <script src="{{ asset('dashboard/js/bootstrap.bundle.min.js')}}"></script>
@@ -346,38 +349,6 @@ desired effect
 
 
 <script>
-    function editTranslation(button) {
-        $(button).attr('disabled', 'disabled');
-        $(button).html('<i class="fa fa-spin fa-spinner" ></i>');
-
-        var translations = [];
-
-        $(".dictionary-item").each(function(){
-            var item = {};
-            item.id = $(this).attr('data-id');
-            item.word_en = $(this).find(".word_en").val();
-            item.word_ar = $(this).find(".word_ar").val();
-
-            translations.push(item);
-        });
-
-        var data = {
-            translations: JSON.stringify(translations),
-            _token: '{{ csrf_token() }}'
-        };
-
-        $.post('{{ url("/dashboard/translation/update?") }}', $.param(data), function(r){
-            if (r.status == 1) {
-                success(r.message);
-            } else {
-                error(r.message);
-            }
-            $(button).removeAttr("disabled");
-            $(button).html(' <i class="fa fa-check" ></i> {{ __('save') }}');
-        });
-    }
-
-
 
     $(document).ready(function () {
         $('.sidebar-menu').tree();
@@ -422,6 +393,8 @@ desired effect
 
 
 </script>
+
+@yield('scripts')
 
 </body>
 </html>

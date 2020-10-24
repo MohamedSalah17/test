@@ -17,11 +17,13 @@ class StudentsImport implements ToModel
     {
         return new Student([
             'name' => $row[0],
-            'code' => $row[1],
-            'email' => $row[2],
+            'username' => $row[1],
+            'code' => $row[2],
+            'email' => $row[3],
             'password' => bcrypt('123456'),
-            'phone' => $row[3],
-            'address' => $row[4],
+            'phone' => $row[4],
+            'active' => $row[5],
+            'account_confirm' => $row[6],
         ]);
 
 

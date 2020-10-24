@@ -16,7 +16,13 @@ class Doctor extends Model
 
 
     protected $fillable = [
-        'name','username', 'email', 'password','phone', 'address'
+        'name',
+        'username',
+        'email',
+        'password',
+        'phone',
+        'active',
+        'account_confirm'
     ];
 
     /*protected $casts = [

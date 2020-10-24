@@ -39,8 +39,6 @@ class SettingController extends Controller
              $option->update();
 
 
-
-
              //notify(__('edit setting'), __('edit setting') . " " . $option->created_at, "fa fa-cogs");
              //return Message::success(Message::$DONE);
              session()->flash('success', __('site.updated_successfully'));
@@ -73,8 +71,10 @@ class SettingController extends Controller
 
 
         //return Message::success(Message::$DONE);
-        session()->flash('success', __('site.updated_successfully'));
-
+        return [
+            "status" => 1,
+            "message" => __('done')
+        ];
     }
 
 

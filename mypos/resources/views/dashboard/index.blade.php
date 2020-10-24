@@ -266,13 +266,13 @@
                         @if (auth()->user()->type == 'student' || auth()->user()->type == 'doctor')
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                <b>@lang('site.subjects')</b> <a class="float-right">  1</a>
+                                <b>@lang('site.subjects')</b> <a class="float-right">  2</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b>@lang('site.lessons')</b> <a class="float-right"> 4</a>
+                                <b>@lang('site.lessons')</b> <a class="float-right"> 3</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b>@lang('site.assignments')</b> <a class="float-right"> 4</a>
+                                <b>@lang('site.assignments')</b> <a class="float-right"> 2</a>
                                 </li>
                             </ul>
                         @endif

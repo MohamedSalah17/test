@@ -34,10 +34,14 @@ class StudentsExport implements FromCollection, WithHeadings, WithEvents
         return [
             '#',
             'Name',
-            'Code',
+            'username',
             'Email',
             'Phone',
-            'Address',
+            'level_id',
+            'department_id',
+            'Code',
+            'Active',
+            'account_confirm',
             'Created_at',
             'Updated_at'
         ];

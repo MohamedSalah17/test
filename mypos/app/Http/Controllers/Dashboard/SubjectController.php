@@ -108,7 +108,9 @@ class SubjectController extends Controller
         $request->validate([
             'name' => 'required|unique:subjects',
             'code' => 'required|unique:subjects',
-            'description' => 'required',
+            'description' => 'nullable',
+            'notes' => 'nullable',
+            'hours' => 'required',
         ]);
 
         $request_data = $request->all();
@@ -164,7 +166,9 @@ class SubjectController extends Controller
             $request->validate([
                 'name' => ['required', Rule::unique('subjects')->ignore($subject->id)],
                 'code' => ['required', Rule::unique('subjects')->ignore($subject->id)],
-                'description' => 'required',
+                'description' => 'nullable',
+                'notes' => 'nullable',
+                'hours' => 'required',
                 //'sbj_doc' => 'required',
             ]);
 

@@ -83,28 +83,19 @@ class StudentController extends Controller
             'email' => 'required|unique:students',
             'username' => 'required|unique:students',
             'phone' => 'required|unique:students',
+            'active' => 'required',
+            'account_confirm' => 'required',
+            'national_id' => 'required',
+            'set_number' => 'required',
 
             'password' => 'required|confirmed',
             //'permissions' => 'required|min:1',
 
-            'address' => 'required',
         ]);
 
         $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
         $request_data['password'] = bcrypt($request->password);
-        //$request_data['phone'] = array_filter($request->phone);
 
-        /*Image Validation
-        if($request->image){
-            Image::make($request->image)
-                ->resize(300, null, function ($constraint) {
-                    $constraint->aspectRatio();
-            })
-            ->save(public_path('uploads/user_images/' .$request->image->hashName()));
-
-            $request_data['image']  =   $request->image->hashName();
-        }//end of if
-        */
 
         $student = Student::create($request_data);
         $student->attachRole('student');
@@ -117,6 +108,7 @@ class StudentController extends Controller
             'username' => 'required|unique:users',
             'phone' => 'required|unique:users',
             'type'  =>  'student',
+            'active' => 'required',
 
             'password' => 'required|confirmed',
             //'permissions' => 'required|min:1',
@@ -147,7 +139,9 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('dashboard.students.edit', compact('student'));
+        $levels = Level::all();
+        $departments = Department::all();
+        return view('dashboard.students.edit', compact('student','levels', 'departments'));
     }
 
     /**
@@ -161,11 +155,16 @@ class StudentController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'level_id' => 'required',
+            'department_id' => 'required',
             'code' => ['required', Rule::unique('students')->ignore($student->id)],
             'email' => ['required', Rule::unique('students')->ignore($student->id)],
             'username' => ['required', Rule::unique('students')->ignore($student->id)],
             'phone' => ['required', Rule::unique('students')->ignore($student->id)],
-            'address' => 'required',
+            'national_id' => 'required',
+            'set_number' => 'required',
+            'active' => 'required',
+
         ]);
 
         $request_data = $request->except(['permissions']);
@@ -178,8 +177,10 @@ class StudentController extends Controller
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
-            'username' => 'required',
+            'username' => 'required|unique:users',
             'phone' => 'required',
+            'active' => 'required',
+
         ]);
 
         $users = User::all();

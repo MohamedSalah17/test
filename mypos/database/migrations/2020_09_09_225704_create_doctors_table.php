@@ -20,7 +20,9 @@ class CreateDoctorsTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('password');
-            $table->text('address');
+            $table->boolean('active', 0);
+            $table->boolean('account_confirm', 0);
+
             //$table->string('image')->default('default.png');
             $table->timestamps();
         });

@@ -180,6 +180,12 @@ return [
         'end_date'             => 'تاريخ الإنتهاء',
         'pdf_quest'             => 'ملف الأسئلة',
         'pdf_anss'             => 'ملف الإجابة',
+        'active'             => 'التفعيل',
+        'level_id'             => 'المستوى',
+        'department_id'             => 'الشعبة',
+        'national_id'             => 'الرقم القومي',
+        'set_number'             => 'رقم الجلوس',
+        'graduated'             => 'خريج',
 
     ],
 ];

@@ -35,7 +35,10 @@
 
                             <div class="form-group">
                                 <label>@lang('site.date')*</label>
-                                <input type="date" name="date" class="form-control" value="{{old('date')}}">
+                                <input type="date" name="date" class="form-control datePicker" value="<?php
+                                                                                                        //$dt = date("Y-m-d");
+                                                                                                        //echo date( "Y-m-d", strtotime( "$dt +7 day" ) )
+                                                                                                        echo date('Y-m-d'); ?>">
                             </div>
 
                             <div class="form-group">

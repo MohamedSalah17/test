@@ -19,6 +19,9 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('phone')->unique();
+            $table->boolean('active', 0);
+            $table->boolean('account_confirm', 0);
+
             //$table->string('last_name');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

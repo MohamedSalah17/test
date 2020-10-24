@@ -110,7 +110,7 @@ return [
     "youtube_link"        => 'فيديو يوتيوب',
     "pdf_file"        => 'ملف pdf',
     "pptx_file"        => 'ملف بوربوينت',
-    "download"        => 'تحميل',
+    "download"        => 'تنزيل',
     "ass_less"        => 'درس المهمه',
     "lesson_name"        => 'اسم الدرس',
     "start_date"        => 'تاريخ البداية',
@@ -164,6 +164,15 @@ return [
     "change_password"        => 'تغيير كلمة السر',
     "change_phone"        => 'تغيير الهاتف',
     "settings"        => 'الإعدادات',
+    "active"        => 'التفعيل',
+    "not_active"        => 'غير مفعل',
+    "is_active"        => 'مفعل',
+    "national_id"        => 'الرقم القومي',
+    "set_number"        => 'رقم الجلوس',
+    "account_confirm"        => 'تأكيد معلومات الحساب',
+    "hours"        => 'عدد الساعات',
+    "phone-or-email-or-username"        => 'الهاتف او البريد الإلكتروني او اسم المستخدم',
+
 
 
 

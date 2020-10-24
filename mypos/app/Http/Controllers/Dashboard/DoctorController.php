@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Doctor;
+use App\Exports\DoctorsExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\DoctorsImport;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class DoctorController extends Controller
 {
@@ -17,6 +21,23 @@ class DoctorController extends Controller
         $this->middleware(['permission:update_doctors'])->only('edit');
         $this->middleware(['permission:delete_doctors'])->only('destroy');
 
+    }
+
+    public function importExportView()
+    {
+       return view('dashboard.doctors.index');
+    }
+
+    public function export()
+    {
+        return Excel::download(new DoctorsExport, 'doctors.xlsx');
+    }
+
+    public function import()
+    {
+        Excel::import(new DoctorsImport,request()->file('file'));
+
+        return back();
     }
 
     public function index(Request $request)
@@ -55,7 +76,7 @@ class DoctorController extends Controller
             'password' => 'required|confirmed',
             //'permissions' => 'required|min:1',
 
-            'address' => 'required',
+            'active' => 'required',
         ]);
 
         $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
@@ -89,6 +110,7 @@ class DoctorController extends Controller
             'username' => 'required|unique:users',
             'phone' => 'required|unique:users',
             'type'  =>  'doctor',
+            'active' => 'required',
 
             'password' => 'required|confirmed',
             //'permissions' => 'required|min:1',
@@ -138,7 +160,7 @@ class DoctorController extends Controller
             'email' => ['required', Rule::unique('doctors')->ignore($doctor->id)],
             'username' => ['required', Rule::unique('doctors')->ignore($doctor->id)],
             'phone' => ['required', Rule::unique('doctors')->ignore($doctor->id)],
-            'address' => 'required',
+            'active' => 'required',
         ]);
 
         $request_data = $request->except(['permissions']);
@@ -147,15 +169,19 @@ class DoctorController extends Controller
         $doctor->update($request_data);
 
         //update doctor in user table
+        $users = User::all();
         $request->validate([
             'name' => 'required',
             //'last_name' => 'required',
             'email' => 'required',
-            'username' => 'required',
+            'username' => ['required',Rule::unique('users')->ignore($user->id)],
             'phone' => 'required',
+            'active' => 'required',
+
         ]);
 
-        $users = User::all();
+
+
         foreach ($users as $user) {
             if($user->fid == $doctor->id){
                 $request_data= $request->except(['permissions']);

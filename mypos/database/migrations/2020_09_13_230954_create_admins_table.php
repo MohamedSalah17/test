@@ -22,6 +22,9 @@ class CreateAdminsTable extends Migration
             //$table->string('last_name');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('active', 0);
+            $table->boolean('account_confirm', 0);
+
             $table->rememberToken();
             $table->timestamps();
         });

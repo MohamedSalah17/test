@@ -40,12 +40,18 @@
 
                             <div class="form-group">
                                 <label>@lang('site.start_date')*</label>
-                                <input type="date" name="start_date" class="form-control" value="{{old('start_date')}}">
+                                <input type="date" name="start_date" class="form-control" value="<?php
+                                                                                                    //$dt = date("Y-m-d");
+                                                                                                    //echo date( "Y-m-d", strtotime( "$dt +7 day" ) )
+                                                                                                    echo date('Y-m-d'); ?>">
                             </div>
 
                             <div class="form-group">
                                 <label>@lang('site.end_date')*</label>
-                                <input type="date" name="end_date" class="form-control" value="{{old('end_date')}}">
+                                <input type="date" name="end_date" class="form-control" value="<?php
+                                                                                                $dt = date("Y-m-d");
+                                                                                                echo date( "Y-m-d", strtotime( "$dt +7 day" ) )
+                                                                                                //echo date('Y-m-d'); ?>">
                             </div>
 
                             {{--<div class="form-group">

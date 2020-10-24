@@ -59,6 +59,8 @@
                                         <th>#</th>
                                         <th>@lang('site.name')</th>
                                         <th>@lang('site.code')</th>
+                                        <th>@lang('site.hours')</th>
+                                        <th>@lang('site.notes')</th>
                                         <th>@lang('site.sbj_doc')</th>
                                         <th>@lang('site.lessons') </th>
                                         @if(auth()->user()->hasRole('doctor')  || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
@@ -78,6 +80,8 @@
                                         <td>{{ $index + 1}}</td>
                                         <td>{{ $subject->name}}</td>
                                         <td>{{ $subject->code}}</td>
+                                        <td>{{ $subject->hours}}</td>
+                                        <td>{{ $subject->notes}}</td>
                                         <td>{{ $subject->doctor['name']}}</td>
                                         <td>{{ $subject->lessons->count()}} <a href="{{route('dashboard.lessons.index', [ 'doc_id' => $subject->doc_id, 'sbj_id' => $subject->id ])}}" class="btn btn-info btn-sm">@lang('site.go')</a> </td>
                                         <td>{{ $subject->stdSbjs->count()}} <a href="{{route('dashboard.student_subjects.index', ['sbj_id' => $subject->id ])}}" class="btn btn-info btn-sm">@lang('site.show')</a> </td>

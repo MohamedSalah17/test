@@ -39,7 +39,7 @@
 
                             <div class="form-group">
                                 <label>@lang('site.level')*</label>
-                                <select name="level_id" class="form-control">
+                                <select name="level_id" class="form-control" id="levelselect">
                                     <option value="">@lang('site.level')</option>
                                     @foreach ($levels as $level)
                                         <option value="{{$level->id}}" {{old('level_id') == $level->id ? 'selected' : ''}}>{{$level->name}}</option>
@@ -47,12 +47,32 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>@lang('site.department')*</label>
                                 <select name="department_id" class="form-control">
                                     <option value="">@lang('site.department')</option>
                                     @foreach ($departments as $department)
-                                        <option value="{{$department->id}}" {{old('department_id') == $department->id ? 'selected' : ''}}>{{$department->name}}</option>
+                                        <option value="{{$department->id}}" {{old('department_id') == $department->id ? 'selected' : ''}}>
+                                            {{$department->name}}-{{$department->level['name']}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div> --}}
+                            @foreach ($departments as $department)
+                            <input id="hiddeparts" type="hidden" name="" data-id="{{$department->id}}" data-name="{{$department->name}}" data-level="{{$department->level_id}}">
+                            @endforeach
+                            @foreach ($levels as $level)
+                            <input id="hidlevels" type="hidden" name="" data-id="{{$level->id}}" data-name="{{$level->name}}">
+                            @endforeach
+
+                            <div class="form-group">
+                                <label>@lang('site.department')*</label>
+                                <select name="department_id" class="form-control" id="departselect">
+                                    <option value="">@lang('site.department')</option>
+                                    @foreach ($departments as $department)
+                                        <option value="{{$department->id}}" {{old('department_id') == $department->id ? 'selected' : ''}}>
+                                            {{$department->name}}-{{$department->level['name']}}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -84,13 +104,28 @@
                                 <input type="text" name="phone" class="form-control" value="{{old('phone')}}">
                             </div>
 
-
-
+                            <div class="form-group">
+                                <label>@lang('site.set_number')*</label>
+                                <input type="text" name="set_number" class="form-control" value="{{old('set_number')}}">
+                            </div>
 
                             <div class="form-group">
-                                <label>@lang('site.address')*</label>
-                                <textarea name="address" class="form-control">{{old('address')}}</textarea>
+                                <label>@lang('site.national_id')*</label>
+                                <input type="text" name="national_id" class="form-control" value="{{old('national_id')}}">
                             </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.active')*</label>
+                                <select name="active" class="form-control">
+                                    <option value="1" selected>@lang('site.is_active')</option>
+                                    <option value="0">@lang('site.not_active')</option>
+                                </select>
+                            </div>
+
+                            <input type="hidden" name="account_confirm" value="0">
+                            <input type="hidden" name="graduated" value="0">
+                            <input type="hidden" name="can_see_result" value="0">
+
 
 
                             {{--

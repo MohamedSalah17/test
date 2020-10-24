@@ -7,8 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    {{-- <title>{{ config('app.name', @lang('site.msa')) }}</title> --}}
+<title>{{ trans('المعهد العالي للعلوم الإدارية ببني سويف') }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
@@ -114,6 +114,20 @@
     <script src="{{ asset('dashboard/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('dashboard/plugins/icheck/icheck.min.js') }}"></script>
     <script src="{{ asset('dashboard/plugins/ckeditor/ckeditor.js') }}"></script>
+
+    <script>
+        $(function(){
+            $(".doclogslid").on('click', function (e) {
+                e.preventDefault();
+                $(".logtext").html('تسجيل دخول كعضو هيئة تدريس')
+            });
+
+            $(".adlogslid").on('click', function (e) {
+                e.preventDefault();
+                $(".logtext").html('تسجيل دخول كموظف شئون طلاب')
+            });
+        });
+    </script>
 
 </body>
 </html>

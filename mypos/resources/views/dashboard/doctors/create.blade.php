@@ -58,13 +58,16 @@
                                 <input type="text" name="phone" class="form-control">
                             </div>
 
-
-
-
                             <div class="form-group">
-                                <label>@lang('site.address')*</label>
-                                <textarea name="address" class="form-control">{{old('address')}}</textarea>
+                                <label>@lang('site.active')*</label>
+                                <select name="active" class="form-control">
+                                    <option value="1" selected>@lang('site.is_active')</option>
+                                    <option value="0">@lang('site.not_active')</option>
+                                </select>
                             </div>
+
+                            <input type="hidden" name="account_confirm" value="0">
+
 
 
                             {{--

@@ -31,18 +31,28 @@
                             {{ method_field('put') }}
 
                             <div class="form-group">
-                                <label>@lang('site.name')</label>
+                                <label>@lang('site.name')*</label>
                                 <input type="text" name="name" class="form-control" value="{{ $subject->name }}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.code')</label>
+                                <label>@lang('site.code')*</label>
                                 <input type="text" name="code" class="form-control" value="{{ $subject->code }}">
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.description')*</label>
+                                <label>@lang('site.hours')*</label>
+                                <input type="number" name="hours" class="form-control" value="{{ $subject->hours }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.description')</label>
                                 <input type="text" name="description" class="form-control" value="{{$subject->description}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label>@lang('site.notes')</label>
+                                <input type="text" name="notes" class="form-control" value="{{$subject->notes}}">
                             </div>
 
 

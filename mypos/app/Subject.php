@@ -9,7 +9,7 @@ class Subject extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        'name', 'code','doc_id','description',
+        'name', 'code','doc_id','description','hours','notes'
     ];
 
     public function doctor(){

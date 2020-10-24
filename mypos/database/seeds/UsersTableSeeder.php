@@ -18,6 +18,8 @@ class UsersTableSeeder extends Seeder
             'username' => 'superadmin',
             'phone' => '01157404397',
             'type' => 'super_admin',
+            'active' => 1,
+            'account_confirm' => 1,
             'password' => bcrypt('123456'),
         ]);
 

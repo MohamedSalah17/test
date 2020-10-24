@@ -49,9 +49,13 @@
                                 <input type="text" name="phone" class="form-control" value="{{$doctor->phone}}">
                             </div>
 
+
                             <div class="form-group">
-                                <label>@lang('site.address') *</label>
-                                <textarea name="address" class="form-control">{{$doctor->address}}</textarea>
+                                <label>@lang('site.active')*</label>
+                                <select name="active" class="form-control">
+                                    <option value="1" {{$doctor->active == 1? 'selected': '' }}>@lang('site.is_active')</option>
+                                    <option value="0" {{$doctor->active == 0? 'selected': '' }}>@lang('site.not_active')</option>
+                                </select>
                             </div>
 
 

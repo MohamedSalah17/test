@@ -19,7 +19,20 @@ class Student extends Model
 
 
     protected $fillable = [
-        'name', 'username','email', 'password','phone', 'address','code','level_id','department_id'
+        'name',
+        'username',
+        'email',
+        'password',
+        'phone',
+        'code',
+        'level_id',
+        'department_id',
+        'active',
+        'account_confirm',
+        'set_number',
+        'national_id',
+        'graduated',
+        'can_see_result',
     ];
 
 
