@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Assignment;
+use App\Doctor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Lesson;
 use App\StudentSubject;
+use App\Subject;
 
 class AssignmentController extends Controller
 {
@@ -25,6 +27,8 @@ class AssignmentController extends Controller
     public function index(Request $request)
     {
         $stdSbs = StudentSubject::all();
+        $subjects = Subject::all();
+        $doctors =Doctor::all();
 
         $lessons = Lesson::all();
         $assignments = Assignment::when($request->search, function ($q) use ($request){
@@ -33,9 +37,15 @@ class AssignmentController extends Controller
         })->when($request->lesson_id, function ($q) use ($request){
           return $q->where('lesson_id', 'like', '%'. $request->lesson_id . '%');
 
-        })->latest()->paginate(6);
+        })->when($request->sbj_id, function ($q) use ($request){
+            return $q->where('sbj_id', 'like', '%'. $request->sbj_id . '%');
 
-        return view('dashboard.assignments.index', compact('assignments','lessons','stdSbs'));
+          })->when($request->doc_id, function ($q) use ($request){
+            return $q->where('doc_id', 'like', '%'. $request->doc_id . '%');
+
+            })->latest()->paginate(6);
+
+        return view('dashboard.assignments.index', compact('assignments','lessons','stdSbs','subjects', 'doctors'));
     }
 
     /**

@@ -22,6 +22,37 @@
                                     <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search}}">
                                 </div>
 
+                                @if(auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
+                                <div class="col-md-4">
+                                    <select name="doc_id" class="form-control">
+                                        <option value="">@lang('site.doctors')</option>
+                                        @foreach ($doctors as $doctor)
+                                            <option value="{{$doctor->id}}" {{request()->doc_id == $doctor->id ? 'selected' : ''}}>{{$doctor->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @endif
+
+                                <div class="col-md-4">
+                                    <select name="lesson_id" class="form-control">
+                                        <option value="">@lang('site.subjects')</option>
+                                        @foreach ($subjects as $subject)
+                                            @if ($subject->doc_id == auth()->user()->fid && auth()->user()->hasRole('doctor') || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
+                                            <option value="{{$subject->id}}" {{request()->sbj_id == $subject->id ? 'selected' : ''}}>{{$subject->name}}</option>
+                                            @endif
+                                            @if (auth()->user()->hasRole('student'))
+                                                @foreach ($stdSbs as $stdSb)
+                                                @if($stdSb->subject_id == $subject->id && $stdSb->student_id == auth()->user()->fid)
+                                                <option value="{{$subject->id}}" {{request()->sbj_id == $subject->id ? 'selected' : ''}}>{{$subject->name}}</option>
+                                                @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
                                 <div class="col-md-4">
                                     <select name="lesson_id" class="form-control">
                                         <option value="">@lang('site.lessons')</option>

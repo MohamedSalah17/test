@@ -18,9 +18,16 @@
                         <h3 class="box-title" style="margin-bottom: 15px">@lang('site.lessons') {{--<small>{{$lessons->total()}}</small>--}}</h3>
                         <form action="{{ route('dashboard.lessons.index')}}" method="GET">
                             <div class="row">
+                                @if(auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
                                 <div class="col-md-4">
-                                    <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search}}">
+                                    <select name="doc_id" class="form-control">
+                                        <option value="">@lang('site.doctors')</option>
+                                        @foreach ($doctors as $doctor)
+                                            <option value="{{$doctor->id}}" {{request()->doc_id == $doctor->id ? 'selected' : ''}}>{{$doctor->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                                @endif
 
                                 <div class="col-md-4">
                                     <select name="sbj_id" class="form-control">
@@ -38,6 +45,13 @@
                                             @endif
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search}}">
                                 </div>
 
                                 <div class="col-md-4">

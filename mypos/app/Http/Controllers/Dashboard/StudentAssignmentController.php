@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Assignment;
+use App\Doctor;
 use App\StudentAssignment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Lesson;
 use App\Student;
+use App\Subject;
 
 class StudentAssignmentController extends Controller
 {
@@ -19,6 +22,10 @@ class StudentAssignmentController extends Controller
     {
         $assignments = Assignment::all();
         $students = Student::all();
+        $doctors = Doctor::all();
+
+        $subjects = Subject::all();
+        $lessons = Lesson::all();
 
         $stdAssignments = StudentAssignment::when($request->search, function ($q) use ($request){
             return $q->where('id', 'like', '%'. $request->search . '%');
@@ -26,9 +33,18 @@ class StudentAssignmentController extends Controller
         })->when($request->assign_id, function ($q) use ($request){
           return $q->where('assign_id', 'like', '%'. $request->assign_id . '%');
 
-        })->latest()->paginate(6);
+        })->when($request->lesson_id, function ($q) use ($request){
+            return $q->where('lesson_id', 'like', '%'. $request->lesson_id . '%');
 
-        return view('dashboard.student_assignments.index', compact('assignments','stdAssignments', 'students'));
+          })->when($request->sbj_id, function ($q) use ($request){
+              return $q->where('sbj_id', 'like', '%'. $request->sbj_id . '%');
+
+            })->when($request->doc_id, function ($q) use ($request){
+                return $q->where('doc_id', 'like', '%'. $request->doc_id . '%');
+
+                })->latest()->paginate(6);
+
+        return view('dashboard.student_assignments.index', compact('assignments','stdAssignments', 'students', 'subjects', 'lessons', 'doctors'));
     }
 
     /**

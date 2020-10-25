@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Doctor;
 use App\Lesson;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,15 +30,17 @@ class LessonController extends Controller
     {
         $stdSbs = StudentSubject::all();
         $subjects = Subject::all();
+        $doctors = Doctor::all();
         $lessons = Lesson::when($request->search, function ($q) use ($request){
             return $q->where('name', 'like', '%'. $request->search . '%');
 
         })->when($request->sbj_id, function ($q) use ($request){
           return $q->where('sbj_id', 'like', '%'. $request->sbj_id . '%');
 
+        })->when($request->doc_id, function ($q) use ($request){
         })->latest()->paginate(6);
 
-        return view('dashboard.lessons.index', compact('lessons','subjects', 'stdSbs'));
+        return view('dashboard.lessons.index', compact('lessons','subjects', 'stdSbs', 'doctors'));
     }
 
     /**
