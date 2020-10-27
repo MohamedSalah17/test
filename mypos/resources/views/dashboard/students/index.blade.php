@@ -18,9 +18,9 @@
                         <h3 class="box-title" style="margin-bottom: 15px">@lang('site.students') <small>{{$students->total()}}</small></h3>
                         <form action="{{ route('dashboard.students.index')}}" method="GET">
                             <div class="row">
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search}}">
-                                </div>
+                                </div> --}}
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
 
@@ -39,7 +39,7 @@
 
                     <div class="box-body">
                         @if ($students->count() > 0)
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="studenttable">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -99,7 +99,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $students->appends(request()->query())->links() }}
+                            {{-- {{ $students->appends(request()->query())->links() }} --}}
                         @else
                             <h2>@lang('site.no_data_found')</h2>
                         @endif
@@ -165,4 +165,12 @@
     </div>
   </div>
 
+@endsection
+@section('scripts')
+<script>
+    $('#studenttable').DataTable({
+         "pageLength": 10,
+
+        });
+</script>
 @endsection

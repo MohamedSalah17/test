@@ -7,6 +7,7 @@ use App\Exports\DoctorsExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Imports\DoctorsImport;
+use App\Student;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -42,9 +43,8 @@ class DoctorController extends Controller
 
     public function index(Request $request)
     {
-        $doctors = Doctor::when($request->search, function ($q) use ($request){
-            return $q->where('name', 'like', '%'. $request->search . '%');
-        })->latest()->paginate(6);
+        $doctors = Doctor::all();
+
 
         return view('dashboard.doctors.index', compact('doctors'));
     }

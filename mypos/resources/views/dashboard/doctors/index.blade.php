@@ -15,14 +15,14 @@
                 <div class="box box-primary">
 
                     <div class="box-header with-border">
-                        <h3 class="box-title" style="margin-bottom: 15px">@lang('site.doctors') <small>{{$doctors->total()}}</small></h3>
+                        <h3 class="box-title" style="margin-bottom: 15px">@lang('site.doctors') {{--<small>{{$doctors->total()}}</small>--}}</h3>
                         <form action="{{ route('dashboard.doctors.index')}}" method="GET">
                             <div class="row">
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search}}">
-                                </div>
+                                </div> --}}
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
+                                    {{-- <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button> --}}
 
                                     @if (auth()->user()->hasPermission('create_doctors'))
                                         <a href=" {{route('dashboard.doctors.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> @lang('site.add')</a>
@@ -40,7 +40,7 @@
 
                     <div class="box-body">
                         @if ($doctors->count() > 0)
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="doctortable">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -88,7 +88,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $doctors->appends(request()->query())->links() }}
+                            {{-- {{ $doctors->appends(request()->query())->links() }} --}}
                         @else
                             <h2>@lang('site.no_data_found')</h2>
                         @endif
@@ -154,4 +154,12 @@
     </div>
   </div>
 
+@endsection
+@section('scripts')
+<script>
+    $('#doctortable').DataTable({
+         "pageLength": 10,
+
+        });
+</script>
 @endsection

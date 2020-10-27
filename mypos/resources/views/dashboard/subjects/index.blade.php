@@ -18,9 +18,7 @@
                         <h3 class="box-title" style="margin-bottom: 15px">@lang('site.subjects') {{--<small>{{$subjects->total()}}</small>--}}</h3>
                         <form action="{{ route('dashboard.subjects.index')}}" method="GET">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search}}">
-                                </div>
+
 
                                 @if (auth()->user()->hasRole('super_admin'))
                                 <div class="col-md-4">
@@ -53,7 +51,7 @@
 
                     <div class="box-body">
                         @if ($subjects->count() > 0)
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="subjecttable">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -163,7 +161,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{$subjects->appends(request()->query())->links()}}
+                            {{-- {{$subjects->appends(request()->query())->links()}} --}}
                         @else
                             <h2>@lang('site.no_data_found')</h2>
                         @endif
@@ -249,3 +247,11 @@
 
 @endsection
 
+@section('scripts')
+<script>
+    $('#subjecttable').DataTable({
+         "pageLength": 10,
+
+        });
+</script>
+@endsection
