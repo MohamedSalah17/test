@@ -12,6 +12,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
             Route::resource('doctors', 'DoctorController')->except(['show']);
             Route::get('doctors/export', 'DoctorController@export')->name('doctors.export');
             Route::post('doctors/import', 'DoctorController@import')->name('doctors.import');
+            Route::get('doctors/data', 'DoctorController@getDocData')->name('doctors.data');
 
             Route::post("profile/update-name", "ProfileController@update");
             Route::post("profile/update-password", "ProfileController@updatePassword");

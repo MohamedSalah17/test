@@ -39,6 +39,9 @@
                     </div>
 
                     <div class="box-body">
+                        <!-- Default checked -->
+
+
                         @if ($doctors->count() > 0)
                             <table class="table table-hover" id="doctortable">
                                 <thead>
@@ -46,15 +49,15 @@
                                         <th>#</th>
                                         <th>@lang('site.name')</th>
                                         <th>@lang('site.email')</th>
-                                        <th>@lang('site.subjects')</th>
                                         <th>@lang('site.phone')</th>
+                                        <th>@lang('site.subjects')</th>
                                         <th>@lang('site.active')</th>
                                         <th>@lang('site.account_confirm')</th>
                                         {{--<th>@lang('site.image')</th>--}}
                                         <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                 {{-- <tbody>
                                     @foreach ($doctors as $index=>$doctor)
                                     <tr>
                                         <td>{{ $index + 1}}</td>
@@ -62,7 +65,18 @@
                                         <td>{{ $doctor->email}}</td>
                                         <td>{{ $doctor->subjects->count()}} <a href="{{route('dashboard.subjects.index', ['doc_id' => $doctor->id])}}" class="btn btn-info btn-sm">@lang('site.go')</a> </td>
                                         <td>{{ is_array($doctor->phone) ? implode($doctor->phone, '-') : $doctor->phone }}</td>
-                                        <td>{{ $doctor->active}}</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-switch material-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="doctorSwitch{{$doctor->id}}" {{ $doctor->active == 1? 'checked' : ''}} value="{{ $doctor->active == 1? '1' : '0'}}" onclick="setTimeout(function(){$('.student-assign-course-form').submit()}, 1000)"
+                                                    onchange="this.checked? this.value = 1 : this.value = 0"
+                                                    type="checkbox">
+                                                    <label class="custom-control-label" for="doctorSwitch{{$doctor->id}}"></label>
+                                                </div>
+                                            </div>
+
+
+                                        </td>
                                         <td>
                                             @if ($doctor->account_confirm == 0)
                                                 @lang('site.no')
@@ -71,7 +85,6 @@
                                             @endif
 
                                         </td>
-                                        <!--td><img src="{{-- $doctor->image_path --}}" style="width: 80px;" class="img-thumbnail" alt=""></td-->
                                         <td>
                                             @if (auth()->user()->hasPermission('update_doctors'))
                                                 <a href=" {{ route('dashboard.doctors.edit', $doctor->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
@@ -86,7 +99,11 @@
                                         </td>
                                     </tr>
                                     @endforeach
+                                </tbody> --}}
+                                <tbody>
+
                                 </tbody>
+
                             </table>
                             {{-- {{ $doctors->appends(request()->query())->links() }} --}}
                         @else
@@ -157,9 +174,27 @@
 @endsection
 @section('scripts')
 <script>
-    $('#doctortable').DataTable({
-         "pageLength": 10,
+    // $('#doctortable').DataTable({
+    //      "pageLength": 10,
 
+    //     });
+        $(function() {
+            $('#doctortable').DataTable({
+                processing: true,
+                serverSide: true,
+                "sorting": [0, 'DESC'],
+                ajax: "{{ route('dashboard.doctors.data') }}",
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                    { data: 'email', name: 'email' },
+                    { data: 'phone', name: 'phone' },
+                    { data: 'subjects', name: 'subjects' },
+                    { data: 'active', name: 'active' },
+                    { data: 'account_confirm', name: 'account_confirm' },
+                    { data: 'action', name: 'action' },
+                ]
+            });
         });
 </script>
 @endsection

@@ -17,7 +17,7 @@
         <section class="content">
         <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title" style="margin-bottom:10px">@lang('site.admins') <small>{{$admins->total()}}</small></h3>
+                    <h3 class="box-title" style="margin-bottom:10px">@lang('site.admins') {{--<small>{{$admins->total()}}</small>--}}</h3>
 
                     <form action=" {{ route('dashboard.admins.index')}} " method="get">
                         <div class="row" style="display:flex">
@@ -74,7 +74,7 @@
                             @endforeach
                         </tbody>
                     </table><!-- end of table -->
-                    {{ $admins->appends(request()->query())->links() }}
+                    {{-- {{ $admins->appends(request()->query())->links() }} --}}
                     @else
                     <h2>@lang('site.no_data_found')</h2>
                     @endif

@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Doctor;
+use App\User;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class DoctorsImport implements ToModel
@@ -14,7 +15,7 @@ class DoctorsImport implements ToModel
     */
     public function model(array $row)
     {
-        return new Doctor([
+        $docs = Doctor::create([
             'name' => $row[0],
             'username' => $row[1],
             'email' => $row[2],
@@ -23,5 +24,18 @@ class DoctorsImport implements ToModel
             'active' => $row[4],
             'account_confirm' => $row[5],
         ]);
+        $docref = $docs->refresh();
+        User::create([
+            'name' => $row[0],
+            'username' => $row[1],
+            'email' => $row[2],
+            'password' => bcrypt('123456'),
+            'phone' => $row[3],
+            'active' => $row[4],
+            'account_confirm' => $row[5],
+            'type' =>'doctor',
+            'fid' => $docref->id
+        ]);
+        return $docs;
     }
 }

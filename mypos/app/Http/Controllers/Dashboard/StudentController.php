@@ -50,7 +50,7 @@ class StudentController extends Controller
         $students = Student::when($request->search, function ($q) use ($request){
             return $q->where('name', 'like', '%'. $request->search . '%')
                     ->orWhere('code', 'like', '%'. $request->search . '%');
-        })->latest()->paginate(6);
+        })->get();
         return view('dashboard.students.index', compact('students'));
     }
 

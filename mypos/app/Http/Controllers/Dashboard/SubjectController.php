@@ -61,7 +61,7 @@ class SubjectController extends Controller
             })->when($request->doc_id, function ($q) use ($request){
             return $q->where('doc_id', 'like', '%'. $request->doc_id . '%');
 
-            })->latest()->paginate(6);
+            })->get();
             return view('dashboard.subjects.index', compact('subjects','doctors'));
         }
         elseif(auth()->user()->type == 'doctor' || auth()->user()->type == 'student'){
@@ -74,7 +74,7 @@ class SubjectController extends Controller
                 return $q->where('name', 'like', '%'. $request->search . '%')
                     ->orWhere('code', 'like', '%'. $request->search . '%');
 
-            })->latest()->paginate(6);
+            })->get();
             //$subjects = Subject::where('doc_id' ,'=',  $doctor_id );
             //$subjects = $query->where('doc_id' ,'=',  $doctor_id);
                         //dd($subjects);

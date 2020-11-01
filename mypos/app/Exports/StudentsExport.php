@@ -42,6 +42,10 @@ class StudentsExport implements FromCollection, WithHeadings, WithEvents
             'Code',
             'Active',
             'account_confirm',
+            'set number',
+            'national id',
+            'graduated',
+            'can see result',
             'Created_at',
             'Updated_at'
         ];

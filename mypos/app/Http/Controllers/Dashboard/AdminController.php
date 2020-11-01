@@ -36,7 +36,7 @@ class AdminController extends Controller
                     ->orWhere('last_name', 'like', '%'. $request->search .'%');
 
             });
-        })->latest()->paginate(6);
+        })->get();
 
         return view('dashboard.admins.index', compact('admins'));
 

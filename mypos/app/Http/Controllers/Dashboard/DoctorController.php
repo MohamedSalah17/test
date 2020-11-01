@@ -8,11 +8,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Imports\DoctorsImport;
 use App\Student;
+use App\Subject;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
-
+use DataTables;
 
 class DoctorController extends Controller
 {
@@ -47,6 +48,28 @@ class DoctorController extends Controller
 
 
         return view('dashboard.doctors.index', compact('doctors'));
+    }
+
+    public function getDocData(){
+        $doctors = Doctor::query();
+
+            return DataTables::eloquent($doctors)
+            ->addColumn('subjects', function(Doctor $doctor){
+                return Subject::where('doc_id', $doctor->id )->count();
+
+            })->addColumn('action', function(Doctor $doctor){
+
+                return '<a href="'. route("dashboard.doctors.edit", $doctor->id) .'" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>'.__('site.edit').' </a>'. ' '.
+                        '<form action="'. route('dashboard.doctors.destroy', $doctor->id) .'" method="POST" style="display: inline-block">
+                            '.csrf_field().'
+                            '. method_field('delete').'
+                            <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i>'. __('site.delete').'</button>
+                        </form>';
+            })
+            ->rawColumns(['action'])
+            ->toJson();
+
+        //return DataTables::of(Doctor::query())->addColumn('subjects')->make(true);
     }
 
     /**

@@ -15,7 +15,7 @@
                 <div class="box box-primary">
 
                     <div class="box-header with-border">
-                        <h3 class="box-title" style="margin-bottom: 15px">@lang('site.students') <small>{{$students->total()}}</small></h3>
+                        <h3 class="box-title" style="margin-bottom: 15px">@lang('site.students') {{--<small>{{$students->total()}}</small>--}}</h3>
                         <form action="{{ route('dashboard.students.index')}}" method="GET">
                             <div class="row">
                                 {{-- <div class="col-md-4">
@@ -73,7 +73,16 @@
                                         <td>{{ $student->department['name']}}</td>
                                         {{--<td><a href="{{route('dashboard.student_subjects.create')}}" class="btn btn-primary">@lang('site.add_orderRegist')</a></td>--}}
                                         <td>{{ is_array($student->phone) ? implode($student->phone, '-') : $student->phone }}</td>
-                                        <td>{{ $student->active}}</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-switch material-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="studentSwitch{{$student->id}}" {{ $student->active == 1? 'checked' : ''}} value="{{ $student->active == 1? '1' : '0'}}" onclick="setTimeout(function(){$('.student-assign-course-form').submit()}, 1000)"
+                                                    onchange="this.checked? this.value = 1 : this.value = 0"
+                                                    type="checkbox">
+                                                    <label class="custom-control-label" for="studentSwitch{{$student->id}}"></label>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>
                                             @if ($student->account_confirm == 0)
                                                 @lang('site.no')

@@ -11,6 +11,7 @@
   <!--bootstrap-->
     {{-- <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('dashboard/datatable/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap-switch.css') }}">
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> --}}
     <link rel="stylesheet" href="{{ asset('dashboard/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard/css/skin-blue.min.css') }}">
@@ -91,6 +92,14 @@
                 width: 100%;
                 height: 400px;
                 border: 1px solid rgb(0, 0, .2);
+            }
+            .material-switch > input:checked + label::before {
+                background: #3C8DBC;
+                opacity: 0.5;
+            }
+            .material-switch > input:checked + label::after {
+                background: #3C8DBC;
+                left: 20px;
             }
 
 
@@ -318,6 +327,7 @@ desired effect
 
       <!-- Bootstrap 3.3.7 -->
       <script src="{{ asset('dashboard/js/bootstrap.min.js')}}"></script>
+      <script src="{{ asset('dashboard/js/bootstrap-switch.min.js')}}"></script>
       <script src="{{ asset('dashboard/js/jquery.min.js')}}"></script>
       {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> --}}
 
@@ -354,8 +364,10 @@ desired effect
         $('.sidebar-menu').tree();
 
         $('#table').DataTable({
-         "pageLength": 10,
-
+            "pageLength": 5,
+            "sorting": [0, 'DESC'],
+            processing : true,
+            serverSide : true,
         });
 
         //icheck

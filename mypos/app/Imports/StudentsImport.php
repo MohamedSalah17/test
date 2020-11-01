@@ -15,16 +15,39 @@ class StudentsImport implements ToModel
     */
     public function model(array $row)
     {
-        return new Student([
+        $stds = Student::create([
             'name' => $row[0],
             'username' => $row[1],
-            'code' => $row[2],
-            'email' => $row[3],
+            'level_id' => $row[2],
+            'department_id' => $row[3],
+            'code' => $row[4],
+            'email' => $row[5],
             'password' => bcrypt('123456'),
-            'phone' => $row[4],
-            'active' => $row[5],
-            'account_confirm' => $row[6],
+            'phone' => $row[6],
+            'set_number' => $row[7],
+            'national_id' => $row[8],
+            'active' => $row[9],
+            'account_confirm' => $row[10],
+            'graduated' => $row[11],
+            'can_see_result' => $row[12],
         ]);
+       $stdref = $stds->refresh();
+
+         User::create([
+            'name' => $row[0],
+            'username' => $row[1],
+            'email' => $row[5],
+            'password' => bcrypt('123456'),
+            'phone' => $row[6],
+            'active' => $row[9],
+            'account_confirm' => $row[10],
+            'type' =>'student',
+            'fid' => $stdref->id
+        ]);
+
+        return $stds;
+
+
 
 
     }
