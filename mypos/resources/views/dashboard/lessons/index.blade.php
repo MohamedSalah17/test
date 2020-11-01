@@ -71,7 +71,7 @@
 
                     <div class="box-body">
                         @if ($lessons->count() > 0)
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="lessonTable">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -81,9 +81,11 @@
                                         <th>@lang('site.pdf_file')</th>
                                         <th>@lang('site.pptx_file')</th>
                                         <th>@lang('site.assignments') </th>
+
                                         @if(auth()->user()->hasRole('doctor'))
                                         <th>@lang('site.action')</th>
                                         @endif
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -112,6 +114,7 @@
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
                                             {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
                                         </td>--}}
+                                        @if(auth()->user()->hasRole('doctor'))
                                         <td>
                                             @if (auth()->user()->hasPermission('update_lessons'))
                                                 <a href=" {{ route('dashboard.lessons.edit', $lesson->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
@@ -125,6 +128,7 @@
                                             @endif
 
                                         </td>
+                                        @endif
                                     </tr>
                                     @endif
 
@@ -154,19 +158,7 @@
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
                                             {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
                                         </td>--}}
-                                        <td>
-                                            @if (auth()->user()->hasPermission('update_lessons'))
-                                                <a href=" {{ route('dashboard.lessons.edit', $lesson->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
-                                            @endif
-                                            @if (auth()->user()->hasPermission('delete_lessons'))
-                                                <form action="{{route('dashboard.lessons.destroy', $lesson->id)}}" method="POST" style="display: inline-block">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('delete')}}
-                                                    <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
-                                                </form>
-                                            @endif
 
-                                        </td>
                                     </tr>
                                     @endif
                                     @endforeach
@@ -175,7 +167,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{$lessons->appends(request()->query())->links()}}
+                            {{-- {{$lessons->appends(request()->query())->links()}} --}}
                         @else
                             <h2>@lang('site.no_data_found')</h2>
                         @endif
@@ -212,4 +204,10 @@
       </div>--}}
 
 @endsection
-
+@section('scripts')
+<script>
+    $('#lessonTable').DataTable({
+            "pageLength": 5,
+        });
+</script>
+@endsection

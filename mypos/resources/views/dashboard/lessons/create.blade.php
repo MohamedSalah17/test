@@ -42,13 +42,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.pptx_file')*</label>
+                                <label><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i> @lang('site.pptx_file')*</label>
                                 <input type="file" name="pptx_file" class="form-control" value="{{old('pptx_file')}}">
                                 <!--input type="submit" value="upload"-->
                             </div>
 
                                 <div class="form-group">
-                                    <label>@lang('site.pdf_file')</label>
+                                    <label><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i> @lang('site.pdf_file')</label>
                                     <input type="file" name="pdf_file" class="form-control" value="{{old('pdf_file')}}">
                                     <!--input type="submit" value="upload"-->
                                 </div>

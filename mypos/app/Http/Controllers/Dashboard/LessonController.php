@@ -38,7 +38,7 @@ class LessonController extends Controller
           return $q->where('sbj_id', 'like', '%'. $request->sbj_id . '%');
 
         })->when($request->doc_id, function ($q) use ($request){
-        })->latest()->paginate(6);
+        })->latest()->get();
 
         return view('dashboard.lessons.index', compact('lessons','subjects', 'stdSbs', 'doctors'));
     }

@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>@lang('site.pdf_quest')*</label>
+                                <label><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i> @lang('site.pdf_quest')*</label>
                                 <input type="file" name="pdf_quest" class="form-control" value="{{old('pdf_quest')}}">
                                 <!--input type="submit" value="upload"-->
                             </div>

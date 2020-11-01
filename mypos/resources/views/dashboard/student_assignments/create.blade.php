@@ -59,7 +59,7 @@
                             <input type="hidden" name="student_id" value={{auth()->user()->fid}}>
 
                             <div class="form-group">
-                                <label>@lang('site.pdf_anss')*</label>
+                                <label><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i> @lang('site.pdf_anss')*</label>
                                 <input type="file" name="pdf_anss" class="form-control" value="{{old('pdf_anss')}}">
                                 <!--input type="submit" value="upload"-->
                             </div>

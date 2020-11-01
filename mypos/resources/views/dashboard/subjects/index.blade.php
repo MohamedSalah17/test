@@ -57,37 +57,42 @@
                                         <th>#</th>
                                         <th>@lang('site.name')</th>
                                         <th>@lang('site.code')</th>
-                                        <th>@lang('site.hours')</th>
-                                        <th>@lang('site.notes')</th>
                                         <th>@lang('site.sbj_doc')</th>
                                         <th>@lang('site.lessons') </th>
-                                        @if(auth()->user()->hasRole('doctor')  || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
+
+                                        @if(auth()->user()->type == 'doctor'  || auth()->user()->type == 'super_admin' || auth()->user()->type == 'admin' )
                                         <th>@lang('site.registed_students') </th>
+                                        <th>@lang('site.hours')</th>
+                                        <th>@lang('site.notes')</th>
                                         @endif
+
                                         @if(auth()->user()->hasRole('doctor')  || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
                                         <th>@lang('site.action')</th>
                                         @endif
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($subjects as $index=>$subject)
                                     {{--dd($subject->doc_id)--}}
 
-                                    @if ($subject->doc_id == auth()->user()->fid && auth()->user()->hasRole('doctor')  || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
+                                    @if ($subject->doc_id == auth()->user()->fid && auth()->user()->type == 'doctor'  || auth()->user()->type == 'super_admin' || auth()->user()->type == 'admin' )
                                     <tr>
                                         <td>{{ $index + 1}}</td>
                                         <td>{{ $subject->name}}</td>
                                         <td>{{ $subject->code}}</td>
-                                        <td>{{ $subject->hours}}</td>
-                                        <td>{{ $subject->notes}}</td>
                                         <td>{{ $subject->doctor['name']}}</td>
                                         <td>{{ $subject->lessons->count()}} <a href="{{route('dashboard.lessons.index', [ 'doc_id' => $subject->doc_id, 'sbj_id' => $subject->id ])}}" class="btn btn-info btn-sm">@lang('site.go')</a> </td>
-                                        <td>{{ $subject->stdSbjs->count()}} <a href="{{route('dashboard.student_subjects.index', ['sbj_id' => $subject->id ])}}" class="btn btn-info btn-sm">@lang('site.show')</a> </td>
 
-                                        {{--<td>
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
-                                            {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
-                                        </td>--}}
+                                        @if(auth()->user()->type == 'doctor'  || auth()->user()->type == 'super_admin' || auth()->user()->type == 'admin' )
+                                        <td>{{ $subject->stdSbjs->count()}} <a href="{{route('dashboard.student_subjects.index', ['sbj_id' => $subject->id ])}}" class="btn btn-info btn-sm">@lang('site.show')</a> </td>
+                                        <td>{{ $subject->hours}}</td>
+                                        <td>{{ $subject->notes}}</td>
+                                        @endif
+
+
+                                        @if(auth()->user()->hasRole('doctor')  || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
+
                                         <td>
                                             @if (auth()->user()->hasPermission('update_subjects'))
                                                 <a href=" {{ route('dashboard.subjects.edit', [$subject->id, 'udoc'=>0])}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
@@ -114,12 +119,14 @@
                                             @endif
 
                                         </td>
+                                        @endif
                                     </tr>
                                     @endif
 
                                     {{--dd($subject->stdSbjs('id'))--}}
 
-                                    @if (auth()->user()->hasRole('student'))
+                                    @if (auth()->user()->type == 'student')
+
                                     @foreach ($stdSbs as $stdSb)
                                     @if($stdSb->subject_id == $subject->id && $stdSb->student_id == auth()->user()->fid)
                                     <tr>
@@ -128,30 +135,8 @@
                                         <td>{{ $subject->code}}</td>
                                         <td>{{ $subject->doctor['name']}}</td>
                                         <td>{{ $subject->lessons->count()}} <a href="{{route('dashboard.lessons.index', [ 'doc_id' => $subject->doc_id, 'sbj_id' => $subject->id ])}}" class="btn btn-info btn-sm">@lang('site.go')</a> </td>
-                                        {{--<td>
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
-                                            {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
-                                        </td>--}}
-                                        <td>
-                                            @if (auth()->user()->hasPermission('update_subjects'))
-                                                <a href=" {{ route('dashboard.subjects.edit', $subject->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
-                                            @endif
-                                            @if (auth()->user()->hasPermission('delete_subjects'))
-                                                <form action="{{route('dashboard.subjects.destroy', $subject->id)}}" method="POST" style="display: inline-block">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('delete')}}
-                                                    <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
-                                                </form>
-                                            @endif
-                                            @if (auth()->user()->hasPermission('create_regist'))
-                                            <a href="{{route('dashboard.student_subjects.create',['sbj_id' => $subject->id])}}" class="btn btn-warning btn-sm">@lang('site.add_std_to_sbj')</a>
-                                            @endif
 
-                                            @if (auth()->user()->hasPermission('create_lessons'))
-                                            <a href="{{route('dashboard.lessons.create',['sbj_id' => $subject->id ])}}" class="btn btn-success btn-sm">@lang('site.add_lesson')</a>
-                                            @endif
 
-                                        </td>
                                     </tr>
                                     @endif
                                     @endforeach
@@ -249,9 +234,11 @@
 
 @section('scripts')
 <script>
-    $('#subjecttable').DataTable({
-         "pageLength": 10,
-
+    $(function(){
+        $('#subjecttable').DataTable({
+            'order': [[ 1, 'desc' ]],
         });
+    });
+
 </script>
 @endsection

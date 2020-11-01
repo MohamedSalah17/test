@@ -86,7 +86,7 @@
 
                     <div class="box-body">
                         @if ($assignments->count() > 0)
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="assigntable">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -95,13 +95,15 @@
                                         <th>@lang('site.quest_file')</th>
                                         <th>@lang('site.start_date')</th>
                                         <th>@lang('site.end_date')</th>
+
                                         @if (auth()->user()->hasPermission('read_stdassign'))
                                         <th>@lang('site.students')</th>
                                         @endif
-                                        <th> </th>
+
                                         @if(auth()->user()->hasRole('doctor')  || auth()->user()->hasRole('student') )
                                         <th>@lang('site.action')</th>
                                         @endif
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -127,15 +129,7 @@
                                             @endif
                                         </td>
 
-                                        <td>
-                                            @if (auth()->user()->hasPermission('create_stdassign'))
-                                            <a href="{{route('dashboard.student_assignments.create')}}" class="btn btn-warning btn-sm"><i class="fa fa-upload"></i> @lang('site.upload_anss')</a>
-                                                {{--
-                                                <a href="{{route('dashboard.assignments.edit',$assignment->id)}}" class="btn btn-warning btn-sm"><i class="fa fa-upload"></i> @lang('site.upload_anss')</a>
-                                                <a href="/files/{{$assignment->pdf_anss}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
-                                                --}}
-                                            @endif
-                                        </td>
+                                        @if(auth()->user()->hasRole('doctor'))
                                         <td>
                                             @if (auth()->user()->hasPermission('update_assignments'))
                                                 <a href=" {{ route('dashboard.assignments.edit', $assignment->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
@@ -149,6 +143,8 @@
                                             @endif
 
                                         </td>
+                                        @endif
+
                                     </tr>
                                     @endif
 
@@ -169,11 +165,7 @@
                                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sbjTable">@lang('site.show_subj_table')</button>
                                             {{--<a href="{{ asset('dashboard/files/myposProject.pdf') }}">@lang('site.show_subj_table')</a>}}
                                         </td>--}}
-                                        <td>
-                                            @if (auth()->user()->hasPermission('read_stdassign'))
-                                            {{ $assignment->stdAssign->count()}} <a href="{{route('dashboard.student_assignments.index', ['assign_id' => $assignment->id ])}}" class="btn btn-info btn-sm">@lang('site.show_students_anss')</a>
-                                            @endif
-                                        </td>
+
 
                                         <td>
                                             @if (auth()->user()->hasPermission('create_stdassign'))
@@ -184,19 +176,7 @@
                                                 --}}
                                             @endif
                                         </td>
-                                        <td>
-                                            @if (auth()->user()->hasPermission('update_assignments'))
-                                                <a href=" {{ route('dashboard.assignments.edit', $assignment->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
-                                            @endif
-                                            @if (auth()->user()->hasPermission('delete_assignments'))
-                                                <form action="{{route('dashboard.assignments.destroy', $assignment->id)}}" method="POST" style="display: inline-block">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('delete')}}
-                                                    <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
-                                                </form>
-                                            @endif
 
-                                        </td>
                                     </tr>
                                     @endif
                                     @endforeach
@@ -243,3 +223,12 @@
 
 @endsection
 
+@section('scripts')
+    <script>
+        $(function(){
+            $('#assigntable').DataTable({
+            "pageLength": 5,
+        });
+        });
+    </script>
+@endsection

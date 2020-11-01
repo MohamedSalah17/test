@@ -365,9 +365,6 @@ desired effect
 
         $('#table').DataTable({
             "pageLength": 5,
-            "sorting": [0, 'DESC'],
-            processing : true,
-            serverSide : true,
         });
 
         //icheck

@@ -96,7 +96,7 @@
 
                     <div class="box-body">
                         @if ($stdAssignments->count() > 0)
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="stdassigntable">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -104,12 +104,12 @@
                                         <th>@lang('site.assign_name')</th>
                                         <th>@lang('site.pdf_anss')</th>
                                         <th>@lang('site.date')</th>
-                                        {{--<th>@lang('site.action')</th>--}}
+                                        <th>@lang('site.action')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($stdAssignments as $index=>$stdAssignment)
-                                    @if ($stdAssignment->doc_id == auth()->user()->fid && auth()->user()->hasRole('doctor') || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
+                                    @if ($stdAssignment->doc_id == auth()->user()->fid && auth()->user()->type == 'doctor' || auth()->user()->type == 'super_admin' || auth()->user()->type == 'admin')
                                     <tr>
                                         <td>{{ $index + 1}}</td>
                                         <td>{{ $stdAssignment->students['name']}}</td>
@@ -161,3 +161,14 @@
 
 @endsection
 
+@section('scripts')
+<script>
+    $(function(){
+        $('#stdassigntable').DataTable({
+         "pageLength": 10,
+
+        });
+    });
+
+</script>
+@endsection
