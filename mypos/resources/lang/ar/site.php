@@ -126,7 +126,7 @@ return [
     "student_regist_subjects"        => 'تسجيل الطلاب الي المقررات',
     "std_name"        => 'اسم الطالب',
     "add_std_to_sbj"        => 'تسجيل المقرر الي طالب',
-    "student_assignments"        => 'مهمات الطلاب',
+    "student_assignments"        => 'إجابات الطلاب',
     "stdassign"        => 'حل المهمات',
     "registed_students"        => 'الطلاب المسجلين',
     "show_students_anss"        => 'عرض اجابات الطلاب',

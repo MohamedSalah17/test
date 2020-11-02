@@ -110,7 +110,7 @@
                                     @foreach ($assignments as $index=>$assignment)
                                     @if ($assignment->doc_id == auth()->user()->fid && auth()->user()->hasRole('doctor') || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
                                     <tr>
-                                        <td>{{ $index + 1}}</td>
+                                        <td>{{ $assignment->id}}</td>
                                         <td>{{ $assignment->name}}</td>
                                         <td>{{ $assignment->lesson['name']}}</td>
                                         <td>
@@ -152,7 +152,7 @@
                                     @foreach ($stdSbs as $stdSb)
                                     @if($stdSb->subject_id == $assignment->sbj_id && $stdSb->student_id == auth()->user()->fid)
                                     <tr>
-                                        <td>{{ $index + 1}}</td>
+                                        <td>{{ $assignment->id}}</td>
                                         <td>{{ $assignment->name}}</td>
                                         <td>{{ $assignment->lesson['name']}}</td>
                                         <td>

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
-
+use Validator;
 class UserController extends Controller
 {
     public function __construct(){
@@ -42,11 +42,22 @@ class UserController extends Controller
         $user = User::find($id);
         //$user = DB::table('users')->where('name', $request->name)->first();
 
-        $request_data = array(
+        $rules = array(
+            'name' => 'required',
+        );
+        $error = Validator::make($request->name, $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
             'name' => $request->name,
         );
 
-        $user->update(['name' => $request->name]);
+
+        //$user->update(['name' => $request->name]);
+        $user->update($form_data);
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('dashboard.index');
 

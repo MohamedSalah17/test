@@ -14,11 +14,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
             Route::post('doctors/import', 'DoctorController@import')->name('doctors.import');
             Route::get('doctors/data', 'DoctorController@getDocData')->name('doctors.data');
 
-            Route::post('/profile/changname/{id}', 'UserController@changeName');
-
-            Route::post("profile/update-name", "ProfileController@update");
-            Route::post("profile/update-password", "ProfileController@updatePassword");
-            Route::post("profile/update-phone", "ProfileController@updatePhone");
 
             //department and level routes
             Route::resource('departments', 'DepartmentController')->except(['show']);
@@ -90,7 +85,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
         });//end the dashboard routes
 
+
     });
+
+       //profile updates
+       Route::post('profile/changname/{id}', 'UserController@changeName');
+
 
 
 

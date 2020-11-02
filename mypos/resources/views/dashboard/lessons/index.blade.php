@@ -92,7 +92,7 @@
                                     @foreach ($lessons as $index=>$lesson)
                                     @if ($lesson->doc_id == auth()->user()->fid && auth()->user()->hasRole('doctor') || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
                                     <tr>
-                                        <td>{{ $index + 1}}</td>
+                                        <td>{{ $lesson->id}}</td>
                                         <td>{{ $lesson->name}}</td>
                                         <td>{{ $lesson->subject['name']}}</td>
                                         <td><a class="btn btn-warning btn-sm" href="{{$lesson->youtube_link}}" target="_blank">go</a></td>
@@ -136,7 +136,7 @@
                                     @foreach ($stdSbs as $stdSb)
                                     @if($stdSb->subject_id == $lesson->sbj_id && $stdSb->student_id == auth()->user()->fid)
                                     <tr>
-                                        <td>{{ $index + 1}}</td>
+                                        <td>{{ $lesson->id}}</td>
                                         <td>{{ $lesson->name}}</td>
                                         <td>{{ $lesson->subject['name']}}</td>
                                         <td><a class="btn btn-warning btn-sm" href="{{$lesson->youtube_link}}" target="_blank">go</a></td>

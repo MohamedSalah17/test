@@ -111,7 +111,7 @@
                                     @foreach ($stdAssignments as $index=>$stdAssignment)
                                     @if ($stdAssignment->doc_id == auth()->user()->fid && auth()->user()->type == 'doctor' || auth()->user()->type == 'super_admin' || auth()->user()->type == 'admin')
                                     <tr>
-                                        <td>{{ $index + 1}}</td>
+                                        <td>{{ $stdAssignment->id}}</td>
                                         <td>{{ $stdAssignment->students['name']}}</td>
                                         <td>{{ $stdAssignment->assignments['name']}}</td>
                                         <td>
