@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -34,6 +36,21 @@ class UserController extends Controller
 
     }//end of index
 
+    //change name function
+    public function changeName(Request $request,$id){
+        //$user = User::findOrFail($id);
+        $user = User::find($id);
+        //$user = DB::table('users')->where('name', $request->name)->first();
+
+        $request_data = array(
+            'name' => $request->name,
+        );
+
+        $user->update(['name' => $request->name]);
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('dashboard.index');
+
+    }
 
     public function create()
     {

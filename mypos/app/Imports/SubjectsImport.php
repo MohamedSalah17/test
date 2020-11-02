@@ -18,6 +18,7 @@ class SubjectsImport implements ToModel
             'doc_id' => $row[0],
             'name' => $row[1],
             'code' => $row[2],
+            'hours' => $row[3],
         ]);
     }
 }

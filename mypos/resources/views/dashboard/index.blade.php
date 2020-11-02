@@ -150,17 +150,21 @@
                             <!-- /.tab-pane -->
 
                             <div class="tab-pane" id="settings">
-                              <form action="#" class="form-horizontal">
-                                  <div class="box">
+                              <form action="" method="POST" class="form-horizontal" id="chnameform">
+                                    @csrf
+                                    {{method_field('')}}
+                                    <input type="hidden" name="id_hid" id="id_hid" value="{{auth()->user()->id}}">
+                                    <input type="hidden" name="action" id="action" value="Edit">
+
+                                <div class="box">
                                       <div class="box-body">
                                         <div class="form-group">
                                             <label>@lang('site.name') </label>
                                             <input type="text" name="name" class="form-control" value="{{auth()->user()->name}}">
                                         </div>
-
                                         <div class="form-group">
                                             <div>
-                                              <button type="submit" class="btn btn-primary btn-block">@lang('site.send')</button>
+                                              <button type="submit" class="btn btn-primary btn-block" id="changnamebtn">@lang('site.send')</button>
                                             </div>
                                           </div>
                                       </div>
@@ -316,4 +320,59 @@
               </div><!-- /.container-fluid -->
         </section>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(function(){
+
+            // $('#changnamebtn').click(function(){
+            //     $.ajax({
+            //         headers: {
+            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //         },
+            //         url : "{{ url('/dashboard/profile/changname'). '/' }}" + user_id,
+            //         type : 'post',
+            //         //data : chnamformid.serialize(),
+            //         data : {'name' : 'name', '_token' : csrf_token},
+            //         dataType : 'json',
+            //         success : function(data){
+            //             alert('Data updated Successfully ');
+            //         },
+            //         error : function(){
+            //             alert('Error Data');
+            //         }
+            //     });
+            // });
+
+            $('#chnameform').on('submit', function(e){
+                e.preventDefault();
+                var token = $('meta[name="csrf-token"]').attr('content');
+                var user_id = $('#id_hid').val();
+
+                if($('#action').val() == 'Edit'){
+                    //action_url="{{url('sample'). '/'}}" + id;
+                    save_method = 'edit';
+                    $('input[name=_method]').val('PATCH');
+
+                }
+
+                $.ajax({
+                    //method:'POST',
+                    //header:{'X-CSRF-TOKEN': token},
+                    url : "{{ url('/dashboard/profile/changname'). '/' }}" + user_id,
+                    type : "post",
+                    data : $(this).serialize(),
+                    //data: {'name' : 'testing'},
+                    dataType : "json",
+                    success : function(response){
+                        alert('Data updated successfully');
+                    },
+                    error : function(){
+                        alert('Error Data');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -22,28 +22,33 @@ class StudentsImport implements ToModel
             'department_id' => $row[3],
             'code' => $row[4],
             'email' => $row[5],
-            'password' => bcrypt('123456'),
-            'phone' => $row[6],
-            'set_number' => $row[7],
-            'national_id' => $row[8],
-            'active' => $row[9],
-            'account_confirm' => $row[10],
-            'graduated' => $row[11],
-            'can_see_result' => $row[12],
+            'password' => bcrypt($row[6]),
+            'phone' => $row[7],
+            'set_number' => $row[8],
+            'national_id' => $row[9],
+            'active' => $row[10],
+            'account_confirm' => $row[11],
+            'graduated' => $row[12],
+            'can_see_result' => $row[13],
         ]);
-       $stdref = $stds->refresh();
 
-         User::create([
+        $stds->attachRole('student');
+        $stdref = $stds->refresh();
+
+        $stduser = User::create([
             'name' => $row[0],
             'username' => $row[1],
             'email' => $row[5],
-            'password' => bcrypt('123456'),
-            'phone' => $row[6],
-            'active' => $row[9],
-            'account_confirm' => $row[10],
+            'password' => bcrypt($row[6]),
+            'phone' => $row[7],
+            'active' => $row[10],
+            'account_confirm' => $row[11],
             'type' =>'student',
             'fid' => $stdref->id
         ]);
+
+        $stduser->attachRole('student');
+
 
         return $stds;
 

@@ -19,23 +19,27 @@ class DoctorsImport implements ToModel
             'name' => $row[0],
             'username' => $row[1],
             'email' => $row[2],
-            'password' => bcrypt('123456'),
-            'phone' => $row[3],
-            'active' => $row[4],
-            'account_confirm' => $row[5],
+            'password' => bcrypt($row[3]),
+            'phone' => $row[4],
+            'active' => $row[5],
+            'account_confirm' => $row[6],
         ]);
+        $docs->attachRole('doctor');
         $docref = $docs->refresh();
-        User::create([
+
+        $docuser = User::create([
             'name' => $row[0],
             'username' => $row[1],
             'email' => $row[2],
-            'password' => bcrypt('123456'),
-            'phone' => $row[3],
-            'active' => $row[4],
-            'account_confirm' => $row[5],
+            'password' => bcrypt($row[3]),
+            'phone' => $row[4],
+            'active' => $row[5],
+            'account_confirm' => $row[6],
             'type' =>'doctor',
             'fid' => $docref->id
         ]);
+        $docuser->attachRole('doctor');
+
         return $docs;
     }
 }
