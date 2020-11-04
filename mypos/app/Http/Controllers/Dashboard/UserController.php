@@ -275,42 +275,27 @@ class UserController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
-        if($user->phone == $request->old_phone){
-            $form_data = array(
-                'phone' => $request->new_phone,
-            );
-            $user->update($form_data);
-            return response()->json(['success'=>'Data Updated Succefully']);
-        }else{
-            return response()->json(['errors' => 'the old phone is false' ]);
+        if(! $user->phone == $request->old_phone){
+
+         return response()->json(['errors' => 'the old phone is false' ]);
          }
+
+         $form_data = array(
+            'phone' => $request->new_phone,
+        );
+        $user->update($form_data);
 
          //if user is doctor
         if($user->type == 'doctor'){
-            $doc = Doctor::find($user->fid);
-            $rules = array(
-                'old_phone' => 'required',
-                'new_phone' => 'required'
+            $doctor = Doctor::find($user->fid);
+
+            $form_data = array(
+                'phone' => $request->new_phone,
             );
-            $request->validate([
-                'old_phone' => 'required',
-                'new_phone' => 'required'
-            ]);
+            $doctor->update($form_data);
 
-            $request_data = $request->all();
-
-            $error = Validator::make($request->all(), $rules);
-
-            if($doc->phone == $request->old_phone){
-                $form_data = array(
-                    'phone' => $request->new_phone,
-                );
-                $doc->update($request_data);
-                return response()->json(['success'=>'Data Updated Succefully']);
-            }else{
-                return response()->json(['errors' => 'the old phone is false' ]);
-             }
         }//end of doctor type
+        return response()->json(['success'=>'Data Updated Succefully']);
 
     }//end of change profile phone function
 
