@@ -39,7 +39,7 @@
 
                             <div class="form-group">
                                 <label>@lang('site.level')*</label>
-                                <select name="level_id" class="form-control">
+                                <select name="level_id" class="form-control select2-js">
                                     <option value="">@lang('site.level')</option>
                                     @foreach ($levels as $level)
                                         <option value="{{$level->id}}" {{$student->level_id == $level->id ? 'selected' : ''}}>{{$level->name}}</option>
@@ -49,7 +49,7 @@
 
                             <div class="form-group">
                                 <label>@lang('site.department')*</label>
-                                <select name="department_id" class="form-control">
+                                <select name="department_id" class="form-control select2-js">
                                     <option value="">@lang('site.department')</option>
                                     @foreach ($departments as $department)
                                         <option value="{{$department->id}}" {{$student->department_id == $department->id ? 'selected' : ''}}>{{$department->name}}</option>

@@ -56,7 +56,7 @@
 
                             <div class="form-group">
                                 <label>@lang('site.ass_less')</label>
-                                <select name="lesson_id" class="form-control">
+                                <select name="lesson_id" class="form-control  select2-js">
                                     <option value="">@lang('site.lessons')</option>
                                     @foreach ($lessons as $lesson)
                                         <option value="{{$lesson->id}}" {{$assignment->lesson_id == $lesson->id ? 'selected' : ''}}>{{$lesson->name}}</option>

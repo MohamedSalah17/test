@@ -20,7 +20,7 @@
                             <div class="row">
                                 @if(auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))
                                 <div class="col-md-4">
-                                    <select name="doc_id" class="form-control">
+                                    <select name="doc_id" class="form-control select2-js">
                                         <option value="">@lang('site.doctors')</option>
                                         @foreach ($doctors as $doctor)
                                             <option value="{{$doctor->id}}" {{request()->doc_id == $doctor->id ? 'selected' : ''}}>{{$doctor->name}}</option>
@@ -30,7 +30,7 @@
                                 @endif
 
                                 <div class="col-md-4">
-                                    <select name="sbj_id" class="form-control">
+                                    <select name="sbj_id" class="form-control select2-js">
                                         <option value="">@lang('site.subjects')</option>
                                         @foreach ($subjects as $subject)
                                         @if ($subject->doc_id == auth()->user()->fid && auth()->user()->hasRole('doctor') || auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin'))

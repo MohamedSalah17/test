@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('dashboard/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard/css/skin-blue.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard/datatable/dataTables.bootstrap.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
     {{-- <link rel="stylesheet" href="{{ asset('dashboard/datatable/dataTables.material.min.css') }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('dashboard/datatable/bootstrap.min.css') }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('dashboard/datatable/buttons.dataTables.min.css') }}"> --}}
@@ -357,8 +359,9 @@ desired effect
     {{--morris --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="{{ asset('dashboard/plugins/morris/morris.min.js') }}"></script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="{{ asset('js/iziToast.js') }}"></script>
+    @include('vendor.lara-izitoast.toast')
 <script>
 
     $(document).ready(function () {
@@ -403,6 +406,11 @@ desired effect
     });//end of ready
 
 
+</script>
+<script>
+    $(document).ready(function() {
+        $('.select2-js').select2();
+    });
 </script>
 
 @yield('scripts')

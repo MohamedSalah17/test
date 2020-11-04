@@ -100,7 +100,7 @@
 
                             <div class="form-group">
                                 <label>@lang('site.sbj_doc')*</label>
-                                <select name="doc_id" class="form-control">
+                                <select name="doc_id" class="form-control select2-js">
                                     <option value="">@lang('site.doctors')</option>
                                     @foreach ($doctors as $doctor)
                                         <option value="{{$doctor->id}}" {{old('doc_id') == $doctor->id ? 'selected' : ''}}>{{$doctor->name}}</option>

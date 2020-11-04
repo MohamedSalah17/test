@@ -1,4 +1,11 @@
 <?php return array (
+  'appslabke/lara-izitoast' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'LaraIzitoast\\LaraIzitoastServiceProvider',
+    ),
+  ),
   'beyondcode/laravel-dump-server' => 
   array (
     'providers' => 

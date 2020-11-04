@@ -179,60 +179,63 @@
                             <!-- /.tab-pane -->
 
                             <div class="tab-pane" id="password">
-                                <form action="#" class="form-horizontal">
                                     <div class="box">
                                         <div class="box-body">
-                                          <div class="form-group">
-                                              <label>@lang('site.old_password') </label>
-                                              <input type="password" name="password" class="form-control" >
-                                          </div>
-
-                                          <div class="form-group">
-                                            <label>@lang('site.new_password') </label>
-                                            <input type="password" name="password" class="form-control" >
-                                          </div>
+                                        <form action="" method="POST" class="form-horizontal" id="chpassform">
+                                            @csrf
 
                                             <div class="form-group">
-                                                <label>@lang('site.password_confirmation') </label>
+                                                <label>@lang('site.old_password') </label>
+                                                <input type="password" name="old_password" class="form-control" >
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>@lang('site.new_password') </label>
                                                 <input type="password" name="password" class="form-control" >
                                             </div>
 
-                                          <div class="form-group">
+                                            <div class="form-group">
+                                                <label>@lang('site.password_confirmation') </label>
+                                                <input type="password" name="password_confirmation" class="form-control" >
+                                            </div>
+
+                                            <div class="form-group">
                                               <div>
                                                 <button type="submit" class="btn btn-primary btn-block">@lang('site.send')</button>
                                               </div>
                                             </div>
+                                        </form>
+
                                         </div>
                                     </div>
 
 
-                                </form>
                             </div>
 
                             <div class="tab-pane" id="phone">
-                                <form action="#" class="form-horizontal">
                                     <div class="box">
                                         <div class="box-body">
-                                          <div class="form-group">
-                                              <label>@lang('site.phone') </label>
-                                              <input type="text" name="phone" class="form-control" value="{{auth()->user()->phone}}">
-                                          </div>
+                                            <form action="" method="POST" class="form-horizontal" id="chphoneform">
+                                                @csrf
+                                            <div class="form-group">
+                                                <label>@lang('site.phone') </label>
+                                                <input type="text" name="old_phone" class="form-control" value="{{auth()->user()->phone}}">
+                                            </div>
 
-                                          <div class="form-group">
-                                            <label>@lang('site.new_phone') </label>
-                                            <input type="text" name="phone" class="form-control">
-                                        </div>
+                                            <div class="form-group">
+                                                <label>@lang('site.new_phone') </label>
+                                                <input type="text" name="new_phone" class="form-control">
+                                            </div>
 
-                                          <div class="form-group">
+                                            <div class="form-group">
                                               <div>
                                                 <button type="submit" class="btn btn-primary btn-block">@lang('site.send')</button>
                                               </div>
                                             </div>
+                                        </form>
+
                                         </div>
                                     </div>
-
-
-                                </form>
                             </div>
                               <!-- /.tab-pane -->
 
@@ -329,7 +332,57 @@
     <script>
         $(function(){
 
+            //function to change profile name
             $('#chnameform').on('submit', function(e){
+                e.preventDefault();
+                var token = $('meta[name="csrf-token"]').attr('content');
+                var user_id = $('#id_hid').val();
+
+                save_method = 'edit';
+                //$('input[name=_method]').val('PATCH');
+
+                //console.log($(this).serialize());
+
+                $.ajax({
+                    //method:'POST',
+                    //header:{'X-CSRF-TOKEN': token},
+                    url : "{{ url('profile/changname'). '/' }}" + user_id,
+                    type : "post",
+                    data : $(this).serialize(),
+                    dataType : "json",
+                    success : function(data){
+                        if(data.errors){
+                            //alert('Data errorsss');
+                            iziToast.error({
+                                timeout: 6000,
+                                title: 'Error', message: data.errors,
+                                position:'topCenter',
+                            });
+                            $('#chnameform')[0].reset();
+                        }
+                        if(data.success){
+                            iziToast.success({
+                                timeout: 6000, icon: 'fa fa-check-circle',
+                                title: 'Success', message: 'Data updated Successfully',
+                                position: 'topCenter',
+                            });
+                            $('#chnameform')[0].reset();
+                        }
+                    },
+                    error : function(){
+                        //alert('Error Data');
+                        iziToast.error({
+                                timeout: 6000,
+                                title: 'Error', message: 'Error Data',
+                                position:'topCenter',
+                            });
+                            $('#chnameform')[0].reset();
+                    }
+                });
+            });//end of change profile name function
+
+            //function to change the password
+            $('#chpassform').on('submit', function(e){
                 e.preventDefault();
                 var token = $('meta[name="csrf-token"]').attr('content');
                 var user_id = $('#id_hid').val();
@@ -342,23 +395,89 @@
                 $.ajax({
                     //method:'POST',
                     //header:{'X-CSRF-TOKEN': token},
-                    url : "{{ url('profile/changname'). '/' }}" + user_id,
+                    url : "{{ url('profile/changpass'). '/' }}" + user_id,
                     type : "post",
                     data : $(this).serialize(),
                     dataType : "json",
                     success : function(data){
                         if(data.errors){
-                            alert('Data errorsss');
+                            //alert(data.errors);
+                            iziToast.error({
+                                timeout: 6000,
+                                title: 'Error', message: data.errors,
+                                position:'topCenter',
+                            });
+                            $('#chpassform')[0].reset();
                         }
                         if(data.success){
-                            alert('Data updated successfully');
+                            //alert(data.success);
+                            iziToast.success({
+                                timeout: 6000, icon: 'fa fa-check-circle',
+                                title: 'Success', message: 'Data updated Successfully',
+                                position: 'topCenter',
+                            });
+                            $('#chpassform')[0].reset();
                         }
                     },
                     error : function(){
-                        alert('Error Data');
+                        //alert('Error Data');
+                            iziToast.error({
+                                timeout: 6000,
+                                title: 'Error', message: 'حقل التاكيد غير متطابق',
+                                position:'topCenter',
+                            });
+                            $('#chpassform')[0].reset();
+
                     }
                 });
-            });
+            });//end of cahnge password function
+
+            //function to change profile phone
+            $('#chphoneform').on('submit', function(e){
+                e.preventDefault();
+                var token = $('meta[name="csrf-token"]').attr('content');
+                var user_id = $('#id_hid').val();
+
+                save_method = 'edit';
+
+                $.ajax({
+                    //method:'POST',
+                    //header:{'X-CSRF-TOKEN': token},
+                    url : "{{ url('profile/changphone'). '/' }}" + user_id,
+                    type : "post",
+                    data : $(this).serialize(),
+                    dataType : "json",
+                    success : function(data){
+                        if(data.errors){
+                            //alert('Data errorsss');
+                            iziToast.error({
+                                timeout: 6000,
+                                title: 'Error', message: data.errors,
+                                position:'topCenter',
+                            });
+                            $('#chphoneform')[0].reset();
+                        }
+                        if(data.success){
+                            iziToast.success({
+                                timeout: 6000, icon: 'fa fa-check-circle',
+                                title: 'Success', message: 'Data updated Successfully',
+                                position: 'topCenter',
+                            });
+                            $('#chphoneform')[0].reset();
+                        }
+                    },
+                    error : function(){
+                        //alert('Error Data');
+                        iziToast.error({
+                                timeout: 6000,
+                                title: 'Error', message: 'Error Data',
+                                position:'topCenter',
+                            });
+                            $('#chphoneform')[0].reset();
+                    }
+                });
+            });//end of change profile phone function
+
         });
     </script>
 @endsection

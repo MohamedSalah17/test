@@ -90,6 +90,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
        //profile updates
        Route::post('profile/changname/{id}', 'UserController@changeName');
+       Route::post('profile/changpass/{id}', 'UserController@changePass');
+       Route::post('profile/changphone/{id}', 'UserController@changePhone');
 
 
 
