@@ -122,9 +122,10 @@ class LessonController extends Controller
             'doc_id'        => 'required',
             'pdf_file'      => 'nullable',
             'pptx_file'     => 'required',
+            'mp4_file'     => 'nullable',
         ]);
 
-        $request_data = $request->except(['pdf_file', 'pptx_file']);
+        $request_data = $request->except(['pdf_file', 'pptx_file','mp4_file']);
 
         if($request->hasFile('pptx_file')){
 
@@ -137,6 +138,16 @@ class LessonController extends Controller
             $destinationPath = public_path('uploads/lessons');
             $pdf_file->move($destinationPath,$pdf_filename);
             }
+
+            if($request->hasFile('mp4_file')){
+                $mp4_file = $request->file('mp4_file');
+                $mp4_filename=time().'.'.$mp4_file->getClientOriginalExtension();
+
+                $request_data['mp4_file'] = $mp4_filename;
+
+                $destinationPath = public_path('uploads/lessons');
+                $mp4_file->move($destinationPath,$mp4_filename);
+                }
             /*if($pdf_file->move($destinationPath,$pdf_filename)){
                 $less = new Lesson();
                 $less->pdf_file = $pdf_filename;

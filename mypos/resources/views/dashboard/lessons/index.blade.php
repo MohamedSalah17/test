@@ -80,6 +80,7 @@
                                         <th>@lang('site.youtube_link')</th>
                                         <th>@lang('site.pdf_file')</th>
                                         <th>@lang('site.pptx_file')</th>
+                                        <th>@lang('site.video')</th>
                                         <th>@lang('site.assignments') </th>
 
                                         @if(auth()->user()->hasRole('doctor'))
@@ -103,6 +104,9 @@
                                         </td>
                                         <td>
                                             <a href="lessons/pptxfile/download/{{$lesson->pptx_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                        </td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#showvideo" onclick="showView('{{url("/uploads/lessons" . "/" . $lesson->mp4_file)}}')" class="btn btn-primary btn-sm"> @lang('site.show')</a>
                                         </td>
                                         <td>
                                             {{ $lesson->assignments->count()}} <a href="{{route('dashboard.assignments.index', ['sbj_id' => $lesson->sbj_id, 'lesson_id' => $lesson->id ])}}" class="btn btn-success btn-sm">@lang('site.show_lesson_assignments')</a>
@@ -149,6 +153,9 @@
                                             <a href="lessons/pptxfile/download/{{$lesson->pptx_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
                                         </td>
                                         <td>
+                                            <a data-toggle="modal" data-target="#showvideo" onclick="showView('{{url("/uploads/lessons" . "/" . $lesson->mp4_file)}}')" class="btn btn-primary btn-sm"> @lang('site.show')</a>
+                                        </td>
+                                        <td>
                                             {{ $lesson->assignments->count()}} <a href="{{route('dashboard.assignments.index', ['sbj_id' => $lesson->sbj_id, 'lesson_id' => $lesson->id ])}}" class="btn btn-success btn-sm">@lang('site.show_lesson_assignments')</a>
                                             @if (auth()->user()->hasPermission('create_assignments'))
                                                 <a href=" {{route('dashboard.assignments.create',['sbj_id' => $lesson->sbj_id, 'lesson_id' => $lesson->id])}}" class="btn btn-warning btn-sm"><i class="fa fa-plus"></i> @lang('site.add_assignment')</a>
@@ -181,6 +188,26 @@
 
     {{--model dailog--}}
 
+    <div class="modal fade" id="showvideo" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title text-center">@lang('site.video')</h4>
+            </div>
+            <div class="modal-body">
+
+                <video class="lessonVideo" width="850" height="500" controls controlslist="nodownload">
+                    <source src="" type="video/mp4">
+                </video>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     {{--
     <!-- Modal -->
     <div class="modal fade" id="sbjTable" role="dialog">
@@ -206,6 +233,12 @@
 @endsection
 @section('scripts')
 <script>
+
+    function showView(src){
+        $('#showvideo video').attr('src', src);
+    }
+    $('.lessonVideo').bind('contextmenu',function() { return false; });
+
     $('#lessonTable').DataTable({
             "pageLength": 5,
         });

@@ -215,4 +215,14 @@ class StudentController extends Controller
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('dashboard.students.index');
     }
+
+    //change active function
+    public function changeActive(Request $request,$id){
+        $std = Student::find($id);
+
+        $form_data = array(
+            'active' => $request->active,
+        );
+        $std->update($form_data);
+    }
 }

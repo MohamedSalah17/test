@@ -172,6 +172,8 @@ return [
     "account_confirm"        => 'تأكيد معلومات الحساب',
     "hours"        => 'عدد الساعات',
     "phone-or-email-or-username"        => 'الهاتف او البريد الإلكتروني او اسم المستخدم',
+    "upload_pc_video"        => 'رفع فيديو من الجهاز',
+    "video"        => 'فيديو',
 
 
 

@@ -217,22 +217,22 @@
                                         <div class="box-body">
                                             <form action="" method="POST" class="form-horizontal" id="chphoneform">
                                                 @csrf
-                                            <div class="form-group">
-                                                <label>@lang('site.phone') </label>
-                                                <input type="text" name="old_phone" class="form-control" value="{{auth()->user()->phone}}">
-                                            </div>
+                                                <div class="form-group">
+                                                    <label>@lang('site.phone') </label>
+                                                    <input type="text" name="old_phone" class="form-control" value="{{auth()->user()->phone}}">
+                                                </div>
 
-                                            <div class="form-group">
-                                                <label>@lang('site.new_phone') </label>
-                                                <input type="text" name="new_phone" class="form-control">
-                                            </div>
+                                                <div class="form-group">
+                                                    <label>@lang('site.new_phone') </label>
+                                                    <input type="text" name="new_phone" class="form-control">
+                                                </div>
 
-                                            <div class="form-group">
-                                              <div>
-                                                <button type="submit" class="btn btn-primary btn-block">@lang('site.send')</button>
-                                              </div>
-                                            </div>
-                                        </form>
+                                                <div class="form-group">
+                                                <div>
+                                                    <button type="submit" class="btn btn-primary btn-block">@lang('site.send')</button>
+                                                </div>
+                                                </div>
+                                            </form>
 
                                         </div>
                                     </div>

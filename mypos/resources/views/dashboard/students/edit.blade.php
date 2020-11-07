@@ -85,12 +85,22 @@
                                 <input type="text" name="national_id" class="form-control" value="{{$student->national_id}}">
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>@lang('site.active')*</label>
                                 <select name="active" class="form-control">
                                     <option value="1" {{$student->active == 1? 'selected' : ''}} >@lang('site.is_active')</option>
                                     <option value="0" {{$student->active == 0? 'selected' : ''}}>@lang('site.not_active')</option>
                                 </select>
+                            </div> --}}
+
+                            <div class="form-group">
+                                <label>@lang('site.active')*</label>
+                                <div class="custom-control custom-switch material-switch">
+                                        <input type="checkbox" name="active" class="custom-control-input" id="studentSwitch{{$student->id}}"
+                                        onchange="this.checked? this.value = 1 : this.value = 0"
+                                        type="checkbox">
+                                        <label class="custom-control-label" for="studentSwitch{{$student->id}}"></label>
+                                </div>
                             </div>
 
 

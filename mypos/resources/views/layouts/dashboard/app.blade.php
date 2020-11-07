@@ -151,7 +151,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" oncontextmenu="return false;">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -362,9 +362,13 @@ desired effect
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/iziToast.js') }}"></script>
     @include('vendor.lara-izitoast.toast')
+
+@yield('scripts')
+
 <script>
 
     $(document).ready(function () {
+
         $('.sidebar-menu').tree();
 
         $('#table').DataTable({
@@ -413,7 +417,6 @@ desired effect
     });
 </script>
 
-@yield('scripts')
 
 </body>
 </html>

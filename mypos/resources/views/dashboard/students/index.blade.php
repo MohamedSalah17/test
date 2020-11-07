@@ -76,10 +76,10 @@
                                         <td>
                                             <div class="form-group">
                                                 <div class="custom-control custom-switch material-switch">
-                                                    <input type="checkbox" class="custom-control-input" id="studentSwitch{{$student->id}}" {{ $student->active == 1? 'checked' : ''}} value="{{ $student->active == 1? '1' : '0'}}" onclick="setTimeout(function(){$('.student-assign-course-form').submit()}, 1000)"
-                                                    onchange="this.checked? this.value = 1 : this.value = 0"
-                                                    type="checkbox">
-                                                    <label class="custom-control-label" for="studentSwitch{{$student->id}}"></label>
+                                                        <input type="checkbox" class="custom-control-input" id="studentSwitch{{$student->id}}" {{ $student->active == 1? 'checked' : ''}} value="{{ $student->active == 1? '1' : '0'}}" name="active" onclick="changeActive($student->id)"
+                                                        onchange="this.checked? this.value = 1 : this.value = 0"
+                                                        type="checkbox">
+                                                        <label class="custom-control-label" for="studentSwitch{{$student->id}}"></label>
                                                 </div>
                                             </div>
                                         </td>
@@ -100,7 +100,7 @@
                                                 <form action="{{route('dashboard.students.destroy', $student->id)}}" method="POST" style="display: inline-block">
                                                     {{ csrf_field() }}
                                                     {{ method_field('delete')}}
-                                                    <button type="submit" style="background-color: white; border: none"><i class="fa fa-trash" style="color: red"></i></button>
+                                                    <button type="submit" class="delete" style="background-color: white; border: none"><i class="fa fa-trash" style="color: red"></i></button>
                                                 </form>
                                             @endif
                                         </td>
@@ -177,9 +177,50 @@
 @endsection
 @section('scripts')
 <script>
-    $('#studenttable').DataTable({
+    $(function(){
+
+        $('#studenttable').DataTable({
          "pageLength": 10,
 
         });
+
+        function changeActive($id){
+            $.ajax({
+                url : "{{ url('std/changeActive').'/'}}" + $id,
+                type : 'post',
+                data : $(this).val(),
+                dataType : 'json',
+                success : function(data){
+                        if(data.errors){
+                            //alert('Data errorsss');
+                            iziToast.error({
+                                timeout: 6000,
+                                title: 'Error', message: data.errors,
+                                position:'topCenter',
+                            });
+                            $('#chphoneform')[0].reset();
+                        }
+                        if(data.success){
+                            iziToast.success({
+                                timeout: 6000, icon: 'fa fa-check-circle',
+                                title: 'Success', message: 'Data updated Successfully',
+                                position: 'topCenter',
+                            });
+                            $('#chphoneform')[0].reset();
+                        }
+                },
+                error : function(){
+                        //alert('Error Data');
+                        iziToast.error({
+                                timeout: 6000,
+                                title: 'Error', message: 'Error Data',
+                                position:'topCenter',
+                            });
+                            $('#chphoneform')[0].reset();
+                }
+            });
+        }
+    });
+
 </script>
 @endsection
