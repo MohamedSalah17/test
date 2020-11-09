@@ -59,11 +59,11 @@ class DoctorController extends Controller
 
             })->addColumn('action', function(Doctor $doctor){
 
-                return '<a href="'. route("dashboard.doctors.edit", $doctor->id) .'" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>'.__('site.edit').' </a>'. ' '.
+                return '<a href="'. route("dashboard.doctors.edit", $doctor->id) .'" class="btn btn-info btn-sm"> <i class="fa fa-edit"></i>'.__('site.edit').' </a>'. ' '.
                         '<form action="'. route('dashboard.doctors.destroy', $doctor->id) .'" method="POST" style="display: inline-block">
                             '.csrf_field().'
                             '. method_field('delete').'
-                            <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i>'. __('site.delete').'</button>
+                            <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> '. __('site.delete').'</button>
                         </form>';
             })
             ->rawColumns(['action'])

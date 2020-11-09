@@ -151,7 +151,8 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini" oncontextmenu="return false;">
+<body class="hold-transition skin-blue sidebar-mini">
+    {{-- oncontextmenu="return false;" to privent user to click right--}}
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -364,23 +365,8 @@ desired effect
     @include('vendor.lara-izitoast.toast')
 
 @yield('scripts')
-
 <script>
-
-    $(document).ready(function () {
-
-        $('.sidebar-menu').tree();
-
-        $('#table').DataTable({
-            "pageLength": 5,
-        });
-
-        //icheck
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-            checkboxClass: 'icheckbox_minimal-blue',
-            radioClass: 'iradio_minimal-blue'
-        });
-
+    $(function(){
         //delete
         $('.delete').click(function (e) {
             e.preventDefault();
@@ -403,12 +389,31 @@ desired effect
             n.show();
         });//end of delete
 
+    });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('.sidebar-menu').tree();
+
+        $('#table').DataTable({
+            "pageLength": 5,
+        });
+
+        //icheck
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+            checkboxClass: 'icheckbox_minimal-blue',
+            radioClass: 'iradio_minimal-blue'
+        });
+
+
 
         CKEDITOR.config.language = "{{ app()->getLocale() }}";//to change the direction of textearea of description by change the language
 
 
     });//end of ready
-
 
 </script>
 <script>

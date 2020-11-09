@@ -92,13 +92,13 @@
                                     <option value="0" {{$student->active == 0? 'selected' : ''}}>@lang('site.not_active')</option>
                                 </select>
                             </div> --}}
+                            <input type="hidden" name="active" value="0">
 
                             <div class="form-group">
                                 <label>@lang('site.active')*</label>
                                 <div class="custom-control custom-switch material-switch">
                                         <input type="checkbox" name="active" class="custom-control-input" id="studentSwitch{{$student->id}}"
-                                        onchange="this.checked? this.value = 1 : this.value = 0"
-                                        type="checkbox">
+                                        onchange="this.checked? this.value = 1 : this.value = 0" {{ $student->active == 1? 'checked' : ''}} >
                                         <label class="custom-control-label" for="studentSwitch{{$student->id}}"></label>
                                 </div>
                             </div>

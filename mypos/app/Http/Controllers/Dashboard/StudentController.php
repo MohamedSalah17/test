@@ -163,11 +163,13 @@ class StudentController extends Controller
             'phone' => ['required', Rule::unique('students')->ignore($student->id)],
             'national_id' => 'required',
             'set_number' => 'required',
-            'active' => 'required',
-
+            'active' => 'nullable',
         ]);
 
+        //dd($request->active);
         $request_data = $request->except(['permissions']);
+
+
         //$request_data['phone'] = array_filter($request->phone);
 
         $student->update($request_data);
@@ -179,7 +181,7 @@ class StudentController extends Controller
             'email' => 'required',
             //'username' => 'required|unique:users',
             'phone' => 'required',
-            'active' => 'required',
+            'active' => 'nullable',
 
         ]);
 
@@ -220,9 +222,16 @@ class StudentController extends Controller
     public function changeActive(Request $request,$id){
         $std = Student::find($id);
 
-        $form_data = array(
-            'active' => $request->active,
-        );
-        $std->update($form_data);
+        $std->update([
+            "active" => $request->active
+        ]);
+
+       /* if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }*/
+
+        return response()->json(['success'=>'Data Updated Succefully']);
+
+        //return [1, "done"];
     }
 }

@@ -51,7 +51,7 @@ class UserController extends Controller
             'name' => 'required',
         ]);
 
-        $error = Validator::make($request->all(), $rules);
+        //$error = Validator::make($request->all(), $rules);
 
         if($error->fails()){
             return response()->json(['errors' => $error->errors()->all()]);

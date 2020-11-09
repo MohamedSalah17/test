@@ -76,10 +76,13 @@
                                         <td>
                                             <div class="form-group">
                                                 <div class="custom-control custom-switch material-switch">
-                                                        <input type="checkbox" class="custom-control-input" id="studentSwitch{{$student->id}}" {{ $student->active == 1? 'checked' : ''}} value="{{ $student->active == 1? '1' : '0'}}" name="active" onclick="changeActive($student->id)"
-                                                        onchange="this.checked? this.value = 1 : this.value = 0"
-                                                        type="checkbox">
+                                                        <input
+                                                        type="checkbox"
+                                                        class="custom-control-input checkinp"
+                                                        id="studentSwitch{{$student->id}}" {{ $student->active == 1? 'checked' : ''}} value="{{ $student->active == 1? '1' : '0'}}" name="active"
+                                                        onchange="this.checked? this.value = 1 : this.value = 0" sid="{{$student->id}}">
                                                         <label class="custom-control-label" for="studentSwitch{{$student->id}}"></label>
+                                                    {{-- onclick="changeActive({{$student->id}},this.value)" --}}
                                                 </div>
                                             </div>
                                         </td>
@@ -100,7 +103,7 @@
                                                 <form action="{{route('dashboard.students.destroy', $student->id)}}" method="POST" style="display: inline-block">
                                                     {{ csrf_field() }}
                                                     {{ method_field('delete')}}
-                                                    <button type="submit" class="delete" style="background-color: white; border: none"><i class="fa fa-trash" style="color: red"></i></button>
+                                                    <button type="submit" class="delete" style="background-color: white; border: none"><i class="fa fa-trash delete" style="color: red"></i></button>
                                                 </form>
                                             @endif
                                         </td>
@@ -177,18 +180,67 @@
 @endsection
 @section('scripts')
 <script>
+
     $(function(){
 
         $('#studenttable').DataTable({
          "pageLength": 10,
 
         });
+        $('.checkinp').on('change', function(){
+            //e.preventDefault();
 
-        function changeActive($id){
+            var sid = $(this).attr('sid');
+            var val = $(this).val();
+            var token = $('meta[name="csrf-token"]').attr('content');
+
             $.ajax({
-                url : "{{ url('std/changeActive').'/'}}" + $id,
+                header:{'X-CSRF-TOKEN': token},
+                url : "{{ url('std/changeActive').'/'}}" + sid,
                 type : 'post',
-                data : $(this).val(),
+                //data : val,
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "active": val
+                },
+                dataType : 'json',
+                success : function(data){
+                        if(data.errors){
+                            //alert('Data errorsss');
+                            iziToast.error({
+                                timeout: 6000,
+                                title: 'Error', message: data.errors,
+                                position:'topCenter',
+                            });
+                            //$('#chphoneform')[0].reset();
+                        };
+                        if(data.success){
+                            iziToast.success({
+                                timeout: 6000, icon: 'fa fa-check-circle',
+                                title: 'Success', message: 'Data updated Successfully',
+                                position: 'topCenter',
+                            });
+                            //$('#chphoneform')[0].reset();
+                        }
+                },
+                error : function(){
+                        //alert('Error Data');
+                        iziToast.error({
+                                timeout: 6000,
+                                title: 'Error', message: 'Error Data',
+                                position:'topCenter',
+                            });
+                            //$('#chphoneform')[0].reset();
+                }
+            });
+        });//end function
+        /*
+        function changeActive(id,val){
+            console.log($('#studentSwitch'+id));
+            $.ajax({
+                url : "{{ url('std/changeActive').'/'}}" + id,
+                type : 'post',
+                data : val,
                 dataType : 'json',
                 success : function(data){
                         if(data.errors){
@@ -219,7 +271,7 @@
                             $('#chphoneform')[0].reset();
                 }
             });
-        }
+        }*/
     });
 
 </script>

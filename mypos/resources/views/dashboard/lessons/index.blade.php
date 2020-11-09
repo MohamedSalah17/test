@@ -77,9 +77,9 @@
                                         <th>#</th>
                                         <th>@lang('site.name')</th>
                                         <th>@lang('site.sbj_name')</th>
+                                        <th>@lang('site.file_one')</th>
+                                        <th>@lang('site.file_two')</th>
                                         <th>@lang('site.youtube_link')</th>
-                                        <th>@lang('site.pdf_file')</th>
-                                        <th>@lang('site.pptx_file')</th>
                                         <th>@lang('site.video')</th>
                                         <th>@lang('site.assignments') </th>
 
@@ -96,18 +96,40 @@
                                         <td>{{ $lesson->id}}</td>
                                         <td>{{ $lesson->name}}</td>
                                         <td>{{ $lesson->subject['name']}}</td>
-                                        <td><a class="btn btn-warning btn-sm" href="{{$lesson->youtube_link}}" target="_blank">go</a></td>
+
                                         <td>
+                                            @if (isset($lesson->pptx_file))
+                                            <a href="lessons/pptxfile/download/{{$lesson->pptx_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                            @else
+                                            __
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            @if (isset($lesson->pdf_file))
                                                 {{--<a href="lessons/pdffiles/{{$lesson->id}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>--}}
                                                 <a href="lessons/pdffile/download/{{$lesson->pdf_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                            @else
+                                                __
+                                            @endif
+                                        </td>
 
-                                        </td>
                                         <td>
-                                            <a href="lessons/pptxfile/download/{{$lesson->pptx_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                            @if (isset($lesson->youtube_link))
+                                            <a class="btn btn-warning btn-sm" href="{{$lesson->youtube_link}}" target="_blank">@lang('site.go')</a>
+                                            @else
+                                            __
+                                            @endif
                                         </td>
+
                                         <td>
+                                            @if (isset($lesson->mp4_file))
                                             <a data-toggle="modal" data-target="#showvideo" onclick="showView('{{url("/uploads/lessons" . "/" . $lesson->mp4_file)}}')" class="btn btn-primary btn-sm"> @lang('site.show')</a>
+                                            @else
+                                            __
+                                            @endif
                                         </td>
+
                                         <td>
                                             {{ $lesson->assignments->count()}} <a href="{{route('dashboard.assignments.index', ['sbj_id' => $lesson->sbj_id, 'lesson_id' => $lesson->id ])}}" class="btn btn-success btn-sm">@lang('site.show_lesson_assignments')</a>
                                             @if (auth()->user()->hasPermission('create_assignments'))
@@ -143,18 +165,40 @@
                                         <td>{{ $lesson->id}}</td>
                                         <td>{{ $lesson->name}}</td>
                                         <td>{{ $lesson->subject['name']}}</td>
-                                        <td><a class="btn btn-warning btn-sm" href="{{$lesson->youtube_link}}" target="_blank">go</a></td>
+
                                         <td>
+                                            @if (isset($lesson->pptx_file))
+                                            <a href="lessons/pptxfile/download/{{$lesson->pptx_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                            @else
+                                            __
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            @if (isset($lesson->pdf_file))
                                                 {{--<a href="lessons/pdffiles/{{$lesson->id}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>--}}
                                                 <a href="lessons/pdffile/download/{{$lesson->pdf_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                            @else
+                                                __
+                                            @endif
+                                        </td>
 
-                                        </td>
                                         <td>
-                                            <a href="lessons/pptxfile/download/{{$lesson->pptx_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
+                                            @if (isset($lesson->youtube_link))
+                                            <a class="btn btn-warning btn-sm" href="{{$lesson->youtube_link}}" target="_blank">@lang('site.go')</a>
+                                            @else
+                                            __
+                                            @endif
                                         </td>
+
                                         <td>
+                                            @if (isset($lesson->mp4_file))
                                             <a data-toggle="modal" data-target="#showvideo" onclick="showView('{{url("/uploads/lessons" . "/" . $lesson->mp4_file)}}')" class="btn btn-primary btn-sm"> @lang('site.show')</a>
+                                            @else
+                                            __
+                                            @endif
                                         </td>
+
                                         <td>
                                             {{ $lesson->assignments->count()}} <a href="{{route('dashboard.assignments.index', ['sbj_id' => $lesson->sbj_id, 'lesson_id' => $lesson->id ])}}" class="btn btn-success btn-sm">@lang('site.show_lesson_assignments')</a>
                                             @if (auth()->user()->hasPermission('create_assignments'))
@@ -206,7 +250,7 @@
             </div>
           </div>
         </div>
-      </div>
+    </div>
 
     {{--
     <!-- Modal -->
@@ -237,7 +281,8 @@
     function showView(src){
         $('#showvideo video').attr('src', src);
     }
-    $('.lessonVideo').bind('contextmenu',function() { return false; });
+
+    $('.lessonVideo').bind('contextmenu',function() { return false; });//to privent click right on video
 
     $('#lessonTable').DataTable({
             "pageLength": 5,
