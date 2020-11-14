@@ -71,6 +71,7 @@
 
                     <div class="box-body">
                         @if ($lessons->count() > 0)
+                        <div class="table-responsive">
                             <table class="table table-hover" id="lessonTable">
                                 <thead>
                                     <tr>
@@ -218,6 +219,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
                             {{-- {{$lessons->appends(request()->query())->links()}} --}}
                         @else
                             <h2>@lang('site.no_data_found')</h2>

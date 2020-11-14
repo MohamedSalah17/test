@@ -96,6 +96,7 @@
 
                     <div class="box-body">
                         @if ($stdAssignments->count() > 0)
+                        <div class="table-responsive">
                             <table class="table table-hover" id="stdassigntable">
                                 <thead>
                                     <tr>
@@ -145,7 +146,8 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{$stdAssignments->appends(request()->query())->links()}}
+                        </div>
+                            {{-- {{$stdAssignments->appends(request()->query())->links()}} --}}
                         @else
                             <h2>@lang('site.no_data_found')</h2>
                         @endif
