@@ -37,4 +37,11 @@ class Doctor extends Model
     public function subjects(){
         return $this->hasMany(Subject::class, 'doc_id');
     }
+
+    public function lessons(){
+        return $this->hasMany(Lesson::class, 'doc_id');
+    }
+    public function assignments(){
+        return $this->hasMany(Assignment::class, 'doc_id');
+    }
 }
