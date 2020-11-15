@@ -177,6 +177,10 @@ return [
     "phone-or-email-or-username"        => 'الهاتف او البريد الإلكتروني او اسم المستخدم',
     "upload_pc_video"        => 'رفع فيديو من الجهاز',
     "video"        => 'فيديو',
+    "add_grade"        => 'إضافة درجة',
+    "edit_grade"        => 'تعديل الدرجة',
+    "grade"        => 'الدرجة',
+    "save"        => 'حفظ',
 
 
 

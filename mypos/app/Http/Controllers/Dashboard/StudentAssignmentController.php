@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Lesson;
 use App\Student;
+use App\StudentSubject;
 use App\Subject;
 
 class StudentAssignmentController extends Controller
@@ -20,6 +21,7 @@ class StudentAssignmentController extends Controller
      */
     public function index(Request $request)
     {
+        $stdSbs = StudentSubject::all();
         $assignments = Assignment::all();
         $students = Student::all();
         $doctors = Doctor::all();
@@ -44,7 +46,7 @@ class StudentAssignmentController extends Controller
 
                 })->latest()->get();
 
-        return view('dashboard.student_assignments.index', compact('assignments','stdAssignments', 'students', 'subjects', 'lessons', 'doctors'));
+        return view('dashboard.student_assignments.index', compact('assignments','stdAssignments', 'students', 'subjects', 'lessons', 'doctors','stdSbs'));
     }
 
     /**
@@ -93,6 +95,24 @@ class StudentAssignmentController extends Controller
 
         session()->flash('success', __('site.uploaded_successfully'));
         return redirect()->route('dashboard.assignments.index');
+
+    }
+
+    public function addGrade(Request $request,$id){
+        $stdAnss = StudentAssignment::find($request->hidden_id);
+
+        $stdAnss->grade = $request->grade;
+        $stdAnss->save();
+        /*$stdAnss->update([
+            "grade" => $request->grade
+        ]);*/
+
+       /* if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }*/
+        //return $stdAnss;
+
+        return response()->json(['success'=>'Data Updated Succefully']);
 
     }
 

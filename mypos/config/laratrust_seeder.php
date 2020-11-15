@@ -39,7 +39,7 @@ return [
             'subjects' => 'r',
             'lessons' => 'r',
             'assignments' => 'r',
-            'stdassign' => 'c',
+            'stdassign' => 'c','r',
             'regist' => 'r',
         ],
 
