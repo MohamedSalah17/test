@@ -188,21 +188,19 @@
      var studenttable =   $('#studenttable').DataTable({
             "pageLength": 10,
             "sorting": [0, 'DESC'],
-            dom : 'Bfrtip',
-            buttons : [
-                'copyHtml5',
-                'excelHtml5',
-                'csvHtml5',
-                'pdfHtml5'
+            "dom" : 'Bfrtip',
+            "buttons" : [
+                'excel',
+                'pdf'
             ],
         });
-        var data = studenttable.buttons.exportData({
+        /*var data = studenttable.buttons.exportData({
             format: {
                 header: function ( data, columnIdx ) {
                     return columnIdx +': '+ data;
                 }
             }
-        });
+        });*/
 
         $('.checkinp').on('change', function(){
             //e.preventDefault();
@@ -343,4 +341,5 @@
     });
 
 </script>
+
 @endsection

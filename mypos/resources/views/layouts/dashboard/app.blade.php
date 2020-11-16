@@ -72,6 +72,13 @@
             .small-box>.inner {
                 padding: 30px;
             }
+            .buttons-excel{
+                background-color: #008d4c;
+                color: #fff;
+                padding: 8px;
+                border-radius: 5px;
+                display: inline-block;
+            }
 
             /* Safari */
             @-webkit-keyframes spin {
@@ -344,6 +351,8 @@ desired effect
       <script src="{{ asset('dashboard/js/bootstrap.bundle.min.js')}}"></script>
       <script src="{{ asset('dashboard/datatable/jquery.dataTables.min.js')}}"></script>
             <script src="{{ asset('dashboard/datatable/dataTables.bootstrap4.min.js')}}"></script>
+            <script src="{{ asset('dashboard/datatable/jszip.min.js')}}"></script>
+            <script src="{{ asset('dashboard/datatable/buttons.html5.min.js')}}"></script>
       {{-- <script src="{{ asset('dashboard/datatable/jquery.dataTables.min_1.js')}}"></script> --}}
 
        <!-- AdminLTE App -->
@@ -367,6 +376,10 @@ desired effect
     <script src="{{ asset('dashboard/plugins/morris/morris.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/iziToast.js') }}"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
     @include('vendor.lara-izitoast.toast')
 
 @yield('scripts')
