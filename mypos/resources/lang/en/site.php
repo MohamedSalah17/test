@@ -104,9 +104,15 @@ return [
     "sbj_name"        => 'Subject Name',
     "show_lesson_assignments"        => 'Show Lesson Assignments',
     "youtube_link"        => 'Youtube video',
+    "video"        => 'Video',
+    "youtube_link_video"        => 'Link of youtube video',
+    "upload_pc_video"        => 'Upload video from pc',
     "pdf_file"        => 'pdf file',
+    "file_one"        => 'File One',
+    "file_two"        => 'File Two',
     "pptx_file"        => 'Powerpoint file',
     "download"        => 'Download',
+    "hours"        => 'Hours',
     "ass_less"        => 'Assignment Lesson',
     "lesson_name"        => 'Lesson Name',
     "start_date"        => 'Start Date',
@@ -158,6 +164,10 @@ return [
     "new_password"        => 'New Password',
     "new_phone"        => 'New Phone',
     "assign_doc"        => 'Assign Subject to Doctor',
+    "add_grade"        => 'Add Grade',
+    "edit_grade"        => 'Edit Grade',
+    "grade"        => 'Grade',
+    "save"        => 'Save',
 
     ////////////////////the new words////////////////////
 

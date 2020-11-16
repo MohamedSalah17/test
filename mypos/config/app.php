@@ -164,6 +164,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         LaraIzitoast\LaraIzitoastServiceProvider::class,
+        Yajra\DataTables\ButtonsServiceProvider::class,
+
 
         /*
          * Package Service Providers...

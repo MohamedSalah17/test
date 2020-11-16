@@ -238,7 +238,8 @@
 <script>
     $(function(){
         $('#subjecttable').DataTable({
-            'order': [[ 1, 'desc' ]],
+            "pageLength": 10,
+            "sorting": [0, 'DESC'],
         });
     });
 

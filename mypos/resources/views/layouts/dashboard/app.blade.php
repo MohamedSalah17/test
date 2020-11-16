@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('dashboard/css/skin-blue.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard/datatable/dataTables.bootstrap.min.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" /> --}}
+    <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet" />
     <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
     {{-- <link rel="stylesheet" href="{{ asset('dashboard/datatable/dataTables.material.min.css') }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('dashboard/datatable/bootstrap.min.css') }}"> --}}

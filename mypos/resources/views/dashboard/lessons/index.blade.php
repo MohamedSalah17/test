@@ -288,6 +288,8 @@
 
     $('#lessonTable').DataTable({
             "pageLength": 5,
+            "sorting": [0, 'DESC'],
+
         });
 </script>
 @endsection

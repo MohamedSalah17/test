@@ -140,10 +140,10 @@
                                             @endif--}}
                                             @if (auth()->user()->type == 'doctor')
                                                 @if ($stdAssignment->grade > 0)
+                                                <button class="btn btn-success btn-sm editGradBtn" data-toggle="modal" data-target="#modalGrade" anssID="{{$stdAssignment->id}}" anssGrade="{{$stdAssignment->grade}}">@lang('site.edit_grade')</button>
                                                 {{$stdAssignment->grade}}
-                                                <button class="btn btn-success btn-sm" id="editGradBtn" data-toggle="modal" data-target="#modalGrade" anssID="{{$stdAssignment->id}}" anssGrade="{{$stdAssignment->grade}}">@lang('site.edit_grade')</button>
                                                 @else
-                                                <button class="btn btn-primary btn-sm" id="addGradBtn" data-toggle="modal" data-target="#modalGrade" anssID="{{$stdAssignment->id}}">@lang('site.add_grade')</button>
+                                                <button class="btn btn-primary btn-sm addGradBtn" data-toggle="modal" data-target="#modalGrade" anssID="{{$stdAssignment->id}}">@lang('site.add_grade')</button>
                                                 @endif
                                             @endif
                                             @if (auth()->user()->type == 'super_admin' || auth()->user()->type == 'admin')
@@ -254,17 +254,20 @@
     $(function(){
         $('#stdassigntable').DataTable({
          "pageLength": 10,
+         "sorting": [0, 'DESC'],
 
         });
 
         //add grade btn on click
-        $('#addGradBtn').on('click', function(){
+        $('.addGradBtn').on('click', function(){
             var anssID = $(this).attr('anssID');
             $('#hidden_id').val(anssID);
+            $('.modal-title').text('@lang("site.add_grade")');
+            $('#grade').val('');
         });
 
         //add grade btn on click
-        $('#editGradBtn').on('click', function(){
+        $('.editGradBtn').on('click', function(){
             var anssID = $(this).attr('anssID');
             var anssGrade = $(this).attr('anssGrade');
 

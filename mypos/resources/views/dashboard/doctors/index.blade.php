@@ -184,6 +184,7 @@
             $('#doctortable').DataTable({
                 "processing": true,
                 "serverSide": true,
+                "pageLength": 10,
                 "sorting": [0, 'DESC'],
                 "ajax" : {
                     "url" : "{{ route('dashboard.doctors.data') }}",
@@ -199,7 +200,12 @@
                     { data: 'active', name: 'active' },
                     { data: 'account_confirm', name: 'account_confirm' },
                     { data: 'action', name: 'action' },
+                ],
+                "dom": 'Bfrtip',
+                "buttons": [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
+                //"buttons" : ['postExcel', 'postCsv', 'postPdf'],
             });
         });
 </script>
