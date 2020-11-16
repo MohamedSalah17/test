@@ -240,6 +240,11 @@
         $('#subjecttable').DataTable({
             "pageLength": 10,
             "sorting": [0, 'DESC'],
+            "dom" : 'Bfrtip',
+            "buttons" : [
+                'excel',
+                'pdf'
+            ]
         });
     });
 

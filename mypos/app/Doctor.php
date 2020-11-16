@@ -50,33 +50,5 @@ class Doctor extends Model
     }
 
 
-    public function dataTable($query)
-    {
-        return datatables()
-            ->eloquent($query);
-    }
 
-    public function html()
-    {
-                return $this->builder()
-                ->columns($this->getColumns())
-                ->minifiedAjax()
-                ->orderBy(1)
-                ->parameters([
-                    'dom'          => 'Bfrtip',
-                    'buttons'      => ['excel', 'csv'],
-                ]);
-                    // ->buttons(
-                    //     Button::make('csv'),
-                    //     Button::make('excel')
-                    // );
-    }
-    protected function getColumns()
-    {
-        return [
-            Column::make('id'),
-            Column::make('name'),
-            Column::make('email'),
-        ];
-    }
 }

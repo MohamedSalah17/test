@@ -190,8 +190,7 @@
             "sorting": [0, 'DESC'],
             "dom" : 'Bfrtip',
             "buttons" : [
-                'excel',
-                'pdf'
+                'copy', 'csv', 'excel', 'pdf',
             ],
         });
         /*var data = studenttable.buttons.exportData({

@@ -352,7 +352,7 @@ desired effect
       <script src="{{ asset('dashboard/datatable/jquery.dataTables.min.js')}}"></script>
             <script src="{{ asset('dashboard/datatable/dataTables.bootstrap4.min.js')}}"></script>
             <script src="{{ asset('dashboard/datatable/jszip.min.js')}}"></script>
-            <script src="{{ asset('dashboard/datatable/buttons.html5.min.js')}}"></script>
+            {{-- <script src="{{ asset('dashboard/datatable/buttons.html5.min.js')}}"></script> --}}
       {{-- <script src="{{ asset('dashboard/datatable/jquery.dataTables.min_1.js')}}"></script> --}}
 
        <!-- AdminLTE App -->
