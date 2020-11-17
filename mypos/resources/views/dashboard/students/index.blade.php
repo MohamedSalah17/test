@@ -187,10 +187,18 @@
 
      var studenttable =   $('#studenttable').DataTable({
             "pageLength": 10,
+            "bPaginate": true,
+            "bLengthChange": true,
+            "bFilter": true,
+            "bInfo": true,
             "sorting": [0, 'DESC'],
-            "dom" : 'Bfrtip',
+            "dom" : 'lBfrtip',
             "buttons" : [
-                'copy', 'csv', 'excel', 'pdf',
+                'copy', 'csv', 'excel', 'pdf','print',
+                //{extent: "print", text: "<span class='glyphicon glyphicon-print'></span> Print"},
+                //{extent: "excelHtml5", text: "<span class='glyphicon glyphicon-th-list'></span> Excel HTML5 Export"},
+                //{extent: "pdfHtml5", text: "<span class='glyphicon glyphicon-save'></span> PDF Export", title: "Filename"}
+
             ],
         });
         /*var data = studenttable.buttons.exportData({

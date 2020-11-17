@@ -192,7 +192,12 @@
 <script>
     $(function(){
         $('#stdSbjTable').DataTable({
-            'order': [[ 1, 'desc' ]],
+            "pageLength": 10,
+            "sorting": [0, 'DESC'],
+            "dom" : 'lBfrtip',
+            "buttons" : [
+                'copy', 'csv', 'excel', 'pdf',
+            ]
         });
     });
 

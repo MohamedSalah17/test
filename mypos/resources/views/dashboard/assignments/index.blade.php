@@ -231,7 +231,10 @@
             $('#assigntable').DataTable({
             "pageLength": 5,
             "sorting": [0, 'DESC'],
-
+            "dom" : 'lBfrtip',
+            "buttons" : [
+                'copy', 'csv', 'excel', 'pdf',
+            ]
         });
         });
     </script>

@@ -108,7 +108,7 @@
 
                                         <td>
                                             @if (isset($lesson->pdf_file))
-                                                {{--<a href="lessons/pdffiles/{{$lesson->id}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>--}}
+                                                <a href="lessons/pdffiles/{{$lesson->id}}" class="btn btn-primary btn-sm"><i class="fa fa-show"></i> @lang('site.show')</a>
                                                 <a href="lessons/pdffile/download/{{$lesson->pdf_file}}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> @lang('site.download')</a>
                                             @else
                                                 __
@@ -289,7 +289,10 @@
     $('#lessonTable').DataTable({
             "pageLength": 5,
             "sorting": [0, 'DESC'],
-
+            "dom" : 'lBfrtip',
+            "buttons" : [
+                'copy', 'csv', 'excel', 'pdf',
+            ]
         });
 </script>
 @endsection

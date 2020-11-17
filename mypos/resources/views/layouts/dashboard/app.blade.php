@@ -72,13 +72,13 @@
             .small-box>.inner {
                 padding: 30px;
             }
-            .buttons-excel{
+            /*.buttons-excel{
                 background-color: #008d4c;
                 color: #fff;
                 padding: 8px;
                 border-radius: 5px;
                 display: inline-block;
-            }
+            }*/
 
             /* Safari */
             @-webkit-keyframes spin {
@@ -350,8 +350,12 @@ desired effect
       {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
       <script src="{{ asset('dashboard/js/bootstrap.bundle.min.js')}}"></script>
       <script src="{{ asset('dashboard/datatable/jquery.dataTables.min.js')}}"></script>
-            <script src="{{ asset('dashboard/datatable/dataTables.bootstrap4.min.js')}}"></script>
-            <script src="{{ asset('dashboard/datatable/jszip.min.js')}}"></script>
+        <script src="{{ asset('dashboard/datatable/dataTables.bootstrap4.min.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.18/pdfmake.min.js"></script>
+        <script type="text/javascript" src="{{ asset('dashboard/datatable/vfs_fonts.js')}}"></script>
+        <script src="{{ asset('dashboard/datatable/jszip.min.js')}}"></script>
+        <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.js"></script>
+
             {{-- <script src="{{ asset('dashboard/datatable/buttons.html5.min.js')}}"></script> --}}
       {{-- <script src="{{ asset('dashboard/datatable/jquery.dataTables.min_1.js')}}"></script> --}}
 
@@ -377,8 +381,9 @@ desired effect
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/iziToast.js') }}"></script>
 
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.bootstrap.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
     @include('vendor.lara-izitoast.toast')
 

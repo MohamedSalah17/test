@@ -201,10 +201,10 @@
                     { data: 'account_confirm', name: 'account_confirm' },
                     { data: 'action', name: 'action' },
                 ],
-                "dom": 'Bfrtip',
-                "buttons": [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+                "dom" : 'lBfrtip',
+                "buttons" : [
+                    'copy', 'csv', 'excel', 'pdf','print'
+                ],
                 //"buttons" : ['postExcel', 'postCsv', 'postPdf'],
             });
         });

@@ -18,7 +18,7 @@
                 <div class="box box-primary">
 
                     <div class="box-header">
-                        <h3 class="box-title">@lang('site.details')</h3>
+                        <h3 class="box-title">@lang('site.show')</h3>
                     </div>
 
                     <div class="box-body">
